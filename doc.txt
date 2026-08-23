@@ -1,0 +1,50 @@
+resources/views/
+├── auth/                       # Shared Authentication Views
+│   ├── login.blade.php
+│   ├── register.blade.php
+│   └── passwords/
+│       ├── email.blade.php
+│       └── reset.blade.php
+│
+├── components/                 # Blade Components
+│   ├── alert.blade.php
+│   ├── product-card.blade.php
+│   └── navbar.blade.php
+│
+├── layouts/                    # Master Layout Templates
+│   ├── admin.blade.php         # Admin Sidebar + Header + Content Layout
+│   ├── client.blade.php        # Customer Storefront Nav + Footer Layout
+│   └── auth.blade.php          # Clean Layout for Login/Register Pages
+│
+├── admin/                      # ADMIN SYSTEM VIEWS
+│   ├── dashboard.blade.php
+│   ├── products/
+│   │   ├── index.blade.php     # Product Table
+│   │   ├── create.blade.php    # Add Product Form
+│   │   ├── edit.blade.php      # Edit Product Form
+│   │   └── show.blade.php
+│   ├── categories/
+│   │   ├── index.blade.php
+│   │   └── edit.blade.php
+│   ├── orders/
+│   │   ├── index.blade.php     # Order List & Status Management
+│   │   └── show.blade.php      # Order Details & Invoice View
+│   └── users/
+│       ├── index.blade.php     # Manage Registered Clients
+│       └── show.blade.php
+│
+└── client/                     # CLIENT SYSTEM VIEWS
+    ├── home.blade.php          # Hero section, featured products
+    ├── products/
+    │   ├── index.blade.php     # Catalog search/filter page
+    │   └── show.blade.php      # Single Product Detail Page
+    ├── cart/
+    │   └── index.blade.php     # Shopping Cart Page
+    ├── checkout/
+    │   └── index.blade.php     # Shipping info & Payment step
+    └── account/
+        ├── dashboard.blade.php # Client overview
+        ├── orders/
+        │   ├── index.blade.php # My Order History
+        │   └── show.blade.php  # Order detail & status tracking
+        └── profile.blade.php   # Edit addresses & personal info
