@@ -12,6 +12,7 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
     protected $primaryKey = 'product_id';
+    protected $guarded = [];
     public function category(): BelongsTo
     {
         return $this->belongsTo(Categories::class, 'categories_id', 'categories_id');
