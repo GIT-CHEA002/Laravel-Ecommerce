@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('total_amount');
             $table->enum('status', ['shipping', 'pending', 'arrived'])->default('pending');
             $table->string('shipping_address')->nullable();
+            $table->boolean('is_paid')->default(false);
             $table->enum('payment_methods', ['ABA', 'ACLEDA', 'BAKONG', 'CREDIT CARD']);
             $table->timestamps();
         });
