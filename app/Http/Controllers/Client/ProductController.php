@@ -21,7 +21,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $products  = Product::findOrFail($product->product_id);
-        dd($products);
+        dd(Product::findOrFail($product->product_id));
     }
 }
