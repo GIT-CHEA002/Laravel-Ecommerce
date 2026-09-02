@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
 
 
 // Product routes
@@ -39,10 +38,19 @@ Route::delete('/admin/order/{order}', [AdminOrderController::class, 'destroy']);
 
 // Users Routes
 
-Route::get('/admin/user', [AdminUserController::class, 'index']);
-Route::get('/admin/user/create', [AdminUserController::class, 'create']);
-Route::post('/admin/user', [AdminUserController::class, 'store']);
-Route::get('/admin/user/{user}', [AdminUserController::class, 'show']);
-Route::get('/admin/user/{user}/edit', [AdminUserController::class, 'edit']);
-Route::patch('/admin/user/{user}', [AdminUserController::class, 'update']);
-Route::delete('/admin/user/{user}', [AdminUserController::class, 'destroy']);
+Route::get('/admin/users', [AdminUserController::class, 'index']);
+Route::get('/admin/users/create', [AdminUserController::class, 'create']);
+Route::post('/admin/users', [AdminUserController::class, 'store']);
+Route::get('/admin/users/{user}', [AdminUserController::class, 'show']);
+Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit']);
+Route::patch('/admin/users/{user}', [AdminUserController::class, 'update']);
+Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy']);
+
+
+// Report Controller 
+Route::get('/admin/report', [AdminReportController::class, 'index']);
+Route::get('/admin/report/sales', [AdminReportController::class, 'sales']);
+Route::get('/admin/report/categories', [AdminReportController::class, 'categories']);
+Route::get('/admin/report/orders', [AdminReportController::class, 'orders']);
+Route::get('/admin/report/products', [AdminReportController::class, 'products']);
+Route::get('/admin/report/customers', [AdminReportController::class, 'customers']);

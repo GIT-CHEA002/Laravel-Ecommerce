@@ -1,3 +1,7 @@
-<div>
-    <!-- Act only according to that maxim whereby you can, at the same time, will that it should become a universal law. - Immanuel Kant -->
-</div>
+@extends('layout.auth-layout')
+@section('title', 'Register')
+@section('content')
+   <div class="w-full h-full  bg-blue-400">
+        <h1>Hello </h1>
+   </div>
+@endsection
