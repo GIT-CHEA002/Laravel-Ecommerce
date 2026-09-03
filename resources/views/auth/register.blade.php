@@ -1,5 +1,6 @@
 @extends('layout.auth-layout')
 @section('title', 'Register')
+@section('favicon', asset('images/favicons/register.png'))
 @section('content')
    <div class="py-12">
       <x-shared.toggle-theme />
