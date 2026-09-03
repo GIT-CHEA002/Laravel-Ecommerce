@@ -10,7 +10,7 @@ class SessionController extends Controller
     //
     public function create()
     {
-        dd("Return Login Form");
+        return view('auth.login');
     }
     public function store(Request $request)
     {
