@@ -6,7 +6,6 @@
 ])
 
 <div class="space-y-1" @if ($type === 'password') x-data="{ isPasswordShow: false }" @endif>
-
   @if ($label)
     <x-form.label :$label :$name />
   @endif

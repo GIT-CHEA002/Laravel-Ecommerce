@@ -1,9 +1,17 @@
+@php
+  $method = strtoupper($attributes->get('method', 'GET'));
+  // check the methods send by attribute 
+  $realMethod = in_array($method, ['GET', 'POST']) ? $method : 'POST';
+@endphp
+
 <form {{ $attributes->merge([
-  'method' => 'GET'
+  'method' => $realMethod
 ]) }}>
-  @if ($attributes->get('method', 'GET') !== 'GET')
+  @if ($method != 'GET')
     @csrf
-    @method($attributes->get('method'))
+    @if ($method != 'POST')
+      @method($method)
+    @endif
   @endif
   {{ $slot }}
 </form>

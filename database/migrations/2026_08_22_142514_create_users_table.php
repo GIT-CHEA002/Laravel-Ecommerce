@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             // relationship
-            $table->foreignId('role_id')
+            $table->foreignId('role_id')->default(1)
                 ->constrained('roles', 'role_id')
                 ->cascadeOnDelete();
             $table->boolean('is_active')->default(true);

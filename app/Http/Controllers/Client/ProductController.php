@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::with('category')->get();
-        return $product;
+        return view('client.home');
     }
     /**
      * Display the specified resource.

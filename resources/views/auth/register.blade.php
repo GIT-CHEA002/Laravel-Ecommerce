@@ -3,12 +3,8 @@
 @section('favicon', asset('images/favicons/register.png'))
 @section('content')
    <div class="py-12">
-      <x-shared.toggle-theme />
-      <div class="">
-
-      </div>
       <x-form.form-wrapper>
-         <x-form.form>
+         <x-form.form action="{{ route('register-user') }}" method="POST">
             <h1 class="text-center text-2xl font-medium tracking-wide">Register </h1>
             <x-form.field name="firstname" label="First Name" placeholder="Jonh" />
             <x-form.field name="lastname" label="Last Name" placeholder="Doe" />
@@ -20,7 +16,7 @@
          </x-form.form>
          <div class="text-center text-sm tracking-wide">
             <span>Have an Account? </span>
-            <a href="/login"
+            <a href="{{ route('login-user') }}"
                class=" capitalize text-indigo-700 font-medium cursor-pointer hover:underline underline-offset-2">back to
                login</a>
          </div>
