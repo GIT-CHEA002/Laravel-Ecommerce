@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
-  body {
-       @apply scroll-smooth 
-           bg-indigo-50/80 dark:bg-slate-950
-           text-slate-800 dark:text-slate-100
-           font-sans
-           transition-colors duration-300;
-  }
-  
+    body {
+        @apply scroll-smooth
+            bg-violet-50 dark:bg-slate-950
+            text-slate-800 dark:text-slate-100
+            transition-colors duration-300 ;
+        font-family: 'Hanken Grotesk', sans-serif;
+    }
 }

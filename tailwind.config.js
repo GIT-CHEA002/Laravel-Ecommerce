@@ -10,7 +10,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Hanken Grotesk', 'sans-serif'],
             },
         },
     },
