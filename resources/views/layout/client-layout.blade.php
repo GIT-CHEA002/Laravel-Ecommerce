@@ -16,6 +16,7 @@
     <main>
         @yield('content')
     </main>
+    <x-footer.client-footer.client-footer />
 </body>
 
 </html>

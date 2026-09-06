@@ -28,7 +28,7 @@
 @endphp
 <header x-data="{isSidebarOpen : false}" {{ $attributes->merge([
   'class' => 'sticky top-0 z-50 max-w-7xl px-4 py-4 sm:px-8 md:px-12 md:py-6
-           bg-indigo-100 dark:bg-slate-900 shadow-md'
+           bg-indigo-100 dark:bg-slate-900 shadow-md overflow-hidden'
 ]) }}>
   <nav class="flex items-center justify-between">
     <a href="/" class="inline-flex items-center gap-2 text-sm font-extrabold
@@ -43,7 +43,7 @@
       <x-form.form class="md:block hidden">
         <x-header.client-header.search-form-field />
       </x-form.form>
-      <x-shared.toggle-theme />
+      <x-shared.toggle-theme class="hidden md:block" />
       <x-header.client-header.cart-link />
       {{-- user sections --}}
       @auth
