@@ -1,12 +1,12 @@
-<div class="h-screen py-8">
+<div class="h-fit bg-white default-padding ">
   <x-shared.section-header>Featured Categories</x-shared.section-header>
   <x-shared.intro-text>Shop by department for top-tier goods.</x-shared.intro-text>
   {{-- data --}}
   <div
-    class="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[300px] lg:auto-rows-[340px] ">
+    class=" py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[300px] lg:auto-rows-[340px] ">
     <!-- #region -->
     @foreach ([1, 2, 3] as $num)
-      <div class="relative z-40 bg-indigo-300 rounded-md overflow-hidden ">
+      <div class="relative z-40 bg-indigo-100 rounded-md overflow-hidden ">
         <img src="https://picsum.photos/800/600" alt="categories"
           class="h-full w-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer">
         <div class="absolute z-40 bottom-5 left-5">
@@ -15,6 +15,5 @@
         </div>
       </div>
     @endforeach
-
   </div>
 </div>

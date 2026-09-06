@@ -1,0 +1,8 @@
+@props(['count' => 0, 'total' => 0])
+<div {{ $attributes->merge(['class' => 'flex w-fit justify-center items-center']) }}>
+  @foreach ([1, 2, 3, 4] as $num)
+    <x-heroicon-s-star class="w-3 h-3 text-green-600" />
+  @endforeach
+  <x-heroicon-o-star class="w-3 h-3 text-green-600" />
+  <span class="text-sm font-semibold tracking-wide px-0.5">(42)</span>
+</div>

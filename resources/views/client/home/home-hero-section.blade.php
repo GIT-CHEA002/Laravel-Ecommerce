@@ -1,4 +1,5 @@
-<div class="grid grid-cols-1 md:grid-cols-2 place-items-center gap-8 border-b border-indigo-700 dark:border-indigo-500">
+<div
+  class="px-4 sm:px-8 md:px-12 py-4 md:py-6 grid grid-cols-1 md:grid-cols-2 place-items-center gap-8 border-b border-indigo-700 dark:border-indigo-500">
   <div class="md:pe-6 lg:pe-12">
     <x-shared.hero-title> Elevate Your Lifestyle with Premium Essentials</x-shared.hero-title>
     <x-shared.intro-text> Discover our curated collection of high-quality products designed to blend seamlessly

@@ -11,5 +11,14 @@
             text-slate-800 dark:text-slate-100/90
             transition-colors duration-300 ;
         font-family: 'Hanken Grotesk', sans-serif;
+        
+    }
+}
+@layer components{
+    .default-padding{
+      @apply  px-4 sm:px-8 md:px-12 py-4 md:py-6
+    }
+    .intro-text-color{
+        @apply text-gray-600 dark:text-gray-300
     }
 }
