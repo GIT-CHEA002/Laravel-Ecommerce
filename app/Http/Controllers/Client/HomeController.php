@@ -11,7 +11,7 @@ class HomeController extends Controller
 
   {
     $featuredProduct = Product::inRandomOrder()->take(10)->get();
-    return view('client.home', ['featuredProduct' => $featuredProduct]);
+    return view('client.home.home', ['featuredProduct' => $featuredProduct]);
   }
   public function show() {}
   public function categories()

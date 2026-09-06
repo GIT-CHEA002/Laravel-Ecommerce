@@ -5,3 +5,4 @@
   4.    {{-- light : text-indigo-700 , border-indigo-200 , bg-indigo-50
         dark : textt-indigo-500, border-slate-700 , bg-slate-800
         --}}
+  5. normal text : text-gray-600 dark:text-gray-300
