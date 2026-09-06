@@ -1,3 +1,1 @@
-<div>
-    <!-- The only way to do great work is to love what you do. - Steve Jobs -->
-</div>
+<h1 {{ $attributes->merge(['class' => 'text-lg md:text-xl lg:text-2xl font-semibold tracking-wide']) }}>{{ $slot }}</h1>

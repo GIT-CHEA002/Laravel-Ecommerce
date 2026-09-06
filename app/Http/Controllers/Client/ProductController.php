@@ -13,8 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('category')->get();
-        return view('client.home');
+        $products = Product::with('category')->get();
+        return view('client.products.index', ['products' => $products]);
     }
     /**
      * Display the specified resource.
