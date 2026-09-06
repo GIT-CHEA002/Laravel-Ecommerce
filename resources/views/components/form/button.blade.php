@@ -1,5 +1,5 @@
 <button {{ $attributes->merge([
-  'class' => 'w-full mt-3
+  'class' => 'w-full
                                         bg-indigo-700/95 text-white
                                           text-sm  uppercase
                                         tracking-wide

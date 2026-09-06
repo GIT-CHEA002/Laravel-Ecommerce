@@ -16,7 +16,6 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
-
     public function store(Request $request)
     {
         $attributes = $request->validate([
