@@ -31,7 +31,7 @@
            bg-indigo-100 dark:bg-slate-900 shadow-md overflow-hidden'
 ]) }}>
   <nav class="flex items-center justify-between">
-    <a href="/" class="inline-flex items-center gap-2 text-sm font-extrabold
+    <a href="/" class="drop-shadow-md inline-flex items-center gap-2 text-sm font-extrabold
                    capitalize tracking-widest text-indigo-700
                    dark:text-indigo-500 md:text-base lg:text-lg">
       <x-heroicon-o-shopping-bag class="h-6 w-6" />

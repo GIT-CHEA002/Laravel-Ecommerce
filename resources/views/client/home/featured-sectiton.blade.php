@@ -17,7 +17,7 @@
     ],
   ];
 @endphp
-<div class="default-padding bg-white py-12 ">
+<div class="default-padding bg-white dark:bg-slate-900 py-12 ">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-10 auto-rows-auto">
     @foreach ($features as $feature)
       <div class=" flex flex-col items-center justify-start gap-3">

@@ -2,7 +2,7 @@
   <x-shared.section-header class="text-center">Featured Products</x-shared.section-header>
   <x-shared.intro-text class="text-center">Shop by department for top-tier goods.</x-shared.intro-text>
   <div class="py-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-auto ">
-    @foreach ([1, 2, 3, 4, 5] as $num)
+    @foreach ([1, 2, 3, 4, 5, 7, 8, 9] as $num)
       <div
         class="bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col">
         <div class="h-1/2 p-3">

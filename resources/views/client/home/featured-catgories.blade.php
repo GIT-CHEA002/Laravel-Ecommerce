@@ -1,4 +1,4 @@
-<div class="h-fit bg-white default-padding ">
+<div class="h-fit bg-white dark:bg-slate-900 default-padding ">
   <x-shared.section-header>Featured Categories</x-shared.section-header>
   <x-shared.intro-text>Shop by department for top-tier goods.</x-shared.intro-text>
   {{-- data --}}
