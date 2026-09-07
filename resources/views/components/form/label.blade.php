@@ -1,2 +1,2 @@
 @props(['label', 'name'])
-<label for="{{ $name }}" class="text-sm tracking-wide">{{ $label }}</label>
+<label for="{{ $name }}" class="text-base tracking-wide">{{ $label }}</label>
