@@ -6,11 +6,11 @@
       into your
       modern life. Precision engineering meets sophisticated style.</x-shared.intro-text>
     <div class="py-3 gap-5 space-y-4 md:space-y-0 block md:flex">
-      <x-button.primary-button href="/client/products" class="w-full md:w-fit justify-center">
+      <x-button.primary-button href="/client/product" class="w-full md:w-fit justify-center">
         Shop Now
         <x-heroicon-o-chevron-right class="h-4 w-4" />
       </x-button.primary-button>
-      <x-button.secondary-button href="/client/categories" class="w-full md:w-fit text-center">
+      <x-button.secondary-button href="/client/category" class="w-full md:w-fit text-center">
         Explore collection
       </x-button.secondary-button>
     </div>
@@ -18,6 +18,6 @@
   {{-- picture of the hero sections--}}
   <div class="md:ps-6 lg:ps-12 w-full  rounded-md overflow-hidden lg:py-12">
     <img src="https://picsum.photos/id/238/800/600" alt="Premium lifestyle essentials"
-      class="w-full h-full rounded-md object-cover" loading="lazy">
+      class="w-full h-full  object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
   </div>
 </div>

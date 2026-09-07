@@ -21,7 +21,7 @@ class ProductImageFactory extends Factory
         return [
             //
             'product_id' => 1,
-            'image_path' => fake()->imageUrl(),
+            'image_url' => fake()->imageUrl(),
         ];
     }
 }

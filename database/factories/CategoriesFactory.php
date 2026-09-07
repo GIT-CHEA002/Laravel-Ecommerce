@@ -30,6 +30,7 @@ class CategoriesFactory extends Factory
                 'Tablet',
             ]),
             'slug' => fake()->unique()->slug(),
+            'image_url' => fake()->imageUrl()
         ];
     }
 }

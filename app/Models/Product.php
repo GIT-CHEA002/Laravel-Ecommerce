@@ -23,7 +23,7 @@ class Product extends Model
     }
     public function isPrimaryImage(): string
     {
-        return $this->productImages->firstWhere('is_primary', 1)->image_path ??
+        return $this->productImages->firstWhere('is_primary', 1)->image_url ??
             $this->productImages->first()->image_path ??
             'https://picsum.photos/id/10/400/300';
     }

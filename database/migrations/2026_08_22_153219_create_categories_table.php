@@ -20,6 +20,7 @@ return new class extends Migration
                 ->nullOnDelete();
             $table->string('name');
             $table->string('slug');
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
