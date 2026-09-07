@@ -16,7 +16,7 @@
 }
 @layer components{
     .default-padding{
-      @apply  px-4 sm:px-8 md:px-12 py-4 md:py-6
+      @apply  px-6 sm:px-8 md:px-12 py-4 md:py-6
     }
     .intro-text-color{
         @apply text-gray-600 dark:text-gray-300

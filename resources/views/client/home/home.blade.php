@@ -7,7 +7,7 @@
     <div class="h-auto max-w-7xl mx-auto">
         @include('client.home.home-hero-section')
         @include('client.home.featured-catgories')
-        @include('client.home.featured-product')
+        @include('client.home.featured-product', ['featuredProduct' => $featuredProduct])
         @include('client.home.featured-sectiton')
     </div>
 @endsection

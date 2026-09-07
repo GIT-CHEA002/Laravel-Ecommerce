@@ -21,6 +21,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'product_id');
     }
+    public function isPrimaryImage(): string
+    {
+        return $this->productImages->firstWhere('is_primary', 1)->image_path ??
+            $this->productImages->first()->image_path ??
+            'https://picsum.photos/id/10/400/300';
+    }
     public function cartItems()
     {
         return $this->hasMany(CartItem::class, 'product_id', 'product_id');

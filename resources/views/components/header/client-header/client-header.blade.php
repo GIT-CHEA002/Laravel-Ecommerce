@@ -27,7 +27,7 @@
   ];
 @endphp
 <header x-data="{isSidebarOpen : false}" {{ $attributes->merge([
-  'class' => 'sticky top-0 z-50 max-w-7xl px-4 py-4 sm:px-8 md:px-12 md:py-6
+  'class' => 'sticky top-0 z-50 max-w-7xl default-padding
            bg-indigo-100 dark:bg-slate-900 shadow-md overflow-hidden'
 ]) }}>
   <nav class="flex items-center justify-between">
