@@ -1,4 +1,4 @@
-@props(['product', 'badgeTag'])
+@props(['product', 'badgeTag'=>'New'])
 <div
   class="bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col">
   <div class="h-1/2 p-3 relative">
@@ -28,5 +28,4 @@
       </x-button.primary-button>
     </div>
   </div>
-
 </div>
