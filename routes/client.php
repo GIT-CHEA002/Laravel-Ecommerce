@@ -6,7 +6,8 @@ use App\Http\Controllers\Client\CartController as ClientCartController;
 
 // product diplay route for user only
 Route::get('/client/product', [ClientSideProductController::class, 'index'])->name('products.index');
-Route::get('/client/product/{product}', [ClientSideProductController::class, 'show']);
+Route::get('/client/product/{product}', [ClientSideProductController::class, 'show'])->name('product.show');
+
 
 // Cart 
 Route::get('/client/cart', [ClientCartController::class, 'index']);

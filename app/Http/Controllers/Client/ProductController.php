@@ -14,17 +14,21 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $allProduct = Product::with('category')->get();
         $products = Product::with('category')
             ->when($request->filled('category'), fn($q) =>
-            $q->where('categories_id', $request->category))
+            $q->whereIn('categories_id', $request->category))
             ->when($request->filled('max_price'), fn($q) =>
             $q->where('price', '<=', $request->max_price))
             ->when($request->filled('rating'), fn($q) =>
             $q->where('rating', '>=', $request->rating))
-            ->paginate(10)
+            ->simplePaginate(10)
             ->withQueryString();
-        $categories = $products->pluck('category')->unique('categories_id')->values();
-        return view('client.products.index.index', ['products' => $products, 'categories' => $categories]);
+        $categories = $allProduct->groupBy('categories_id');
+        return view('client.products.index.index', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
     /**
      * Display the specified resource.
@@ -32,6 +36,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        dd(Product::findOrFail($product->product_id));
+        $displayProduct = Product::findOrFail($product->product_id);
+        return view('client.products.show.show', ['product' => $displayProduct]);
     }
 }

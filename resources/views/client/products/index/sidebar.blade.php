@@ -13,9 +13,13 @@
         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
         x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
-        @foreach ($categories as $category)
-          <x-form.checkbox type="checkbox" :label="$category->name" name="category[]"
-            value="{{ $category->categoried_id }}" :checked="in_array($category->categories_id, (array) request('category', []))" onchange="this.form.submit()" />
+        @foreach ($categories as $categoryId => $products)
+          @php
+            $category = $products->first()->category;
+          @endphp
+          <x-form.checkbox type="checkbox" :label="$category->name" name="category[]" :value="$category->categories_id"
+            :checked="in_array($category->categories_id, (array) request('category', []))"
+            onchange="this.form.submit()" />
         @endforeach
       </div>
     </div>

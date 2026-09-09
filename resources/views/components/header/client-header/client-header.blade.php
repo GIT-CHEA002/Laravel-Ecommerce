@@ -10,7 +10,7 @@
       'href' => '/client/product',
       'icon' => 'shopping-bag',
       'name' => 'Shop',
-      'active' => request()->is('client/product'),
+      'active' => request()->is('client/product') || preg_match('#^client/product/\d+$#', request()->path()),
     ],
     [
       'href' => '/client/categories',
