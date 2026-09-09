@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->float('price');
             $table->string('slug');
-            $table->string('description');
+            $table->text('description');
             $table->unsignedInteger('stock_quantity', autoIncrement: false);
             $table->boolean('is_on_market')->default(true);
             $table->timestamps();
