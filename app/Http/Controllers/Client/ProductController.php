@@ -37,6 +37,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $displayProduct = Product::findOrFail($product->product_id);
-        return view('client.products.show.show', ['product' => $displayProduct]);
+        $relatedProduct = Product::where('categories_id', $product->categories_id)
+            ->where('product_id', '!=', $product->product_id)->get();
+        return view('client.products.show.show', ['product' => $displayProduct, 'relatedProduct' => $relatedProduct]);
     }
 }

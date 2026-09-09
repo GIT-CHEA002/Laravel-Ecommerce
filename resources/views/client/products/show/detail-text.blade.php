@@ -1,4 +1,4 @@
-<div class="rounded-md md:p-3 flex flex-col justify-between">
+<div class="rounded-md md:ps-3 flex flex-col justify-between">
   <div>
     <p class="tracking-wide text-indigo-700 text-sm font-medium">
       {{ $product->category->name }}
