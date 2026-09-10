@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('image_url')->nullable();
             $table->timestamps();
+            $table->unique(['name', 'parent_categories_id']);
         });
         // create parent schema
     }

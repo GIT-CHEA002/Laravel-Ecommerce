@@ -21,6 +21,11 @@ class Categories extends Model
     {
         return $this->hasMany(Categories::class, 'parent_categories_id');
     }
+    public function childrenRecursive(): HasMany
+    {
+        return $this->children()->with('childrenRecursive');
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'categories_id', 'categories_id');

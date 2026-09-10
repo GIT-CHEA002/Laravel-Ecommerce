@@ -18,9 +18,7 @@ class CategoriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'parent_categories_id' => Categories::query()
-                ->inRandomOrder()
-                ->value('categories_id'),
+            'parent_categories_id' => null,
             'name' => fake()->randomElement([
                 'Smart Phone',
                 'Computer',

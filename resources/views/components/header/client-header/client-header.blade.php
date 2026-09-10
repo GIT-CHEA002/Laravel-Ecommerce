@@ -13,10 +13,10 @@
       'active' => request()->is('client/product') || preg_match('#^client/product/\d+$#', request()->path()),
     ],
     [
-      'href' => '/client/categories',
+      'href' => '/client/category',
       'icon' => 'squares-2x2',
       'name' => 'Categories',
-      'active' => request()->is('client/categories'),
+      'active' => request()->is('client/category'),
     ],
     [
       'href' => '/client/trending',
