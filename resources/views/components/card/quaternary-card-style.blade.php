@@ -20,9 +20,9 @@
       <p class="text-justify">{{ Str::words($product->description, 15, '...') }}</p>
     </div>
     <div class="py-2">
-      <x-links.secondary-link
-        href="{{ route('category.index', ['category' => $product->category->categories_id]) }}">Explore
-        departments</x-links.primary-link>
+      <x-links.secondary-link class="text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2"
+        href="{{ route('category.index', ['category' => $product->category->categories_id]) }}">
+        Explore departments</x-links.primary-link>
     </div>
   </div>
 </div>

@@ -44,7 +44,7 @@
         <x-header.client-header.search-form-field />
       </x-form.form>
       <x-shared.toggle-theme class="hidden md:block" />
-      <x-header.client-header.cart-link />
+      <x-header.client-header.cart-link href="/client/cart" />
       {{-- user sections --}}
       @auth
         <div class="cursor-pointer px-0.5">

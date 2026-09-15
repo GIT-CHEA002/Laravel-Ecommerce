@@ -31,6 +31,14 @@ class ProductController extends Controller
         ]);
     }
     /**
+     * Summary of trending
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function trending()
+    {
+        return view('client.products.trending.trending', ['trendingProduct' => []]);
+    }
+    /**
      * Display the specified resource.
      * public function index(Request $request)
      */

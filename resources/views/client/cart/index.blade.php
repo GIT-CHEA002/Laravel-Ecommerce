@@ -2,7 +2,21 @@
 @section('title', 'Shopping Cart')
 @section('favicon', asset('images/favicons/register.png'))
 @section('content')
-  <div class="h-screen max-w-7xl mx-auto px-4 sm:px-8 md:px-12 py-4 md:py-6">
-    <h1>This is the product page content for the shoppings </h1>
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 py-4 md:py-6">
+    <x-shared.section-header>Your shopping cart</x-shared.section-header>
+    <x-shared.intro-text>You have 2 items in your cart</x-shared.intro-text>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-4">
+
+      {{-- display product cart --}}
+      <div class="md:col-span-2 rounded-md p-3 border bg-white dark:bg-slate-800">
+        @foreach ([1, 2, 3, 4] as $num)
+          @include('client.cart.product-cart-card')
+        @endforeach
+      </div>
+      {{-- summary sections --}}
+      @include('client.cart.summary')
+    </div>
   </div>
 @endsection
+@stack('scripts')

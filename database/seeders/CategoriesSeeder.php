@@ -23,18 +23,19 @@ class CategoriesSeeder extends Seeder
     ];
     public function run(): void
     {
-        foreach ($this->name as $name) {
-            $parent = Categories::factory()->create([
-                'parent_categories_id' => null,
-                'name' => $name
-            ]);
-            $childrens = fake()->unique()->words(3);
-            foreach ($childrens as $children) {
-                Categories::factory()->create([
-                    'parent_categories_id' => $parent->categories_id,
-                    'name' => $children
-                ]);
-            }
-        }
+        // foreach ($this->name as $name) {
+        //     $parent = Categories::factory()->create([
+        //         'parent_categories_id' => null,
+        //         'name' => $name
+        //     ]);
+        //     $childrens = fake()->unique()->words(3);
+        //     foreach ($childrens as $children) {
+        //         Categories::factory()->create([
+        //             'parent_categories_id' => $parent->categories_id,
+        //             'name' => $children
+        //         ]);
+        //     }
+        // }
+        Categories::factory(6)->create();
     }
 }

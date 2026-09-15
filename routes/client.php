@@ -17,3 +17,6 @@ Route::get('/client/category', [ClientCategoryController::class, 'index'])->name
 // Cart 
 Route::get('/client/cart', [ClientCartController::class, 'index']);
 Route::post('/client/cart/{product}', [ClientCartController::class, 'store']); // middle ware protect
+
+// trending 
+Route::get('/client/trending', [ClientSideProductController::class, 'trending']);

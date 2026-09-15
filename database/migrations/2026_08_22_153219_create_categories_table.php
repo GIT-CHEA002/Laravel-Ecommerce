@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id('categories_id');
             // self parent references
-            $table->foreignId('parent_categories_id')
-                ->nullable()
-                ->constrained('categories', 'categories_id')
-                ->nullOnDelete();
+            // $table->foreignId('parent_categories_id')
+            //     ->nullable()
+            //     ->constrained('categories', 'categories_id')
+            //     ->nullOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->string('image_url')->nullable();
             $table->timestamps();
-            $table->unique(['name', 'parent_categories_id']);
+            // $table->unique(['name', 'parent_categories_id']);
         });
         // create parent schema
     }

@@ -18,8 +18,8 @@ class CategoriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'parent_categories_id' => null,
-            'name' => fake()->randomElement([
+            // 'parent_categories_id' => null,
+            'name' => fake()->unique()->randomElement([
                 'Smart Phone',
                 'Computer',
                 'Electronics',

@@ -1,5 +1,5 @@
 @props(['initial' => 1, 'min' => 1, 'max' => 10, 'name' => 'quantity'])
-<div x-data="quantitySelector({{ $initial }},{{ $min }},{{ $max }})" {{ $attributes->merge(['class' => 'flex justify-between items-center gap-4 bg-white/90 dark:bg-slate-800 py-1 px-3 rounded-md']) }}>
+<div x-data="quantitySelector({{ $initial }},{{ $min }},{{ $max }})" {{ $attributes->merge(['class' => 'flex justify-between items-center gap-4 bg-white/90 dark:bg-slate-800 py-1 px-3 border rounded-md']) }}>
   <button @click="decrement()" class="">
     <x-heroicon-s-minus class="w-4 h-4" />
   </button>

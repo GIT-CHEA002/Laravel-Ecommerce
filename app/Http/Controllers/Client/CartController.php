@@ -13,8 +13,8 @@ class CartController extends Controller
     //
     public function index()
     {
-        $cart = Cart::with('cartItems.')->get()->groupBy('cart_id');
-        return $cart;
+        $cart = Cart::with('cartItems')->get()->groupBy('cart_id');
+        return view('client.cart.index', ['carts' => $cart]);
     }
     public function store(Product $product)
     {
@@ -70,7 +70,6 @@ class CartController extends Controller
         if ($cartItem->cart->user_id !== auth()->id()) {
             abort(403);
         }
-
         $cartItem->delete();
 
         return redirect()

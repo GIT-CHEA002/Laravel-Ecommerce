@@ -1,14 +1,3 @@
-@php
-  $departments = [
-    ['label' => 'All Departments', 'count' => 0, 'value' => null, 'active' => true],
-    ['label' => 'Audio & Studio Sound', 'value' => 'audio-studio-sound', 'active' => false],
-    ['label' => 'Peripherals & Keyboards', 'value' => 'peripherals-keyboards', 'active' => false],
-    ['label' => 'Cameras & Optics', 'value' => 'cameras-optics', 'active' => false],
-    ['label' => 'Desk & Office', 'value' => 'desk-office', 'active' => false],
-    ['label' => 'Leather & Travel Goods', 'value' => 'leather-travel-goods', 'active' => false],
-  ];
-@endphp
-
 @extends('layout.client-layout')
 
 @section('title', 'Categories')
@@ -64,10 +53,8 @@
             @foreach ($products as $product)
               <x-card.quaternary-card-style :product="$product" />
             @endforeach
-
           </div>
         </div>
-
       </div>
     </div>
   </div>
