@@ -19,10 +19,10 @@
       'active' => request()->is('client/category'),
     ],
     [
-      'href' => '/client/trending',
+      'href' => '/client/product/trending',
       'icon' => 'squares-2x2',
       'name' => 'Trending',
-      'active' => request()->is('client/trending'),
+      'active' => request()->is('/client/product/trending'),
     ],
   ];
 @endphp
@@ -40,7 +40,7 @@
     {{-- desktop links --}}
     <x-header.client-header.desktop-links :links="$links" />
     <div class="flex items-center justify-end gap-4">
-      <x-form.form class="md:block hidden">
+      <x-form.form class="md:flex my-auto hidden">
         <x-header.client-header.search-form-field />
       </x-form.form>
       <x-shared.toggle-theme class="hidden md:block" />

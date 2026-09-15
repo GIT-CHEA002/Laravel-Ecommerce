@@ -13,13 +13,13 @@
     cart
   </span>
   <x-heroicon-o-shopping-cart class="h-5 w-5" />
-
   @auth
-    <span class="absolute -right-2 -top-2 flex h-5 w-5
-                                               items-center justify-center rounded-full
-                                               bg-indigo-600 text-[10px] font-semibold
-                                               text-white ring-2 ring-indigo-100
-                                               dark:ring-slate-900 animate-pulse">
+    <span class="
+        absolute -right-2 -top-2 flex h-5 w-5
+                                                           items-center justify-center rounded-full
+                                                           bg-indigo-600 text-[10px] font-semibold
+                                                           text-white ring-2 ring-indigo-100
+                                                           dark:ring-slate-900 animate-pulse">
       1
     </span>
   @endauth

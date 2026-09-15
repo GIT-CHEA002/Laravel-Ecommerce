@@ -33,29 +33,12 @@
           </x-shared.featured-icon-text>
         </div>
       </div>
-      <div class="">
-        {{-- categories tag --}}
-        <div class="flex items-center justify-start gap-3 pb-8">
-          <x-shared.pilltab href="{{ route('category.index') }}" :active="is_null($categoryId)">
-            All Departments
-          </x-shared.pilltab>
-          @foreach ($categories as $category)
-            <x-shared.pilltab href="{{ route('category.index', ['category' => $category->categories_id]) }}"
-              :active="(string) $categoryId === (string) $category->categories_id">{{$category->name}}</x-shared.pilltab>
-          @endforeach
-        </div>
-        {{-- featured categories --}}
-        <div class="">
-          <x-shared.section-header>Primary Departments</x-shared.section-header>
-          <x-shared.intro-text class="text-sm">Direct navigation through structured parent
-            collections</x-shared.intro-text>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-3">
-            @foreach ($products as $product)
-              <x-card.quaternary-card-style :product="$product" />
-            @endforeach
-          </div>
-        </div>
-      </div>
+
+      {{-- categories tag --}}
+      @include('client.category.category-tag', ['categories' => $categories])
+      {{-- featured categories --}}
+      @include('client.category.featured-product', ['products' => $products])
+
     </div>
   </div>
 @endsection

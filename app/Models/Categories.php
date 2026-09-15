@@ -13,18 +13,18 @@ class Categories extends Model
     use HasFactory;
     protected $primaryKey = 'categories_id';
     protected $guarded = [];
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(Categories::class, 'parent_categories_id');
-    }
-    public function children(): HasMany
-    {
-        return $this->hasMany(Categories::class, 'parent_categories_id');
-    }
-    public function childrenRecursive(): HasMany
-    {
-        return $this->children()->with('childrenRecursive');
-    }
+    // public function parent(): BelongsTo
+    // {
+    //     return $this->belongsTo(Categories::class, 'parent_categories_id');
+    // }
+    // public function children(): HasMany
+    // {
+    //     return $this->hasMany(Categories::class, 'parent_categories_id');
+    // }
+    // public function childrenRecursive(): HasMany
+    // {
+    //     return $this->children()->with('childrenRecursive');
+    // }
 
     public function products(): HasMany
     {

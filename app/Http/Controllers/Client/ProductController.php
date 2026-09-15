@@ -36,7 +36,10 @@ class ProductController extends Controller
      */
     public function trending()
     {
-        return view('client.products.trending.trending', ['trendingProduct' => []]);
+        $trendingProduct = [];
+        $categories = Categories::with('products')->get();
+
+        return view('client.products.trending.trending', compact(['trendingProduct', 'categories']));
     }
     /**
      * Display the specified resource.
