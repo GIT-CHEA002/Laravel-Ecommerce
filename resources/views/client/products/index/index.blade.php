@@ -45,7 +45,7 @@
                 </select>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 auto-rows-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-auto">
             {{-- Sidebar filters --}}
             @include('client.products.index.sidebar', ['categories' => $categories])
             {{-- Product listing --}}

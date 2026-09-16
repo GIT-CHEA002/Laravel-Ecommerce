@@ -5,6 +5,7 @@
 ])
 
 <span {{ $attributes->merge([
-  'class' => "$textColor text-xs font-semibold tracking-wide px-2 py-1 $rounded $bgColor",
+  'class' => "$textColor text-xs font-normal tracking-wide px-2 py-0.5  $rounded $bgColor",
 ]) }}>
-  {{ $slot }} </span>
+  {{ $slot }}
+</span>
