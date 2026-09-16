@@ -4,8 +4,11 @@
   <div
     class="py-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 auto-rows-auto sm:auto-rows-[250px] md:auto-rows-[300px] lg:auto-rows-[340px] ">
     @foreach ($featuredProduct as $product)
-      <x-card.primary-card-style :product="$product" :badgeTag="$product->slug"
-        target="{{ route('product.show', $product) }}" />
+      @include('client.home.featured-product-card', [
+        'product' => $product,
+        'target' => route('product.show', $product),
+        'badgeTag' => $product->slug,
+      ])
     @endforeach
   </div>
 </div>

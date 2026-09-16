@@ -37,8 +37,7 @@
       {{-- categories tag --}}
       @include('client.category.category-tag', ['categories' => $categories])
       {{-- featured categories --}}
-      @include('client.category.featured-product', ['products' => $products])
-
+      @include('client.category.featured-product-category', ['products' => $products])
     </div>
   </div>
 @endsection

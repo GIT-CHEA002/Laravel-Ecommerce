@@ -9,7 +9,7 @@
     <a href="/" class="inline-flex items-center gap-2 text-sm font-extrabold
                    capitalize tracking-widest text-indigo-700
                    dark:text-indigo-500 md:text-base lg:text-lg">
-      StoreFront
+      LaraStore
     </a>
     {{-- dispose btn --}}
     <button @click="isSidebarOpen = !isSidebarOpen" class="text-indigo-700 dark:text-indigo-500 font-bold">

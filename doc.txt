@@ -13,7 +13,7 @@ resources/views/
 │
 ├── layouts/                    # Master Layout Templates
 │   ├── admin.blade.php         # Admin Sidebar + Header + Content Layout
-│   ├── client.blade.php        # Customer Storefront Nav + Footer Layout
+│   ├── client.blade.php        # Customer LaraStore Nav + Footer Layout
 │   └── auth.blade.php          # Clean Layout for Login/Register Pages
 │
 ├── admin/                      # ADMIN SYSTEM VIEWS

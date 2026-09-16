@@ -3,7 +3,7 @@
   <nav class=" flex items-center justify-between ">
     <a href="/"
       class="capitalize tracking-widest text-indigo-700 dark:text-indigo-500 text-sm md:text-base lg:text-lg font-extrabold">
-      StoreFront </a>
+      LaraStore </a>
     <div class="flex-1 flex justify-end items-center">
       <x-shared.toggle-theme />
     </div>

@@ -22,7 +22,7 @@
       'href' => '/client/product/trending',
       'icon' => 'squares-2x2',
       'name' => 'Trending',
-      'active' => request()->is('/client/product/trending'),
+      'active' => request()->is('client/product/trending'),
     ],
   ];
 @endphp
@@ -32,10 +32,10 @@
 ]) }}>
   <nav class="flex items-center justify-between">
     <a href="/" class="drop-shadow-md inline-flex items-center gap-2 text-sm font-extrabold
-                   capitalize tracking-widest text-indigo-700
+                   capitalize tracking-wide text-indigo-700
                    dark:text-indigo-500 md:text-base lg:text-lg">
       <x-heroicon-o-shopping-bag class="h-6 w-6" />
-      StoreFront
+      LaraStore
     </a>
     {{-- desktop links --}}
     <x-header.client-header.desktop-links :links="$links" />

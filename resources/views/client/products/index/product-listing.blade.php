@@ -4,8 +4,7 @@
   <div
     class=" flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-auto sm:auto-rows-[250px] md:auto-rows-[300px] lg:auto-rows-[360px]">
     @foreach ($products as $product)
-      <x-card.secondary-card-style :product="$product" target="{{ route('product.show', $product) }}"
-        class="flex-shrink-0 w-64 sm:w-auto" />
+      @include('client.products.index.product-listing-card', ['product' => $product, "target" => route('product.show', $product), 'badgeTag' => 'New'])
     @endforeach
   </div>
   <div class="mt-8">

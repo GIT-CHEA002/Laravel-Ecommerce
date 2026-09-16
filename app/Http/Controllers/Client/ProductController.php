@@ -36,7 +36,9 @@ class ProductController extends Controller
      */
     public function trending()
     {
-        $trendingProduct = [];
+        $trendingProduct = Product::latest('product_id')
+            ->take(8)
+            ->paginate(8);
         $categories = Categories::with('products')->get();
 
         return view('client.products.trending.trending', compact(['trendingProduct', 'categories']));

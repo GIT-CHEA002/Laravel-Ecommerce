@@ -1,5 +1,5 @@
-@props(['product', 'badgeTag' => 'New', 'target' => '#'])
-<div {{ $attributes->merge(['class' => 'bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col']) }}>
+<div
+  class='bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col'>
   <div class="h-1/2 px-7 pt-7 relative">
     <img src="https://picsum.photos/500/400" alt="{{ $product->name ?? 'Electronics category' }}"
       class="h-full w-full rounded-md object-cover hover:scale-105 transition-transform duration-700 cursor-pointer">
