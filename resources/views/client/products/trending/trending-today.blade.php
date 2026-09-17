@@ -12,12 +12,10 @@
       <h1 class="w-fit text-sm font-medium uppercase tracking-wide text-indigo-700 dark:text-indigo-500">
         Special Edition Release
       </h1>
-
       <h1 class="w-fit rounded-full bg-red-100 px-2 text-xs font-medium tracking-wide text-red-700 dark:text-red-500">
         Only 14 units remaining in stock
       </h1>
     </div>
-
     {{-- Product name --}}
     <x-shared.section-header>
       Aura Pro Wireless Headphones — Indigo Edition

@@ -1,7 +1,6 @@
 @props(['product', 'badgeTag' => 'New', 'target' => '#'])
-
 <div
-  class=" p-6 sm:p-4  md:p-0 bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col">
+  class=" min-w-64 sm:p-4  md:p-0 bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col">
   <div class="aspect-[4/3] p-3 relative group">
     <a href="{{ $target }}" class="block h-full w-full relative">
       <img {{-- src="{{ $product->isPrimaryImage() }}" for the real image path --}} src="https://picsum.photos/500/400"
@@ -12,14 +11,12 @@
       <div class="absolute top-3 left-3 z-10">
         <x-shared.badge-tag bgColor="bg-green-100">{{ $badgeTag }}</x-shared.badge-tag>
       </div>
-
       {{-- hover overlay --}}
       <div
         class="p-3 w-full h-full absolute inset-0 flex items-end bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <span class="text-wrap text-white text-sm font-medium">Click the picture to view details</span>
       </div>
     </a>
-
     {{-- wishlist button: sibling of <a>, not nested inside it --}}
       <button
         class="text-black absolute top-3 right-3 z-20 bg-indigo-100 rounded-full p-1.5 shadow hover:bg-blue-100 transition-colors">

@@ -2,7 +2,7 @@
   <x-shared.section-header class="text-center">Featured Products</x-shared.section-header>
   <x-shared.intro-text class="text-center">Shop by department for top-tier goods.</x-shared.intro-text>
   <div
-    class=" py-5 flex overflow-x-auto flex-nowrap sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 items-stretch  ">
+    class=" py-5 flex overflow-x-auto flex-nowrap sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-stretch  ">
     @foreach ($featuredProduct as $product)
       @include('client.home.featured-product-card', [
         'product' => $product,
