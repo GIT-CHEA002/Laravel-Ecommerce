@@ -22,7 +22,7 @@ class ProductController extends Controller
             $q->where('price', '<=', $request->max_price))
             ->when($request->filled('rating'), fn($q) =>
             $q->where('rating', '>=', $request->rating))
-            ->simplePaginate(10)
+            ->simplePaginate(9)
             ->withQueryString();
         $categories = $allProduct->groupBy('categories_id');
         return view('client.products.index.index', [
