@@ -4,13 +4,13 @@
 @section('content')
     <div class="py-12">
         <x-form.form-wrapper>
-            <x-form.form action="" method="POST">
-                <h1 class="text-center text-2xl font-medium tracking-wide">Register </h1>
+            <x-form.form action="{{ route('login-store-user') }}" method="POST">
+                <h1 class="text-center text-2xl font-medium tracking-wide">Login </h1>
                 <x-form.field name="email" label="Email Address" type="email" placeholder="johndoe@gmail.com" />
                 <x-form.field name="password" label="Password" type="password" placeholder="Your password" />
-                <x-form.button>Register</x-form.button>
+                <x-form.button class="mt-3">Login</x-form.button>
             </x-form.form>
-            <div class="flex justify-between items-center text-sm tracking-wide">
+            <div class="flex justify-between items-center text-xs tracking-wide">
                 <a href="/forgotpassword"
                     class="  capitalize text-indigo-700 font-medium cursor-pointer hover:underline underline-offset-2">
                     Forgot password ?

@@ -21,15 +21,16 @@ class RegisteredUserController extends Controller
         $attributes = $request->validate([
             'firstname' => ['required', 'min:3', 'max:254'],
             'lastname' => ['required', 'min:3', 'max:254'],
-            'email' => ['required', 'email', Email::default()],
-            'password' => ['required', 'min:8', 'max:254', 'confirmed', Password::default()],
+            'email' => ['required', 'email', 'unique:users,email', Email::default()],
+            'password' => ['required', 'string', 'min:8', 'max:254', 'confirmed', Password::default()],
         ]);
+        // log the user in with DB transactions
         $user = DB::transaction(function () use ($attributes) {
             $user = User::create([
                 'first_name' => $attributes['firstname'],
                 'last_name' => $attributes['lastname'],
                 'email' => $attributes['email'],
-                'password' => $attributes['email'],
+                'password' => $attributes['password'],
             ]);
             return $user;
         });

@@ -12,7 +12,7 @@
             <x-form.field name="password" label="Password" type="password" placeholder="Your password" />
             <x-form.field name="password_confirmation" label="Confirm Password" type="password"
                placeholder="Retype your password " />
-            <x-form.button>Register</x-form.button>
+            <x-form.button class="mt-3">Register</x-form.button>
          </x-form.form>
          <div class="text-center text-sm tracking-wide">
             <span>Have an Account? </span>

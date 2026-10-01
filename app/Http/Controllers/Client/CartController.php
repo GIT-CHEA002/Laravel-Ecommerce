@@ -7,14 +7,21 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     //
     public function index()
     {
-        $cart = Cart::with('cartItems')->get()->groupBy('cart_id');
-        return view('client.cart.index', ['carts' => $cart]);
+        // method 1 : 
+        $cart = Cart::with('cartItems.products')   // singular, matches method name
+            ->where('user_id', Auth::user()->user_id)
+            ->first();
+        // dd(Auth::user()->user_id, $cart->user_id);
+        // return $cart->cartItems;
+        // method 2 : 
+        return view('client.cart.index', ['carts' => $cart->cartItems]);
     }
     public function store(Product $product)
     {

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController as ClientHomeController;
 
-Route::get('/', [ClientHomeController::class, 'index']);
+Route::get('/', [ClientHomeController::class, 'index'])->name('client.home');
 
 require __DIR__ . '/auth.php';
 

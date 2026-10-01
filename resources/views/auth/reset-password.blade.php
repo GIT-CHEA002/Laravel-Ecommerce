@@ -1,3 +1,8 @@
-<div>
-    <!-- Simplicity is an acquired taste. - Katharine Gerould -->
-</div>
+@extends('layout.auth-layout')
+@section('title', 'Reset Password')
+@section('favicon', asset('images/favicons/register.png'))
+@section('content')
+    <div>
+        Reset password
+    </div>
+@endsection

@@ -18,10 +18,17 @@ class CartItemSeeder extends Seeder
     {
         // $this->call(CartItemFactory::class);
         Cart::all()->each(function (Cart $cart) {
-            CartItem::factory(fake()->numberBetween(1, 4))->create([
-                'cart_id' => $cart->cart_id,
-                'product_id' => Product::inRandomOrder()->value('product_id')
-            ]);
+            $itemCount = fake()->numberBetween(1, 4);
+
+            // grab N unique random products so this cart never repeats a product
+            $productIds = Product::inRandomOrder()->limit($itemCount)->pluck('product_id');
+
+            foreach ($productIds as $productId) {
+                CartItem::factory()->create([
+                    'cart_id' => $cart->cart_id,
+                    'product_id' => $productId,
+                ]);
+            }
         });
     }
 }

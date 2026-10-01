@@ -11,12 +11,9 @@ Route::get('/client/product', [ClientSideProductController::class, 'index'])->na
 Route::get('/client/product/trending', [ClientSideProductController::class, 'trending'])->name('product.trending');
 Route::get('/client/product/{product}', [ClientSideProductController::class, 'show'])->name('product.show');
 
-// trending 
-
-
 // categories route 
 Route::get('/client/category', [ClientCategoryController::class, 'index'])->name('category.index');
 
-// Cart 
+// Cart : middleware protections
 Route::get('/client/cart', [ClientCartController::class, 'index']);
 Route::post('/client/cart/{product}', [ClientCartController::class, 'store']); // middle ware protect

@@ -1,7 +1,7 @@
 <button {{ $attributes->merge([
   'class' => 'w-full
                                         bg-indigo-700/95 text-white
-                                          text-sm  uppercase
+                                        text-sm  uppercase
                                         tracking-wide
                                         rounded-full py-1.5 
                                         hover:bg-indigo-700

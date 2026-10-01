@@ -1,3 +1,8 @@
-<div>
-    <!-- Be present above all else. - Naval Ravikant -->
-</div>
+@extends('layout.auth-layout')
+@section('title', 'Reset Password')
+@section('favicon', asset('images/favicons/register.png'))
+@section('content')
+    <div>
+        Forgot Password
+    </div>
+@endsection

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Email;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
@@ -15,33 +16,32 @@ class SessionController extends Controller
     {
         return view('auth.login');
     }
+    // login user or attempt
+    // check authorization
+    // check if login or not , then throw validate 
+    // regenerate the session token 
+    // redirect to the specific resources
     public function store(Request $request)
     {
-        // login user or attempt
-        // check authorization
-        // check if login or not , then throw validate 
-        // regenerate the session token 
-        // redirect to the specific resources
-
-        $attributes = $request->validate([
-            'email' => [
-                'required',
-                Email::default(),
-                'password' => ['required', Password::default()]
-            ]
+        $attributes  = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string']
         ]);
-        if ($attributes) {
-            dd($attributes);
+        if (!Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
+                'email' => 'These credentials do not match our records.',
+            ]);
         }
+        $request->session()->regenerate();
+        return redirect()->route('client.home');
     }
-
     public function destroy(Request $request)
     {
-        // check the credential
-        // attempt to log out (or destroy the credential)
-        // redirect to the home page
-        dd("Log the user out ");
-        Auth::logout();
+        Auth::guard('web')->logout();
+        // invalid token check
+        $request->session()->invalidate();
+        // regenerate the token 
+        $request->session()->regenerateToken();
         return redirect('/');
     }
 }

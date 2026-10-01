@@ -7,11 +7,10 @@
     <x-shared.intro-text>You have 2 items in your cart</x-shared.intro-text>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-4">
-
       {{-- display product cart --}}
       <div class="md:col-span-2 rounded-md p-3 border bg-white dark:bg-slate-800">
-        @foreach ([1, 2, 3, 4] as $num)
-          @include('client.cart.product-cart-card')
+        @foreach ($carts as $item)
+          @include('client.cart.product-cart-card', ['item' => $item])
         @endforeach
       </div>
       {{-- summary sections --}}
