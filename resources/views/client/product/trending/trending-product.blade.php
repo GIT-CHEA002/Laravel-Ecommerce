@@ -7,7 +7,7 @@
   <div
     class="py-5 flex flex-nowrap overflow-x-auto sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 items-stretch ">
     @foreach ($trendingProduct as $product)
-      @include('client.products.trending.trending-product-card', [
+      @include('client.product.trending.trending-product-card', [
         'product' => $product,
         'target' => route('product.show', $product),
         'badgeTag' => $product->slug,

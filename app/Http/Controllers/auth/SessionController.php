@@ -33,7 +33,8 @@ class SessionController extends Controller
             ]);
         }
         $request->session()->regenerate();
-        return redirect()->route('client.home');
+        $landing = $request->user()->isAdmin() ? route('admin.dashboard') : route('client.home');
+        return redirect()->intended($landing);
     }
     public function destroy(Request $request)
     {

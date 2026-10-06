@@ -1,4 +1,4 @@
-<x-form.form method="GET" action="{{ route('products.index') }}">
+<x-form.form method="GET" action="{{ route('product.index') }}">
   <div class="md:self-start md:sticky top-12 md:top-24 md:col-span-1 lg:col-span-1 pe-2">
     {{-- Category filter --}}
     <div x-data="{ isCategoryOpen: $persist(false) }" class="border-b border-indigo-700 dark:border-indigo-500 py-4">

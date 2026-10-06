@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -31,10 +32,12 @@ class RegisteredUserController extends Controller
                 'last_name' => $attributes['lastname'],
                 'email' => $attributes['email'],
                 'password' => $attributes['password'],
+                'role_id' => 2
             ]);
             return $user;
         });
         Auth::login($user);
-        return redirect('/');
+        $landing = $request->user()->isAdmin() ? route('admin.dashboard') : route('client.home');
+        return redirect()->intended($landing);
     }
 }

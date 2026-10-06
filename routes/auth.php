@@ -5,9 +5,11 @@ use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
 
 // Guest-only routes (login/register)
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest', 'nocache'])->group(function () {
   Route::get('/auth/login', [SessionController::class, 'create'])->name('login-user');
-  Route::post('/auth/login', [SessionController::class, 'store'])->name('login-store-user');
+  Route::post('/auth/login', [SessionController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('login-store-user');
 
   Route::get('/auth/register', [RegisteredUserController::class, 'create'])->name('register-user');
   Route::post('/auth/register', [RegisteredUserController::class, 'store'])->name('register-store-user');

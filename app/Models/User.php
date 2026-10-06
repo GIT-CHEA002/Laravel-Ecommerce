@@ -50,11 +50,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // The relationship of the model (eloquent)
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
-    public function userAddresses():HasMany
+    public function userAddresses(): HasMany
     {
         return $this->hasMany(UserAddress::class, 'user_id', 'user_id');
     }
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'user_id', 'user_id');
+    }
+    // self additional methods : check if the current user is admin or not 
+    public function isAdmin()
+    {
+        return $this->role_id === 1;
     }
 }

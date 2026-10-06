@@ -5,12 +5,12 @@
 
 @section('content')
   <div class=" default-padding">
-    @include('client.products.trending.trending-page-header')
+    @include('client.product.trending.trending-page-header')
     {{-- pills --}}
-    @include('client.products.trending.pill-tag')
+    @include('client.product.trending.pill-tag')
     {{-- trending today --}}
-    @include('client.products.trending.trending-today')
-    @include('client.products.trending.trending-product', ['trendingProduct' => $trendingProduct])
+    @include('client.product.trending.trending-today')
+    @include('client.product.trending.trending-product', ['trendingProduct' => $trendingProduct])
   </div>
 @endsection
 @stack('scripts')

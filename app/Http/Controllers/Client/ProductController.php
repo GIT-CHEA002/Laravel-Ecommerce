@@ -25,7 +25,7 @@ class ProductController extends Controller
             ->simplePaginate(9)
             ->withQueryString();
         $categories = $allProduct->groupBy('categories_id');
-        return view('client.products.index.index', [
+        return view('client.product.index.index', [
             'products' => $products,
             'categories' => $categories,
         ]);
@@ -41,7 +41,7 @@ class ProductController extends Controller
             ->paginate(8);
         $categories = Categories::with('products')->get();
 
-        return view('client.products.trending.trending', compact(['trendingProduct', 'categories']));
+        return view('client.product.trending.trending', compact(['trendingProduct', 'categories']));
     }
     /**
      * Display the specified resource.

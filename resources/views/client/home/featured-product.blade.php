@@ -13,7 +13,7 @@
   </div>
   {{-- --}}
   <div class="py-3 flex justify-end">
-    <x-links.primary-link href="{{ route('products.index') }}" width="w-fit"
+    <x-links.primary-link href="{{ route('product.index') }}" width="w-fit"
       class="no-underline text-sm tracking-wide font-meduim text-indigo-700 dark:text-indigo-500  hover:underline">
       View All Products
     </x-links.primary-link>

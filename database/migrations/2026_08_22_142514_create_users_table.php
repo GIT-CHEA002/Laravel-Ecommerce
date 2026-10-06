@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             // relationship
-            $table->foreignId('role_id')->default(1)
+            $table->foreignId('role_id')->default(2)
                 ->constrained('roles', 'role_id')
                 ->cascadeOnDelete();
             $table->boolean('is_active')->default(true);

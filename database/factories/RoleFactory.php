@@ -19,7 +19,9 @@ class RoleFactory extends Factory
     {
         return [
             //
-            'description' => fake()->sentence()
+            'description' => fake()->sentence(),
+            'name' => fake()->randomElement(['Client', 'Admin']),
+            'slug' => fake()->randomElement(['client', 'admin'])
         ];
     }
 }

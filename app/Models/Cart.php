@@ -12,6 +12,7 @@ class Cart extends Model
     /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
     protected $primaryKey = 'cart_id';
+    protected $fillable = ['user_id'];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');

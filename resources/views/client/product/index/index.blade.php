@@ -47,9 +47,9 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-auto">
             {{-- Sidebar filters --}}
-            @include('client.products.index.sidebar', ['categories' => $categories])
+            @include('client.product.index.sidebar', ['categories' => $categories])
             {{-- Product listing --}}
-            @include('client.products.index.product-listing', ['products' => $products])
+            @include('client.product.index.product-listing', ['products' => $products])
         </div>
     </div>
 @endsection
