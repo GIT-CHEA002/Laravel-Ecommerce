@@ -11,9 +11,10 @@ class ProductPolicy
     /**
      * Determine whether the user can view any models.
      */
+
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -37,15 +38,16 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete(soft delete) the model.
      */
     public function delete(User $user, Product $product): bool
     {
-        return false;
+        // check if no product in cart : then delete (soft delete)
+        return $user->isAdmin() && !$product->orderProduct()->exists();
     }
 
     /**
@@ -53,7 +55,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -61,6 +63,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return false;
+        return $user->isAdmin() && !$product->orderProduct()->exists();
     }
 }

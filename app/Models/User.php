@@ -68,8 +68,12 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user_id', 'user_id');
     }
     // self additional methods : check if the current user is admin or not 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->role_id === 1;
+    }
+    public function isClient(): bool
+    {
+        return $this->role_id === 2;
     }
 }
