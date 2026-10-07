@@ -38,11 +38,14 @@ class SessionController extends Controller
     }
     public function destroy(Request $request)
     {
+        $isAdmin = $request->user()?->isAdmin() ?? false;
         Auth::guard('web')->logout();
-        // invalid token check
         $request->session()->invalidate();
-        // regenerate the token 
         $request->session()->regenerateToken();
-        return redirect('/');
+        if ($isAdmin) {
+            return redirect()->route('login-user');
+        } else {
+            return redirect('/');
+        }
     }
 }

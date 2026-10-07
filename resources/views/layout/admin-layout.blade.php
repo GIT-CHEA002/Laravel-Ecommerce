@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="theme" :class="{'dark':darkMode}">
+<html lang="en" x-data="theme" :class="{'dark': darkMode}">
 
 <head>
     <meta charset="UTF-8">
@@ -10,9 +10,15 @@
 </head>
 
 <body>
-    <main>
-        @yield('content')
-    </main>
+    <div class="flex min-h-screen">
+        <x-aside.admin-aside.admin-sidebar />
+        <main class="w-full h-auto">
+            <x-header.admin-header.admin-header />
+            <div class="px-6 md:px-8 py-4 md:py-6   ">
+                @yield('content')
+            </div>
+        </main>
+    </div>
 </body>
 
 </html>

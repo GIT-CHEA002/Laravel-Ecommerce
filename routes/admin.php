@@ -12,7 +12,6 @@ Route::middleware(['auth', 'admin', 'nocache'])
   ->prefix('admin')
   ->name('admin.')
   ->group(function () {
-
     // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 

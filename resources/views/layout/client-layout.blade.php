@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    {{-- call the client header --}}
     <x-header.client-header.client-header />
     <main>
         @yield('content')

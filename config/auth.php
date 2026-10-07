@@ -42,6 +42,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        // register guards : directive use
+        // 'admin' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users'
+        // ]
+
     ],
 
     /*

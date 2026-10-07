@@ -7,9 +7,8 @@ use App\Http\Controllers\Client\CartController as ClientCartController;
 use App\Http\Controllers\Client\CategoryController as ClientCategoryController;
 
 // Public storefront: guests, customers, and admins
-Route::middleware(['nocache'])->group(function () {
+Route::middleware(['client', 'nocache'])->group(function () {
   Route::get('/', [ClientHomeController::class, 'index'])->name('client.home');
-
   Route::prefix('client')->group(function () {
     Route::get('/product', [ClientSideProductController::class, 'index'])->name('product.index');
     Route::get('/product/trending', [ClientSideProductController::class, 'trending'])->name('product.trending');

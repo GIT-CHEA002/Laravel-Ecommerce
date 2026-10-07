@@ -4,7 +4,9 @@
     'hover:text-indigo-700/90 hover:bg-indigo-50 dark:hover:bg-white/5
 hover:border-l-2 hover:border-indigo-700 dark:hover:border-indigo-500 dark:hover:text-indigo-500/90')
 ]) }}>
-  <x-dynamic-component :component="'heroicon-o-' . $icon" class="w-5 h-5" />
+  @if ($icon)
+    <x-dynamic-component :component="'heroicon-o-' . $icon" class="w-5 h-5" />
+  @endif
   <span>
     {{ $name }}
   </span>

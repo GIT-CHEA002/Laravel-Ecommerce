@@ -46,13 +46,12 @@
       </x-form.form>
       <x-shared.toggle-theme class="hidden md:block" />
       <x-header.client-header.cart-link href="/client/cart" />
-
       {{-- user sections --}}
       @auth
         <button type="button" @click="isLogoutDialog = true" class="relative flex w-fit cursor-pointer items-center justify-center gap-1
-             rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700
-             transition hover:bg-indigo-100
-             dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-500">
+                           rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700
+                           transition hover:bg-indigo-100
+                           dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-500">
           <span class="text-xs tracking-wide">Log out</span>
           <x-heroicon-o-user class="h-5 w-5 text-indigo-700 dark:text-indigo-500" />
         </button>
@@ -70,7 +69,7 @@
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95" role="dialog" aria-modal="true" class="relative w-full max-w-sm rounded-xl border border-indigo-200 bg-indigo-50
-                  p-6 shadow-xl dark:border-slate-700 dark:bg-slate-900">
+                                p-6 shadow-xl dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-lg font-bold text-indigo-700 dark:text-indigo-500">Log out?</h2>
             <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
@@ -79,7 +78,7 @@
 
             <div class="mt-6 flex justify-end gap-3">
               <button type="button" @click="isLogoutDialog = false" class="cursor-pointer rounded-md px-3 py-1.5 text-sm font-semibold text-slate-700
-                   transition hover:bg-indigo-100 dark:text-slate-300 dark:hover:bg-slate-800">
+                                 transition hover:bg-indigo-100 dark:text-slate-300 dark:hover:bg-slate-800">
                 Cancel
               </button>
 
@@ -87,7 +86,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="cursor-pointer rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold
-                     text-white transition hover:bg-red-700">
+                                   text-white transition hover:bg-red-700">
                   Yes, log out
                 </button>
               </x-form.form>
@@ -96,14 +95,10 @@
         </div>
       @endauth
       @guest
-        <a href="/auth/login" class="relative flex w-fit cursor-pointer items-center
-                                                              justify-center gap-1 rounded-md border border-indigo-200
-                                                              bg-indigo-50 px-2 py-1 text-indigo-700
-                                                              transition hover:bg-indigo-100
-                                                              dark:border-slate-700 dark:bg-slate-800
-                                                              dark:text-indigo-500">
+        <a href="{{ route('login-user') }}"
+          class="flex w-fit items-center justify-center gap-1 rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700 transition hover:bg-indigo-100 dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-500">
           <span class="text-xs tracking-wide">Login</span>
-          <x-heroicon-o-user class="h-5 w-5 text-indigo-700 dark:text-indigo-500" />
+          <x-heroicon-o-user class="h-5 w-5" />
         </a>
       @endguest
       {{-- bar to get the mobile menu --}}

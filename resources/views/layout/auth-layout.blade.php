@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    {{-- call the authenticate header --}}
     <x-header.auth-header />
     <main class="px-4 md:px-12">
         @yield('content')
