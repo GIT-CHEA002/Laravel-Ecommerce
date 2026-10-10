@@ -13,7 +13,9 @@
     <div class="flex min-h-screen">
         <x-aside.admin-aside.admin-sidebar />
         <main class="w-full h-auto">
-            <x-header.admin-header.admin-header />
+            <div class="sticky z-50 top-0 bg-violet-50">
+                <x-header.admin-header.admin-header />
+            </div>
             <div class="px-6 md:px-8 py-4 md:py-6   ">
                 @yield('content')
             </div>

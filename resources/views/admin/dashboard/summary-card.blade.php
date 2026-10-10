@@ -6,7 +6,7 @@
         <h1 class="uppercase text-sm font-semibold tracking-wide">{{ $info['title'] }}</h1>
         <h1 class="py-2 text-xl tracking-wide font-bold">{{ $info['value'] }}</h1>
       </div>
-      <x-dynamic-component :component="'heroicon-o-' . $info['icon']" class="w-4 h-4" />
+      <x-dynamic-component :component="'heroicon-o-' . $info['icon']" class="w-5 h-5 text-indigo-700 font-bold" />
     </div>
     <p @class([
       'mt-1 flex items-center gap-1 text-xs sm:text-sm font-medium tracking-wide',
