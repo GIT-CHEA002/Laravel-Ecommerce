@@ -19,7 +19,7 @@ Route::middleware(['auth', 'admin'])
     Route::prefix('products')->name('products.')->group(function () {
       Route::get('/', [AdminProductController::class, 'index'])->name('index');
       Route::get('/create', [AdminProductController::class, 'create'])->name('create');
-      Route::post('/', [AdminProductController::class, 'store'])->name('store');
+      Route::post('/', [AdminProductController::class, 'store'])->name('store')->can('create');
       Route::get('/{product}', [AdminProductController::class, 'show'])->name('show');
       Route::get('/{product}/edit', [AdminProductController::class, 'edit'])->name('edit');
       Route::patch('/{product}', [AdminProductController::class, 'update'])->name('update');

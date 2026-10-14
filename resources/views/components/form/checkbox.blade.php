@@ -6,3 +6,4 @@
     <x-form.label :label="$label" :name="$name" />
   @endif
 </div>
+<x-form.error :error="$errors->first($name)" />
