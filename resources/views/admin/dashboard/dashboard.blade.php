@@ -40,6 +40,7 @@
 @extends('layout.admin-layout')
 @section('title', 'Admin - Over view (Dashboard)')
 @section('page-heading', 'Product Management')
+@section('favicon', asset('images/favicons/register.png'))
 @section('content')
   <div>
     <h1 class="text-3xl tracking-wide capitalize font-bold">DashBoard overview</h1>

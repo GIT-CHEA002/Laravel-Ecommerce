@@ -12,12 +12,9 @@
   <table class="w-full text-sm text-left dark:text-white">
     <thead class="text-xs tracking-wide uppercase bg-indigo-100 dark:bg-slate-700 border-y border-slate-400">
       <tr class="font-light">
-        <th class="px-3 py-2">Order</th>
-        <th class="px-3 py-2">Customer</th>
-        <th class="px-3 py-2">Amount</th>
-        <th class="px-3 py-2">Payment</th>
-        <th class="px-3 py-2">Status</th>
-        <th class="px-3 py-2">Action</th>
+        @foreach (['order', 'customer', 'amount', 'payment', 'status', 'action'] as $heading)
+          <th class="px-3 py-2">{{$heading}}</th>
+        @endforeach
       </tr>
     </thead>
     <tbody class="divide-y">
@@ -36,19 +33,6 @@
           </td>
         </tr>
       @endforeach
-      <tr>
-        <td class="px-3 py-2">#1002</td>
-        <td class="px-3 py-2">Sokchea Chhun</td>
-        <td class="px-3 py-2">$859.50</td>
-        <td class="px-3 py-2">Pending</td>
-        <td class="px-3 py-2">
-          <x-shared.badge-tag bgColor="bg-green-100" textColor="text-green-700">Shipping</x-shared.badge-tag>
-        </td>
-        <td class="px-3 py-2">
-          <a href="#"
-            class="font-semibold tracking-wider text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">View</a>
-        </td>
-      </tr>
     </tbody>
   </table>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -11,17 +12,19 @@ class ProductController extends Controller
     //
     public function index()
     {
-        $product = Product::with('category')->get();
-        return view('admin.product.index', ['product' => $product]);
+        $products = Product::with('category')->simplePaginate(5);
+        return view('admin.product.index', ['products' => $products]);
     }
     public function show(Product $product)
     {
         // should show specific products
+
         dd(Product::findOrFail($product->product_id));
     }
     public function create()
     {
-        dd("create form of admin layout");
+        $category = Categories::all();
+        return view('admin.product.create', ['category' => $category]);
     }
     public function store(Request $request)
     {
@@ -30,6 +33,7 @@ class ProductController extends Controller
         // save 
         // redirect
         dd("Redirect to dashboard");
+        return redirect()->route('admin.products.index');
     }
     public function edit(Product $product)
     {

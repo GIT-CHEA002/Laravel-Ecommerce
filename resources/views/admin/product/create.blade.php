@@ -1,8 +1,34 @@
-@extends('layout.auth-layout');
-@section('title', 'Admin - Create Product');
-@section('page-heading', 'Product Management');
+@extends('layout.admin-layout')
+@section('title', 'Admin - Create Product')
+@section('favicon', asset('images/favicons/register.png'))
 @section('content')
     <div>
-        Product Management Tab
+        <x-shared.section-header class=" underline underline-offset-2">Product Adding Form</x-shared.section-header>
+        {{-- form --}}
+        <x-form.form class="py-3 space-y-4" action="{{ route('admin.products.store') }}">
+            <div class="flex justify-between items-center  gap-6">
+                <x-form.field name="name" label="Name" placeholder="Coca Cola" class="flex-1 py-2" />
+                <x-form.field name="price" label="Price" placeholder="$20,00..." class="flex-1 py-2" />
+            </div>
+            <x-form.field name="description" label="Description(10-200 words)" placeholder="This product is about..."
+                :isTextArea="true" />
+            <div class="flex justify-between items-center  gap-6">
+                <x-form.field name="stock_quantity" label="Stock" placeholder="20..." class="flex-1" />
+                <div class="">
+                    <label for="" class="opacity-0">Category</label>
+                    <x-form.select name="category" :options="$category->pluck('name', 'name')" label="Category(optional):"
+                        onchange="this.form.submit()" selected="Laptop" />
+                </div>
+                <div class="">
+                    <label for="" class="opacity-0">Category</label>
+                    <x-form.checkbox name="is_on_market" label="Avaible(On Market ?)" />
+                </div>
+            </div>
+            <div class="flex justify-end mt-2">
+                <div class="w-1/4">
+                    <x-form.button class="rounded-md">Add New Product</x-form.button>
+                </div>
+            </div>
+        </x-form.form>
     </div>
 @endsection
