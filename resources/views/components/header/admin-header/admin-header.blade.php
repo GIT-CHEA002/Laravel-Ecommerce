@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'px-6 md:px-8 py-4 md:py-6  flex-1 min-w-0 h-fit border-b border-indigo-700']) }}>
+<div {{ $attributes->merge(['class' => 'px-6 md:px-8 py-4 md:py-6  flex-1 min-w-0 h-fit border-b border-indigo-700  shadow-sm dark:bg-slate-950']) }}>
   <div class="flex justify-between items-center">
     {{-- search section --}}
     <x-form.form class="md:flex my-auto hidden">

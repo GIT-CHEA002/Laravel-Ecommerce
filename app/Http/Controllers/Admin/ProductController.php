@@ -11,8 +11,8 @@ class ProductController extends Controller
     //
     public function index()
     {
-        $product = Product::all();
-        return $product;
+        $product = Product::with('category')->get();
+        return view('admin.product.index', ['product' => $product]);
     }
     public function show(Product $product)
     {

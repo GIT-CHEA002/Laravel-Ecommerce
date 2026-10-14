@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 
-Route::middleware(['auth', 'admin', 'nocache'])
+Route::middleware(['auth', 'admin'])
   ->prefix('admin')
   ->name('admin.')
   ->group(function () {
