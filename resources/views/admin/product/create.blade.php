@@ -16,12 +16,12 @@
                 <x-form.field name="stock_quantity" label="Stock" placeholder="20..." class="flex-1" />
                 <div class="">
                     <label for="" class="opacity-0">Category</label>
-                    <x-form.select name="categories_id" :options="$category->pluck('name', 'categories_id')"
-                        label="Category(optional):" selected="{{ $category->first()->name }}" />
+                    <x-form.select name="categories_id" :options="$categories->pluck('name', 'categories_id')"
+                        label="Category(optional):" selected="{{ $categories->first()->name }}" />
                 </div>
                 <div class="">
                     <label for="" class="opacity-0">Category</label>
-                    <x-form.checkbox name="is_on_market" label="Avaible(On Market ?)"  />
+                    <x-form.checkbox name="is_on_market" label="Avaible(On Market ?)" />
                 </div>
             </div>
             <div class="flex justify-end  items-center gap-3 mt-2">

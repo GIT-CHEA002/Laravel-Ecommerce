@@ -5,6 +5,7 @@
   'type' => 'text',
   'icon' => null,
   'isTextArea' => false,
+  'value' => null
 ])
 
 @php
@@ -37,9 +38,9 @@
         <x-heroicon-o-eye-slash class="size-4" x-show="show" x-cloak />
       </button>
     @elseif ($isTextArea)
-      <x-form.text-area :$name :$placeholder />
+      <x-form.text-area :$name :$placeholder :$value />
     @else
-      <x-form.input :$name :$placeholder :$type />
+      <x-form.input :$name :$placeholder :$type :$value />
     @endif
   </div>
 

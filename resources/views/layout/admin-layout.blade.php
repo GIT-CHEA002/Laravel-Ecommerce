@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <x-shared.toast-message />
     <div class="flex min-h-screen">
         <x-aside.admin-aside.admin-sidebar />
         <main class="w-full h-auto">
