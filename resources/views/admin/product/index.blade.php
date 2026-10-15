@@ -53,8 +53,12 @@
                             <td class="px-3 py-2">${{ number_format($product->price, 2) }}</td>
                             <td class="px-3 py-2">{{ $product->stock_quantity }}</td>
                             <td class="px-3 py-2">
-                                @if ($product->is_on_market === 1)
-                                    @if ($product->stock_quantity <= 10)
+                                @if ($product->is_on_market)
+                                    @if ($product->stock_quantity == 0)
+                                        <x-shared.badge-tag bgColor="bg-red-100" textColor="text-red-600">
+                                            Out Stock
+                                        </x-shared.badge-tag>
+                                    @elseif ($product->stock_quantity <= 10)
                                         <x-shared.badge-tag bgColor="bg-amber-100" textColor="text-amber-600">
                                             Low Stock
                                         </x-shared.badge-tag>
@@ -63,21 +67,28 @@
                                     @endif
                                 @else
                                     <x-shared.badge-tag bgColor="bg-red-100" textColor="text-red-600">
-                                        Out Stock
+                                        Not Available
                                     </x-shared.badge-tag>
                                 @endif
                             </td>
                             <td class="px-3 py-2">
                                 <div class="flex justify-start items-center gap-3">
-                                    <a href="#">
+                                    <a href="{{ route('admin.products.show', $product) }}">
                                         <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
                                     </a>
                                     <a href="{{ route('admin.products.edit', $product) }}">
                                         <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
                                     </a>
-                                    <a href="#">
-                                        <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
-                                    </a>
+                                    @can('delete', $product)
+                                        <div x-data="{openDelete: false}">
+                                            <button type="button" @click="openDelete = true" class="cursor-pointer">
+                                                <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
+                                            </button>
+                                            <x-shared.confirm-dialog show="openDelete" title="Delete Product"
+                                                message="Are you sure want to soft delete this product"
+                                                action="{{ route('admin.products.destroy', $product) }}" confirmText="Delete" />
+                                        </div>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

@@ -1,8 +1,8 @@
-@extends('layout.auth-layout');
-@section('title', 'Admin - Product Information');
-@section('page-heading', 'Product Information');
+@extends('layout.admin-layout')
+@section('title', 'Admin - Product Information')
+@section('favicon', asset('images/favicons/register.png'))
 @section('content')
     <div>
-        Product Management Tab
+        Product Showing Tab
     </div>
 @endsection

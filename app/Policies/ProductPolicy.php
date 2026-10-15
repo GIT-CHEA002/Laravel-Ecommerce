@@ -47,7 +47,7 @@ class ProductPolicy
     public function delete(User $user, Product $product): bool
     {
         // check if no product in cart : then delete (soft delete)
-        return $user->isAdmin() && !$product->orderProduct()->exists();
+        return $user->isAdmin();
     }
 
     /**

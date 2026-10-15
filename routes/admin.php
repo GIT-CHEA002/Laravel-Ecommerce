@@ -14,7 +14,6 @@ Route::middleware(['auth', 'admin'])
   ->group(function () {
     // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-
     // Products
     Route::prefix('products')->name('products.')->group(function () {
       Route::get('/', [AdminProductController::class, 'index'])->name('index');
@@ -23,9 +22,17 @@ Route::middleware(['auth', 'admin'])
       Route::get('/{product}', [AdminProductController::class, 'show'])->name('show');
       Route::get('/{product}/edit', [AdminProductController::class, 'edit'])->name('edit');
       Route::patch('/{product}', [AdminProductController::class, 'update'])->name('update');
-      Route::delete('/{product}', [AdminProductController::class, 'destroy'])->name('destroy');
+      Route::delete('/{product}', [AdminProductController::class, 'destroy'])
+        ->can('delete', 'product')
+        ->name('destroy');
+      Route::delete('/{product}/force', [AdminProductController::class, 'forceDelete'])
+        ->withTrashed() // trash the product (force it)
+        ->can('forceDelete', 'product')
+        ->name('forceDelete');
+      Route::patch('/{product}/restore', [AdminProductController::class, 'restore'])
+        ->can('restore', 'product')
+        ->name('restore');
     });
-
     // Categories
     Route::prefix('categories')->name('categories.')->group(function () {
       Route::get('/', [AdminCategoryController::class, 'index'])->name('index');
@@ -33,8 +40,12 @@ Route::middleware(['auth', 'admin'])
       Route::post('/', [AdminCategoryController::class, 'store'])->name('store');
       Route::get('/{category}', [AdminCategoryController::class, 'show'])->name('show');
       Route::get('/{category}/edit', [AdminCategoryController::class, 'edit'])->name('edit');
-      Route::patch('/{category}', [AdminCategoryController::class, 'update'])->name('update');
-      Route::delete('/{category}', [AdminCategoryController::class, 'destroy'])->name('destroy');
+      Route::patch('/{category}', [AdminCategoryController::class, 'update'])
+
+        ->name('update');
+      Route::delete('/{category}', [AdminCategoryController::class, 'destroy'])
+
+        ->name('destroy');
     });
 
     // Orders (no create/edit/delete: admins only view and update status)
