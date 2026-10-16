@@ -26,7 +26,7 @@
     </x-form.form>
     <div class="flex justify-end  items-center gap-3 mt-2">
         <div class="w-1/4  flex justify-end items-center gap-4">
-            <x-button.primary-button href="{{ route('admin.products.index') }}"
+            <x-button.primary-button href="{{ url()->previous() }}"
                 class="bg-red-700 dark:bg-red-500">Back</x-button.primary-button>
             @if ($product->is_on_market == false)
                 @can('restore', $product)

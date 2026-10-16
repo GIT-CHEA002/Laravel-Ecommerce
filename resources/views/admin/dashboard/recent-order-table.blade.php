@@ -1,9 +1,9 @@
 {{-- table and title --}}
-<div class="col-span-2 border rounded-md shadow-md dark:bg-slate-800 h-fit">
+<div class="col-span-2 border rounded-md shadow-md dark:bg-slate-800">
   {{-- title section --}}
   <div class="flex items-center justify-between default-padding">
     <span class="text-xl font-bold">Recent Orders</span>
-    <a href="#"
+    <a href="{{ route('admin.products.index') }}"
       class="text-sm font-bold tracking-wide text-indigo-700 capitalize dark:text-indigo-500 hover:underline underline-offset-2">
       view all
     </a>
