@@ -27,7 +27,7 @@
     <div class="flex justify-end  items-center gap-3 mt-2">
         <div class="w-1/4  flex justify-end items-center gap-4">
             <x-button.primary-button href="{{ url()->previous() }}"
-                class="bg-red-700 dark:bg-red-500">Back</x-button.primary-button>
+                class="bg-green-700 dark:bg-green-500">Back</x-button.primary-button>
             @if ($product->is_on_market == false)
                 @can('restore', $product)
                     <div x-data="{isRestoreOpen : false}">
@@ -40,7 +40,6 @@
                             confirmStyle="bg-indigo-700 dark:bg-indigo-500"
                             action="{{ route('admin.products.restore', $product) }}" />
                     </div>
-
                 @endcan
             @endif
         </div>

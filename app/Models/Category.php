@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Categories extends Model
+class Category extends Model
 {
-    /** @use HasFactory<\Database\Factories\CategoriesFactory> */
+    /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
     protected $primaryKey = 'categories_id';
     protected $guarded = [];
     // public function parent(): BelongsTo
     // {
-    //     return $this->belongsTo(Categories::class, 'parent_categories_id');
+    //     return $this->belongsTo(Category::class, 'parent_categories_id');
     // }
     // public function children(): HasMany
     // {
-    //     return $this->hasMany(Categories::class, 'parent_categories_id');
+    //     return $this->hasMany(Category::class, 'parent_categories_id');
     // }
     // public function childrenRecursive(): HasMany
     // {

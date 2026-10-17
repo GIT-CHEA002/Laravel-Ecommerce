@@ -29,7 +29,7 @@
       'trend' => 'neutral',
     ],
     [
-      'title' => 'Categories',
+      'title' => 'Category',
       'value' => '24',
       'icon' => 'rectangle-group',
       'change' => '2 new added',

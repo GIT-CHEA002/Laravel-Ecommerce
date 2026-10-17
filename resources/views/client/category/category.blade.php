@@ -1,6 +1,6 @@
 @extends('layout.client-layout')
 
-@section('title', 'Categories')
+@section('title', 'Category')
 @section('favicon', asset('images/favicons/register.png'))
 
 @section('content')

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -22,7 +22,7 @@ class ProductController extends Controller
     }
     public function create()
     {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('admin.product.create', ['categories' => $categories]);
     }
     public function store(Request $request)
@@ -48,7 +48,7 @@ class ProductController extends Controller
     public function edit(Product $product)
 
     {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('admin.product.edit', ['product' => $product, 'categories' => $categories]);
     }
     public function update(Request $request, Product $product)

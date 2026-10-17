@@ -2,7 +2,7 @@
 @props([
   'name',
   'options' => [],          // ['value' => 'Label']
-  'placeholder' => null,    // e.g. "All Categories"
+  'placeholder' => null,    // e.g. "All Category"
   'label' => false,
   'selected' => null,
 ])

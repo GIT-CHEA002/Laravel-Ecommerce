@@ -11,7 +11,7 @@
       ],
     ],
     [
-      'title' => 'Categories',
+      'title' => 'Category',
       'links' => [
         ['label' => 'Electronics', 'url' => '/category/electronics'],
         ['label' => 'Home & Garden', 'url' => '/category/home-garden'],

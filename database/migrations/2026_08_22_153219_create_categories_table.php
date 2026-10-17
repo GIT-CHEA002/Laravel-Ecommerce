@@ -19,6 +19,7 @@ return new class extends Migration
             //     ->constrained('categories', 'categories_id')
             //     ->nullOnDelete();
             $table->string('name');
+            $table->boolean('is_listing')->default(1);
             $table->string('slug');
             $table->string('image_url')->nullable();
             $table->timestamps();

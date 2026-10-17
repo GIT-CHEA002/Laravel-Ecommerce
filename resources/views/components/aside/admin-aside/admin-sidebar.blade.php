@@ -15,7 +15,7 @@
     [
       'href' => '/admin/categories',
       'icon' => 'rectangle-group',
-      'name' => 'Categories',
+      'name' => 'Category',
       'active' => request()->is('admin/categories*'),
     ],
     [

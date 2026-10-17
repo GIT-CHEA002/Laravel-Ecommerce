@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class CategoryController extends Controller
       ->withQueryString();
 
     // get all category
-    $categories = Categories::withCount('products')->get();
+    $categories = Category::withCount('products')->get();
 
     return view('client.category.category', ['categories' => $categories, 'products' => $products, 'categoryId' => $categoryId]);
     // return $catetories;

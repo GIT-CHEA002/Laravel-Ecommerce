@@ -3,39 +3,62 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    //
     public function index()
     {
-        $categories = Categories::all();
+        $categories = Category::with('products')->simplePaginate(3);
         return view('admin.category.index', ['categories' => $categories]);
     }
-    public function show(Categories $category)
+    public function show(Category $category)
     {
-        dd(Categories::findOrFail($category->categories_id));
+        return view('admin.category.show', ['category' => $category]);
     }
     public function create()
     {
-        dd("Create category form");
+        return view('admin.category.create');
     }
     public function store(Request $request)
     {
-        dd("Store the category");
+        // validate
+        // authorize 
+        // save 
+        // redirect
+        dd("Save the data and redirect");
+        return redirect()
+            ->route('admin.category.index')
+            ->withInput()
+            ->with('success', 'Create new category successfully');
     }
-    public function edit()
+    public function edit(Category $category)
     {
-        dd("Edit the category form");
+        return view('admin.category.edit', ['category' => $category]);
     }
-    public function update(Request $request)
+    public function update(Request $request, Category $category)
     {
-        dd("To do update list");
+        // search and confirm 
+        // validate
+        // save 
+        // redirect
     }
     public function destroy(Request $request)
     {
+        // confirm the destroy
         dd("Destroy the category items");
+    }
+    public function restore(Request $request)
+    {
+        // confirm
+        // restore the soft delete data 
+        // redirect
+    }
+    public function forceDelete(Request $request)
+    {
+        // confirm 
+        // permanantly destroy data 
+        // redirect 
     }
 }

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             UserAddressSeeder::class,
-            CategoriesSeeder::class,
+            CategorySeeder::class,
             ProductSeeder::class,
             ProductImageSeeder::class,
             CartSeeder::class,

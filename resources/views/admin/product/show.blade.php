@@ -124,8 +124,9 @@
                     </x-shared.display-text>
                 </div>
             </div>
-            <x-button.primary-button href="{{ url()->previous() }}"
-                class=" w-full bg-red-700 dark:bg-red-500">Back</x-button.primary-button>
+            <x-button.primary-button href="{{ url()->previous() }}" class="w-full bg-green-700 dark:bg-green-500">
+                Back
+            </x-button.primary-button>
             <x-button.primary-button href="{{ route('admin.products.edit', $product) }}" class="w-full">
                 Edit product
             </x-button.primary-button>

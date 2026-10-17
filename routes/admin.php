@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use Illuminate\Validation\Rules\Can;
 
 Route::middleware(['auth', 'admin'])
   ->prefix('admin')
@@ -17,11 +18,20 @@ Route::middleware(['auth', 'admin'])
     // Products
     Route::prefix('products')->name('products.')->group(function () {
       Route::get('/', [AdminProductController::class, 'index'])->name('index');
-      Route::get('/create', [AdminProductController::class, 'create'])->name('create');
-      Route::post('/', [AdminProductController::class, 'store'])->name('store');
+      // protected route
+      Route::get('/create', [AdminProductController::class, 'create'])
+        ->can('create', 'product')
+        ->name('create');
+      Route::post('/', [AdminProductController::class, 'store'])
+        ->can('create', 'product')
+        ->name('store');
       Route::get('/{product}', [AdminProductController::class, 'show'])->name('show');
-      Route::get('/{product}/edit', [AdminProductController::class, 'edit'])->name('edit');
-      Route::patch('/{product}', [AdminProductController::class, 'update'])->name('update');
+      Route::get('/{product}/edit', [AdminProductController::class, 'edit'])
+        ->can('update', 'product')
+        ->name('edit');
+      Route::patch('/{product}', [AdminProductController::class, 'update'])
+        ->can('update', 'product')
+        ->name('update');
       Route::delete('/{product}', [AdminProductController::class, 'destroy'])
         ->can('delete', 'product')
         ->name('destroy');
@@ -33,19 +43,23 @@ Route::middleware(['auth', 'admin'])
         ->can('restore', 'product')
         ->name('restore');
     });
-    // Categories
+    // Category
     Route::prefix('categories')->name('categories.')->group(function () {
       Route::get('/', [AdminCategoryController::class, 'index'])->name('index');
-      Route::get('/create', [AdminCategoryController::class, 'create'])->name('create');
-      Route::post('/', [AdminCategoryController::class, 'store'])->name('store');
-      Route::get('/{category}', [AdminCategoryController::class, 'show'])->name('show');
-      Route::get('/{category}/edit', [AdminCategoryController::class, 'edit'])->name('edit');
-      Route::patch('/{category}', [AdminCategoryController::class, 'update'])
-
-        ->name('update');
+      // protected route 
+      Route::get('/create', [AdminCategoryController::class, 'create'])
+        ->name('create');
+      Route::post('/', [AdminCategoryController::class, 'store'])
+        ->name('store');
+      Route::get('/{category}', [AdminCategoryController::class, 'show'])
+        ->name('show');
+      Route::get('/{category}/edit', [AdminCategoryController::class, 'edit'])
+        ->name('edit');
       Route::delete('/{category}', [AdminCategoryController::class, 'destroy'])
-
+        ->can('delete', 'category')
         ->name('destroy');
+      Route::patch('/{category}', [AdminCategoryController::class, 'update'])
+        ->name('update');
     });
 
     // Orders (no create/edit/delete: admins only view and update status)
