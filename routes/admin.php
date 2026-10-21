@@ -20,10 +20,8 @@ Route::middleware(['auth', 'admin'])
       Route::get('/', [AdminProductController::class, 'index'])->name('index');
       // protected route
       Route::get('/create', [AdminProductController::class, 'create'])
-        ->can('create', 'product')
         ->name('create');
       Route::post('/', [AdminProductController::class, 'store'])
-        ->can('create', 'product')
         ->name('store');
       Route::get('/{product}', [AdminProductController::class, 'show'])->name('show');
       Route::get('/{product}/edit', [AdminProductController::class, 'edit'])
@@ -44,7 +42,7 @@ Route::middleware(['auth', 'admin'])
         ->name('restore');
     });
     // Category
-    Route::prefix('categories')->name('categories.')->group(function () {
+    Route::prefix('category')->name('category.')->group(function () {
       Route::get('/', [AdminCategoryController::class, 'index'])->name('index');
       // protected route 
       Route::get('/create', [AdminCategoryController::class, 'create'])
@@ -55,13 +53,27 @@ Route::middleware(['auth', 'admin'])
         ->name('show');
       Route::get('/{category}/edit', [AdminCategoryController::class, 'edit'])
         ->name('edit');
+      Route::patch('/{category}', [AdminCategoryController::class, 'update'])
+        ->name('update');
       Route::delete('/{category}', [AdminCategoryController::class, 'destroy'])
         ->can('delete', 'category')
         ->name('destroy');
-      Route::patch('/{category}', [AdminCategoryController::class, 'update'])
-        ->name('update');
+      Route::delete('/{category}/force', [AdminCategoryController::class, 'forceDelete'])
+        ->can('forceDelete', 'category')
+        ->name('forceDelete');
+      Route::patch('/{category}/restore', [AdminCategoryController::class, 'restore'])
+        ->can('restore', 'category')
+        ->name('restore');
+      Route::patch('/{category}/products/{product}/detach', [AdminCategoryController::class, 'detachProduct'])
+        ->can('update', 'product')
+        ->name('products.detach');
+      Route::get('/{category}/product/attach', [AdminCategoryController::class, 'attachProductIndex'])
+        ->can('update', 'category')
+        ->name('product.attach.index');
+      Route::patch('/{category}/products/attach', [AdminCategoryController::class, 'attachProduct'])
+        ->can('update', 'category')
+        ->name('product.attach');
     });
-
     // Orders (no create/edit/delete: admins only view and update status)
     Route::prefix('orders')->name('orders.')->group(function () {
       Route::get('/', [AdminOrderController::class, 'index'])->name('index');

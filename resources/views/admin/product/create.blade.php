@@ -6,7 +6,7 @@
         <x-shared.section-header class=" underline underline-offset-2">Product Adding Form</x-shared.section-header>
         {{-- form --}}
         <x-form.form class="py-3 space-y-4" action="{{ route('admin.products.store') }}" method="POST">
-            <div class="flex justify-between items-center  gap-6">
+            <div class="flex justify-between items-center gap-6">
                 <x-form.field name="name" label="Name" placeholder="Coca Cola" class="flex-1 py-2" />
                 <x-form.field name="price" label="Price" placeholder="$20,00..." class="flex-1 py-2" />
             </div>

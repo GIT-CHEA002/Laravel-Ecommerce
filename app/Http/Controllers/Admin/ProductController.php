@@ -5,26 +5,31 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Str;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     public function index()
     {
         $products = Product::with('category')->simplePaginate(5);
-        return view('admin.product.index', ['products' => $products]);
+
+        return view('admin.product.index', compact('products'));
     }
+
     public function show(Product $product)
     {
-        return view('admin.product.show', ['product' => $product]);
+        return view('admin.product.show', compact('product'));
     }
+
     public function create()
     {
         $categories = Category::all();
-        return view('admin.product.create', ['categories' => $categories]);
+
+        return view('admin.product.create', compact('categories'));
     }
+
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -32,25 +37,32 @@ class ProductController extends Controller
             'price'          => ['required', 'numeric', 'min:0'],
             'description'    => ['required', 'string', 'min:10', 'max:2000'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
-            'categories_id' => ['nullable', 'exists:categories,categories_id'],
-            'is_on_market'   => ['sometimes'],
+            'categories_id'  => ['nullable', 'exists:categories,categories_id'],
+            'is_on_market'   => ['sometimes', 'boolean'],
         ]);
-        $attributes['slug'] = \Illuminate\Support\Str::slug($attributes['name']);
+
+        $attributes['slug'] = Str::slug($attributes['name']);
         $attributes['is_on_market'] = $request->boolean('is_on_market');
-        // step 2 : need to attach image
-        $product = Product::create($attributes);
-        if ($product) {
-            return redirect()->route('admin.products.index')->with('success', 'create product successfully');
-        } else {
-            return back()->withInput()->with('error', 'fails to add new product ');
+        try {
+            Product::create($attributes);
+            return redirect()
+                ->route('admin.products.index')
+                ->with('success', 'Product created successfully.');
+        } catch (QueryException $e) {
+            report($e);
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to create new product!');
         }
     }
-    public function edit(Product $product)
 
+    public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('admin.product.edit', ['product' => $product, 'categories' => $categories]);
+
+        return view('admin.product.edit', compact('product', 'categories'));
     }
+
     public function update(Request $request, Product $product)
     {
         $attributes = $request->validate([
@@ -58,43 +70,76 @@ class ProductController extends Controller
             'price'          => ['required', 'numeric', 'min:0'],
             'description'    => ['required', 'string', 'min:10', 'max:2000'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
-            'categories_id' => ['nullable', 'exists:categories,categories_id'],
-            'is_on_market'   => ['sometimes'],
+            'categories_id'  => ['nullable', 'exists:categories,categories_id'],
+            'is_on_market'   => ['sometimes', 'boolean'],
         ]);
-        $attributes['slug'] = \Illuminate\Support\Str::slug($attributes['name']);
+
+        $attributes['slug'] = Str::slug($attributes['name']);
         $attributes['is_on_market'] = $request->boolean('is_on_market');
-        $isUpdate = $product->updateOrFail($attributes);
-        if ($isUpdate) {
-            return redirect()->route('admin.products.index')->with('success', 'product update successfully');
-        } else {
-            return back()->withInput()->withErrors('error', 'Fails to update the current product.');
+
+        try {
+            $product->updateOrFail($attributes);
+
+            return redirect()
+                ->route('admin.products.index')
+                ->with('success', 'Product updated successfully.');
+        } catch (QueryException $e) {
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to update product!');
         }
     }
+
     public function destroy(Request $request, Product $product)
     {
-        $isDelete = $product->updateOrFail(['is_on_market' => false]);
-        if ($isDelete) {
-            return redirect()->route('admin.products.index')->with('success', 'Soft delete product successfully');
-        } else {
-            return back()->withInput()->with('error', 'Fail to update the current product.');
+        try {
+            $product->updateOrFail(['is_on_market' => false]);
+
+            return redirect()
+                ->route('admin.products.index')
+                ->with('success', 'Product deactivated successfully.');
+        } catch (QueryException $e) {
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to deactivate the product!');
         }
     }
+
     public function restore(Request $request, Product $product)
     {
-        $isRestored = $product->updateOrFail(['is_on_market' => true]);
-        if ($isRestored) {
-            return redirect()->route('admin.products.index')->with('success', 'Product restore successfully');
-        } else {
-            return back()->withInput()->with('error', 'Fail to restore this product.');
+        try {
+            $product->updateOrFail(['is_on_market' => true]);
+
+            return redirect()
+                ->route('admin.products.index')
+                ->with('success', 'Product restored successfully.');
+        } catch (QueryException $e) {
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to activate the product!');
         }
     }
+
     public function forceDelete(Request $request, Product $product)
     {
-        $isDeleted = $product->delete();
-        if ($isDeleted) {
-            return redirect()->route('admin.products.index')->with('success', 'Force delete successfully , it gone!');
-        } else {
-            return back()->withInput()->with('error', 'Can not force delete this product!');
+        try {
+            $product->delete();
+
+            return redirect()
+                ->route('admin.products.index')
+                ->with('success', 'Product deleted permanently.');
+        } catch (QueryException $e) {
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Failed to delete this product from the database.');
         }
     }
 }

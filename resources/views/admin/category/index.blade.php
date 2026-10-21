@@ -8,7 +8,7 @@
       <x-shared.section-header>Category - Overview</x-shared.section-header>
       <x-shared.intro-text>Manage your store inventory and listings</x-shared.intro-text>
     </div>
-    <x-button.primary-button href="{{ route('admin.categories.create') }}">
+    <x-button.primary-button href="{{ route('admin.category.create') }}">
       <x-heroicon-o-plus class="w-5 h-5" />
       <span class="capitalize text-sm tracking-wide">Add Category</span>
     </x-button.primary-button>
@@ -47,25 +47,35 @@
             </td>
             <td class="px-3 py-2">
               <div class="flex justify-start items-center gap-3">
-                <a href="{{ route('admin.categories.show', $category) }}">
+                <a href="{{ route('admin.category.show', $category) }}">
                   <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
                 </a>
-                <a href="{{ route('admin.categories.edit', $category) }}">
+                <a href="{{ route('admin.category.edit', $category) }}">
                   <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
                 </a>
-
-                @can('delete', $category)
-                  <div x-data="{openDelete: false}">
-                    <button type="button" @click="openDelete = true" class="cursor-pointer">
-                      <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
-                    </button>
-                    <x-shared.confirm-dialog show="openDelete" title="Delete Category"
-                      message="Are you sure want to soft delete this Category"
-                      action="{{ route('admin.categories.destroy', $category) }}" confirmText="Delete" />
-                  </div>
-                @endcan
-
-
+                @if ($category->is_listing == true)
+                  @can('delete', $category)
+                    <div x-data="{isDeleteOpen : false}">
+                      <button type="button" @click="isDeleteOpen = true" class="cursor-pointer">
+                        <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
+                      </button>
+                      <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate category"
+                        message="Are you sure want to deactivate this category"
+                        action="{{ route('admin.category.destroy', $category) }}" confirmText="Deactivate" />
+                    </div>
+                  @endcan
+                @elseif ($category->is_listing == false)
+                  @can('restore', $category)
+                    <div x-data="{isRestoreOpen : false}">
+                      <button type="button" @click="isRestoreOpen = true" class="cursor-pointer">
+                        <x-heroicon-s-arrow-uturn-left class="w-4 h-5 text-green-700 dark:text-green-500" />
+                      </button>
+                      <x-shared.confirm-dialog show="isRestoreOpen" title="Restore category"
+                        confirmStyle="bg-green-700 dark:bg-green-500" message="Are you sure want to restore this category"
+                        method="PATCH" action="{{ route('admin.category.restore', $category) }}" confirmText="Restore" />
+                    </div>
+                  @endcan
+                @endif
               </div>
             </td>
           </tr>

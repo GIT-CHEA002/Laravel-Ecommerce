@@ -15,6 +15,7 @@
                 <x-heroicon-o-plus class="w-5 h-5" />
                 <span class="capitalize text-sm tracking-wide">Add product</span>
             </x-button.primary-button>
+
         </div>
         {{-- search and filter section --}}
         <div class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3">
@@ -35,7 +36,7 @@
             <table class="w-full text-sm text-left dark:text-white">
                 <thead class="text-xs tracking-wide uppercase bg-indigo-100 dark:bg-slate-700">
                     <tr class="font-light">
-                        @foreach (['Image', 'Product Name', 'Price', 'Stock', 'Status', 'Action'] as $heading)
+                        @foreach (['Image', 'Product Name', 'Price', 'Stock', 'Sold', 'Status', 'Action'] as $heading)
                             <th class="px-3 py-3">{{ $heading }}</th>
                         @endforeach
                     </tr>
@@ -52,6 +53,7 @@
                             <td class="px-3 py-2">{{ $product->name }}</td>
                             <td class="px-3 py-2">${{ number_format($product->price, 2) }}</td>
                             <td class="px-3 py-2">{{ $product->stock_quantity }}</td>
+                            <td class="px-3 py-2">{{ $product->stock_quantity - 5}}</td>
                             <td class="px-3 py-2">
                                 @if ($product->is_on_market)
                                     @if ($product->stock_quantity == 0)
@@ -79,16 +81,30 @@
                                     <a href="{{ route('admin.products.edit', $product) }}">
                                         <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
                                     </a>
-                                    @can('delete', $product)
-                                        <div x-data="{openDelete: false}">
-                                            <button type="button" @click="openDelete = true" class="cursor-pointer">
-                                                <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
-                                            </button>
-                                            <x-shared.confirm-dialog show="openDelete" title="Delete Product"
-                                                message="Are you sure want to soft delete this product"
-                                                action="{{ route('admin.products.destroy', $product) }}" confirmText="Delete" />
-                                        </div>
-                                    @endcan
+                                    @if ($product->is_on_market == true)
+                                        @can('delete', $product)
+                                            <div x-data="{isDeleteOpen : false}">
+                                                <button type="button" @click="isDeleteOpen = true" class="cursor-pointer">
+                                                    <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
+                                                </button>
+                                                <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate Product"
+                                                    message="Are you sure want to deactivate this product"
+                                                    action="{{ route('admin.products.destroy', $product) }}" confirmText="Deactivate" />
+                                            </div>
+                                        @endcan
+                                    @elseif ($product->is_on_market == false)
+                                        @can('restore', $product)
+                                            <div x-data="{isRestoreOpen : false}">
+                                                <button type="button" @click="isRestoreOpen = true" class="cursor-pointer">
+                                                    <x-heroicon-s-arrow-uturn-left class="w-4 h-5 text-green-700 dark:text-green-500" />
+                                                </button>
+                                                <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
+                                                    confirmStyle="bg-green-700 dark:bg-green-500"
+                                                    message="Are you sure want to restore this product" method="PATCH"
+                                                    action="{{ route('admin.products.restore', $product) }}" confirmText="Restore" />
+                                            </div>
+                                        @endcan
+                                    @endif
                                 </div>
                             </td>
                         </tr>

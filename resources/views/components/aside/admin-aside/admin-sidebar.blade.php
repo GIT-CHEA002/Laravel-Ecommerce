@@ -13,10 +13,10 @@
       'active' => request()->is('admin/products*'),
     ],
     [
-      'href' => '/admin/categories',
+      'href' => '/admin/category',
       'icon' => 'rectangle-group',
       'name' => 'Category',
-      'active' => request()->is('admin/categories*'),
+      'active' => request()->is('admin/category*'),
     ],
     [
       'href' => '/admin/orders',
