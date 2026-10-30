@@ -3,8 +3,7 @@
   {{-- card --}}
   @if ($summaryInfo)
     @foreach ($summaryInfo as $info)
-      @include('admin.dashboard.summary-card', ['info' => $info])
+      @include('admin.dashboard.dashboard-summary-card', ['info' => $info])
     @endforeach
   @endif
-
 </div>

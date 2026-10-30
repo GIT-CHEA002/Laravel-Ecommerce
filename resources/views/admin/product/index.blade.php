@@ -8,7 +8,7 @@
         {{-- header section --}}
         <div class="flex justify-between items-center">
             <div class="block">
-                <x-shared.section-header>Products</x-shared.section-header>
+                <x-shared.section-header>Products (Total : {{ \App\Models\Product::count() }})</x-shared.section-header>
                 <x-shared.intro-text>Manage your store inventory and listings</x-shared.intro-text>
             </div>
             <x-button.primary-button href="{{ route('admin.products.create') }}">
@@ -18,19 +18,18 @@
 
         </div>
         {{-- search and filter section --}}
-        <div class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3">
-            {{-- form to search --}}
-            <x-form.form class="w-1/4">
-                <x-form.field name="product" placeholder="search product..."
+        <x-form.form class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3"
+            onchange="this.submit()" method="GET" action="{{ route('admin.products.index') }}">
+            <div class="w-1/4">
+                <x-form.field name="search" :value="request('search')" placeholder="search product..."
                     class="py-1 tracking-wide space-y-0 placeholder:capitalize" icon="magnifying-glass" />
-            </x-form.form>
-            {{-- filter section --}}
-            <div class="flex justify-end items-center gap-4">
-                <x-form.select name="category" placeholder="All Category" :options="['active' => 'Active', 'draft' => 'Draft', 'archived' => 'Archived']" onchange="this.form.submit()" />
-                <x-form.select name="status" placeholder="All Statuses" :options="['active' => 'Active', 'draft' => 'Draft', 'archived' => 'Archived']" onchange="this.form.submit()" />
             </div>
-        </div>
-
+            <div class="flex justify-end items-center gap-4">
+                <x-form.select name="category" placeholder="All Category" :options="$categories->pluck('name', 'categories_id')" :selected="request('category')" onchange="this.form.submit()" />
+                <x-form.select name="is_on_market" placeholder="All Statuses" :options="[1 => 'Active', 0 => 'Inactive']"
+                    :selected="request('is_on_market')" onchange="this.form.submit()" />
+            </div>
+        </x-form.form>
         {{-- Display table --}}
         <div class="border rounded-md shadow-md dark:bg-slate-800 h-fit my-3 overflow-hidden">
             <table class="w-full text-sm text-left dark:text-white">

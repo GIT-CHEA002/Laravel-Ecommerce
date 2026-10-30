@@ -76,13 +76,17 @@ Route::middleware(['auth', 'admin'])
     });
     // Orders (no create/edit/delete: admins only view and update status)
     Route::prefix('orders')->name('orders.')->group(function () {
-      Route::get('/', [AdminOrderController::class, 'index'])->name('index');
-      Route::get('/{order}', [AdminOrderController::class, 'show'])->name('show');
-      Route::patch('/{order}', [AdminOrderController::class, 'update'])->name('update');
+      Route::get('/', [AdminOrderController::class, 'index'])
+        ->name('index');
+      Route::get('/{order}', [AdminOrderController::class, 'show'])
+        ->name('show');
+      Route::patch('/{order}', [AdminOrderController::class, 'update'])
+        ->name('update');
+      Route::delete('/{order}', [AdminOrderController::class, 'destroy']);
     });
 
     // Users
-    Route::prefix('users')->name('users.')->group(function () {
+    Route::prefix('user')->name('users.')->group(function () {
       Route::get('/', [AdminUserController::class, 'index'])->name('index');
       Route::get('/create', [AdminUserController::class, 'create'])->name('create');
       Route::post('/', [AdminUserController::class, 'store'])->name('store');

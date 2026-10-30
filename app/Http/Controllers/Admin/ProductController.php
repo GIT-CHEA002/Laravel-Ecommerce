@@ -11,23 +11,28 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->simplePaginate(5);
-
-        return view('admin.product.index', compact('products'));
+        $categories = Category::with('products')->get();
+        $products = Product::with('category')
+            ->when($request->filled('search'), fn($q) => $q->whereLike('name', '%' . trim($request->search) . '%'))
+            ->when($request->filled('category'), fn($q) => $q->where('categories_id', $request->category))
+            ->when($request->filled('is_on_market'), fn($q) => $q->where('is_on_market', $request->is_on_market))
+            ->latest()
+            ->simplePaginate(5)
+            ->withQueryString();
+        return view('admin.product.index', ['products' => $products, 'categories' => $categories]);
     }
 
     public function show(Product $product)
     {
-        return view('admin.product.show', compact('product'));
+        return view('admin.product.show', ['product' => $product]);
     }
 
     public function create()
     {
         $categories = Category::all();
-
-        return view('admin.product.create', compact('categories'));
+        return view('admin.product.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)

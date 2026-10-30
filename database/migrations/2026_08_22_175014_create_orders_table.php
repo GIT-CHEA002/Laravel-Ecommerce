@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained('users', 'user_id')
                 ->cascadeOnDelete();
-            $table->string('order_number')->unique();
+            $table->string('order_number')->unique()->nullable();
             $table->float('total_amount');
-            $table->enum('status', ['shipping', 'pending', 'arrived'])->default('pending');
+            $table->enum('status', ['shipping', 'pending', 'arrived'])->nullable()->default('pending');
             $table->string('shipping_address')->nullable();
             $table->boolean('is_paid')->default(false);
             $table->enum('payment_methods', ['ABA', 'ACLEDA', 'BAKONG', 'CREDIT CARD']);

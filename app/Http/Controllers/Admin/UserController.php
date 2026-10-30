@@ -11,28 +11,25 @@ class UserController extends Controller
     //
     public function index()
     {
-        $user = User::all();
-        dd($user);
+        $users = User::simplePaginate(10);
+        return view('admin.customer.index', ['users' => $users]);
     }
     public function show(User $user)
     {
-        dd($user::findOrFail($user->user_id));
+        dd($user::findOrFail($user));
+        return view('admin.customer.show', ['user' => $user]);
     }
     public function create()
     {
-        dd("Create User Form (Admin's work only) ");
+        return view('admin.customer.create');
     }
     public function store(Request $request)
     {
+        // validate
+        // authorization
+        // save and attach 
+        // redirect
         dd("Store the User in the database");
-    }
-    public function edit()
-    {
-        dd("Return edit form of the user (include fields)");
-    }
-    public function update(Request $request)
-    {
-        dd("Store and save the user in the database");
     }
     public function destroy(Request $request)
     {

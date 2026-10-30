@@ -27,8 +27,8 @@
     [
       'href' => '/admin/customers',
       'icon' => 'users',
-      'name' => 'Customers',
-      'active' => request()->is('admin/customers*'),
+      'name' => 'Customer',
+      'active' => request()->is('admin/user*'),
     ],
     [
       'href' => '/admin/gallery',
