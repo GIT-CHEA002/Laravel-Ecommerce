@@ -11,8 +11,10 @@ class UserController extends Controller
     //
     public function index()
     {
+        $admins = User::where('role_id', 1)->get();
+        $clients = User::where('role_id', 2)->simplePaginate();
         $users = User::simplePaginate(10);
-        return view('admin.customer.index', ['users' => $users]);
+        return view('admin.customer.index', ['users' => $users, 'admins' => $admins, 'clients' => $clients]);
     }
     public function show(User $user)
     {

@@ -2,7 +2,8 @@
   class="my-4 block h-fit items-start justify-between gap-6 rounded-md border bg-white p-4 dark:border-slate-600 dark:bg-slate-800 md:flex">
   {{-- Product image --}}
   <div class="w-full shrink-0 overflow-hidden p-3 sm:p-4 md:w-1/3 md:p-5 lg:p-4">
-    <img src="https://picsum.photos/600/600" alt="Aura Pro Wireless Headphones"
+    <img src="{{ $product->productImages?->first()->image_url ?? "https://picsum.photos/600/600" }}"
+      alt="Aura Pro Wireless Headphones"
       class="aspect-square h-full w-full rounded-md border border-slate-400 object-cover dark:border-slate-600">
   </div>
   {{-- Product information --}}

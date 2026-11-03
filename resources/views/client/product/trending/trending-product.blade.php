@@ -6,7 +6,7 @@
   </x-shared.intro-text>
   <div
     class="py-5 flex flex-nowrap overflow-x-auto sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 items-stretch ">
-    @foreach ($trendingProduct as $product)
+    @foreach ($products as $product)
       @include('client.product.trending.trending-product-card', [
         'product' => $product,
         'target' => route('product.show', $product),
@@ -15,6 +15,6 @@
     @endforeach
   </div>
   <div class="py-4">
-    {{ $trendingProduct->links() }}
+    {{ $products->links() }}
   </div>
 </div>

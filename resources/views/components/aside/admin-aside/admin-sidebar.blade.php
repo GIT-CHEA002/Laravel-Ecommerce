@@ -25,7 +25,7 @@
       'active' => request()->is('admin/orders*'),
     ],
     [
-      'href' => '/admin/customers',
+      'href' => '/admin/user',
       'icon' => 'users',
       'name' => 'Customer',
       'active' => request()->is('admin/user*'),

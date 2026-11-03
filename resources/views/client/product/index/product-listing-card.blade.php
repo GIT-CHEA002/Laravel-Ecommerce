@@ -1,8 +1,8 @@
-{{-- @props(['product', 'badgeTag' => 'New', 'target' => '#']) --}}
+@props(['product', 'badgeTag' => 'New', 'target' => '#'])
 <div
   class=' bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col'>
   <div class="h-1/2 p-3 relative">
-    <img {{-- src="{{ $product->isPrimaryImage() }}" for the real image path--}} src="https://picsum.photos/500/400"
+    <img src="{{ $product->productImages?->first()->image_url ?? "https://picsum.photos/500/400" }}"
       alt="{{ $product->name ?? 'Electronics category' }}"
       class="  h-full w-full rounded-md object-cover hover:scale-105 transition-transform duration-300 cursor-pointer">
     <div class="absolute top-3 right-4">

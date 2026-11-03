@@ -9,9 +9,16 @@
       </x-shared.section-header>
       <div class="flex items-center justify-start md:gap-4">
         <x-shared.rating-star count="128 Reviews" color="text-amber-500" />
-        <x-shared.badge-tag class="animate-pulse">
-          In stock
-        </x-shared.badge-tag>
+        @if ($product->is_on_market == true)
+          <x-shared.badge-tag class="animate-pulse">
+            In stock
+          </x-shared.badge-tag>
+        @else
+          <x-shared.badge-tag class="animate-pulse" bgColor="bg-red-100" textColor="text-red-600">
+            Out stock
+          </x-shared.badge-tag>
+        @endif
+
       </div>
       <div class="py-2">
         <span class="text-lg md:text-xl lg:text-2xl tracking-wide font-bold text-indigo-700 dark:text-indigo-500">

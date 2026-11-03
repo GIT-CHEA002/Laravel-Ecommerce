@@ -24,7 +24,7 @@
                 </span>
             </li>
         </ul>
-        @include('client.products.show.detail', ['product' => $product])
-        @include('client.products.show.related-product', ['relatedProduct' => $relatedProduct])
+        @include('client.product.show.detail', ['product' => $product])
+        @include('client.product.show.related-product', ['relatedProduct' => $relatedProduct])
     </div>
 @endsection

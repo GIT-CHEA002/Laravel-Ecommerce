@@ -36,12 +36,12 @@ class ProductController extends Controller
      */
     public function trending()
     {
-        $trendingProduct = Product::latest('product_id')
+        $products = Product::latest('product_id')
             ->take(8)
             ->paginate(8);
         $categories = Category::with('products')->get();
 
-        return view('client.product.trending.trending', compact(['trendingProduct', 'categories']));
+        return view('client.product.trending.trending', ['products' => $products, 'categories' => $categories]);
     }
     /**
      * Display the specified resource.
@@ -52,6 +52,6 @@ class ProductController extends Controller
         $displayProduct = Product::findOrFail($product->product_id);
         $relatedProduct = Product::where('categories_id', $product->categories_id)
             ->where('product_id', '!=', $product->product_id)->get();
-        return view('client.products.show.show', ['product' => $displayProduct, 'relatedProduct' => $relatedProduct]);
+        return view('client.product.show.show', ['product' => $displayProduct, 'relatedProduct' => $relatedProduct]);
     }
 }
