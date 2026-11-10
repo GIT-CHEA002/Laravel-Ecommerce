@@ -24,15 +24,24 @@ class UserController extends Controller
             ]
         );
     }
+    public function show(User $user)
+    {
+        return view('admin.user.show', ['user' => $user]);
+    }
     public function admin(Request $request)
     {
-        $admins = User::where('role_id',)
+        $admins = User::where('role_id',1)
             ->when($request->filled('search'), function ($query) use ($request) {
-                $query->whereLike('user_id', "%" . trim($request->search) . "%")
-                    ->orWhereLike('email', "%" . trim($request->search) . "%");
+                $search = '%' . trim($request->search) . '%';
+                $query->where(function ($c) use ($search) {
+                    $c->whereLike('first_name', $search)
+                        ->orWhereLike('last_name', $search)
+                        ->orWhereLike('email', $search);
+                });
             })->when($request->filled('status'), function ($query) use ($request) {
                 $query->where("is_active", trim($request->status));
             })->when($request->filled('sort'), function ($query) use ($request) {
+                // direction and sort
                 $query->orderBy($request->sort, $request->direction == 'desc' ? 'desc' : 'asc');
             })
             ->latest()
@@ -44,22 +53,23 @@ class UserController extends Controller
     {
         $clients = User::where('role_id', 2)
             ->when($request->filled('search'), function ($query) use ($request) {
-                $query->whereLike('user_id', "%" . trim($request->search) . "%")
-                    ->orWhereLike('email', "%" . trim($request->search) . "%");
+                $search = '%' . trim($request->search) . '%';
+                $query->where(function ($c) use ($search) {
+                    $c->whereLike('first_name', $search)
+                        ->orWhereLike('last_name', $search)
+                        ->orWhereLike('email', $search);
+                });
             })->when($request->filled('status'), function ($query) use ($request) {
                 $query->where("is_active", trim($request->status));
             })->when($request->filled('sort'), function ($query) use ($request) {
+                // direction and sort
                 $query->orderBy($request->sort, $request->direction == 'desc' ? 'desc' : 'asc');
             })
-            ->latest()
             ->paginate(6)
             ->withQueryString();
-        return $clients;
+        return view('admin.user.client.index', ['clients' => $clients]);
     }
-    public function show(User $user)
-    {
-        return view('admin.user.show', ['user' => $user]);
-    }
+
     public function create()
     {
         return view('admin.customer.create');
