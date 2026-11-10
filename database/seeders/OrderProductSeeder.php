@@ -17,10 +17,18 @@ class OrderProductSeeder extends Seeder
     {
         //
         Order::all()->each(function (Order $order) {
-            OrderProduct::factory(fake()->numberBetween(1, 4))->create([
-                'order_id' => $order->order_id,
-                'product_id' => Product::inRandomOrder()->value('product_id')
-            ]);
+            $products = Product::inRandomOrder()
+                ->limit(fake()->numberBetween(1, 4))
+                ->get();
+            foreach ($products as $product) {
+                OrderProduct::factory()->create([
+                    'order_id'     => $order->order_id,
+                    'product_id'   => $product->product_id,
+                    'product_name' => $product->name,
+                    'product_sku'  => $product->stock_quantity,
+                    'unit_price'   => $product->price,
+                ]);
+            }
         });
     }
 }

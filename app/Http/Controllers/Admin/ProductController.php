@@ -15,9 +15,16 @@ class ProductController extends Controller
     {
         $categories = Category::with('products')->get();
         $products = Product::with('category')
-            ->when($request->filled('search'), fn($q) => $q->whereLike('name', '%' . trim($request->search) . '%'))
-            ->when($request->filled('category'), fn($q) => $q->where('categories_id', $request->category))
-            ->when($request->filled('is_on_market'), fn($q) => $q->where('is_on_market', $request->is_on_market))
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->whereLike('name', '%' . trim($request->search) . '%');
+            })
+            // later we change to slug
+            ->when($request->filled('category'), function ($query) use ($request) {
+                $query->whereHas("category", fn($c) => $c->where('name', $request->category));
+            })
+            ->when($request->filled('is_on_market'), function ($query) use ($request) {
+                $query->where('is_on_market', $request->is_on_market);
+            })
             ->latest()
             ->simplePaginate(5)
             ->withQueryString();

@@ -20,6 +20,7 @@ return new class extends Migration
                 ->constrained('roles', 'role_id')
                 ->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
+            $table->string('avatar')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

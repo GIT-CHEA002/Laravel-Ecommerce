@@ -20,7 +20,6 @@ return new class extends Migration
             //     ->nullOnDelete();
             $table->string('name');
             $table->boolean('is_listing')->default(1);
-            $table->string('slug');
             $table->string('image_url')->nullable();
             $table->timestamps();
             // $table->unique(['name', 'parent_categories_id']);

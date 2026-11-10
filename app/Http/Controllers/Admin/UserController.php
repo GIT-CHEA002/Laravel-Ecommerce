@@ -8,18 +8,57 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
-    public function index()
+    public function index(Request $request)
     {
-        $admins = User::where('role_id', 1)->get();
-        $clients = User::where('role_id', 2)->simplePaginate();
-        $users = User::simplePaginate(10);
-        return view('admin.customer.index', ['users' => $users, 'admins' => $admins, 'clients' => $clients]);
+        $admins = User::where('role_id', 1)->latest('user_id')->limit(5)->get();
+        $clients = User::where('role_id', 2)->latest('user_id')->limit(5)->get();
+        $clientCount = User::where('role_id', 2)->count();
+        $adminCount = User::where('role_id', 1)->count();
+        return view(
+            'admin.user.index',
+            [
+                'admins' => $admins,
+                'clients' => $clients,
+                'clientCount' => $clientCount,
+                'adminCount' => $adminCount
+            ]
+        );
+    }
+    public function admin(Request $request)
+    {
+        $admins = User::where('role_id',)
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->whereLike('user_id', "%" . trim($request->search) . "%")
+                    ->orWhereLike('email', "%" . trim($request->search) . "%");
+            })->when($request->filled('status'), function ($query) use ($request) {
+                $query->where("is_active", trim($request->status));
+            })->when($request->filled('sort'), function ($query) use ($request) {
+                $query->orderBy($request->sort, $request->direction == 'desc' ? 'desc' : 'asc');
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+        return view('admin.user.admin.index', ['admins' => $admins]);
+    }
+    public function client(Request $request)
+    {
+        $clients = User::where('role_id', 2)
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->whereLike('user_id', "%" . trim($request->search) . "%")
+                    ->orWhereLike('email', "%" . trim($request->search) . "%");
+            })->when($request->filled('status'), function ($query) use ($request) {
+                $query->where("is_active", trim($request->status));
+            })->when($request->filled('sort'), function ($query) use ($request) {
+                $query->orderBy($request->sort, $request->direction == 'desc' ? 'desc' : 'asc');
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+        return $clients;
     }
     public function show(User $user)
     {
-        dd($user::findOrFail($user));
-        return view('admin.customer.show', ['user' => $user]);
+        return view('admin.user.show', ['user' => $user]);
     }
     public function create()
     {

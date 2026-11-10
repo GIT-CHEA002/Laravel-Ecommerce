@@ -50,14 +50,19 @@
 
     <x-form.form method="GET" action="{{ route('admin.orders.index') }}" onchange="this.submit()"
         class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3">
-        <div class="w-1/4">
+        <div class="w-1/4 ">
             <x-form.field name="order_number" placeholder="ORD-001..." :value="request('order_number')"
                 class="py-1 tracking-wide space-y-0 placeholder:capitalize" icon="magnifying-glass" />
         </div>
         {{-- filter section --}}
         <div class="flex justify-end items-center gap-4">
+            <div class="flex items-center gap-2">
+                <x-form.field type="date" name="date_from" :value="request('date_from')" onchange="this.form.submit()" />
+                <span class="text-sm text-slate-500 dark:text-slate-400">to</span>
+                <x-form.field type="date" name="date_to" :value="request('date_to')" onchange="this.form.submit()" />
+            </div>
             <x-form.select name="status" placeholder="All status" :selected="request('status')" :options="['shipping' => 'Shipping', 'arrived' => 'Arrived', 'pending' => 'Pending']" onchange="this.form.submit()" />
-            <x-form.select name="is_paid" placeholder="All Statuses" :options="[1 => 'Paid', 0 => 'Unpaid']"
+            <x-form.select name="is_paid" placeholder="Paid / Unpaid" :options="[1 => 'Paid', 0 => 'Unpaid']"
                 onchange="this.form.submit()" :selected="request('is_paid')" />
         </div>
     </x-form.form>
@@ -83,26 +88,28 @@
                         <td class="px-3 py-2">${{ number_format($order->total_amount, 2) }}</td>
                         {{-- <td class="px-3 py-2">{{ $order->status}}</td> --}}
                         <td class="px-3 py-2">
-
-                            @if ($order->status == 'shipping')
-                                <x-shared.badge-tag bgColor="bg-amber-100" textColor="text-amber-600">
-                                    {{ $order->status }}
-                                </x-shared.badge-tag>
-                            @elseif ($order->status == 'pending')
-                                <x-shared.badge-tag bgColor="bg-red-100" textColor="text-red-600">
-                                    {{ $order->status }}
-                                </x-shared.badge-tag>
-                            @elseif ($order->status == 'arrived')
-                                <x-shared.badge-tag bgColor="bg-green-100" textColor="text-green-600">
-                                    Not Available
-                                </x-shared.badge-tag>
-                            @endif
+                            @php
+                                $badge = match ($order->status) {
+                                    'pending' => ['bg-red-100', 'text-red-600'],
+                                    'processing' => ['bg-blue-100', 'text-blue-600'],
+                                    'shipping' => ['bg-amber-100', 'text-amber-600'],
+                                    'delivered' => ['bg-green-100', 'text-green-600'],
+                                    'cancelled' => ['bg-gray-100', 'text-gray-600'],
+                                    'refuned' => ['bg-purple-100', 'text-purple-600'],
+                                    default => ['bg-gray-100', 'text-gray-500'],
+                                };
+                            @endphp
+                            <x-shared.badge-tag :bgColor="$badge[0]" :textColor="$badge[1]">
+                                {{ ucfirst($order->status ?? 'unknown') }}
+                            </x-shared.badge-tag>
                         </td>
                         <td class="px-3 py-2">
                             {{ $order->shipping_address }}
                         </td>
-                        <td class="px-3 py-2">
-                            {{ $order->is_paid ? 'Paid' : 'Not yet' }}
+                        <td class="px-3 py-2 ">
+                            <span class="text-xs font-medium tracking-wide text-indigo-700 dark:text-indigo-500">
+                                {{ $order->payment_status }}
+                            </span>
                         </td>
                         <td class="px-3 py-2">
                             <a href="{{ route('admin.orders.show', $order) }}"

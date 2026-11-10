@@ -12,16 +12,44 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
+            // relation and key 
             $table->id('order_id');
             $table->foreignId('user_id')
                 ->constrained('users', 'user_id')
                 ->cascadeOnDelete();
             $table->string('order_number')->unique()->nullable();
-            $table->float('total_amount');
-            $table->enum('status', ['shipping', 'pending', 'arrived'])->nullable()->default('pending');
-            $table->string('shipping_address')->nullable();
-            $table->boolean('is_paid')->default(false);
-            $table->enum('payment_methods', ['ABA', 'ACLEDA', 'BAKONG', 'CREDIT CARD']);
+
+            // Money information 
+            $table->decimal('subtotal', 12, 2)->default(0);
+            $table->decimal('discount_amount', 12, 2)->default(0);
+            $table->decimal('shipping_fee', 12, 2)->default(0);
+            $table->decimal('tax_amount', 12, 2)->default(0);
+            $table->decimal('total_amount', 12, 2)->default(0);
+            $table->char('currency', 3)->default('USD');
+
+            // order life cyclye
+            $table->enum(
+                'status',
+                ['pending', 'processing', 'shipping', 'delivered', 'cancelled', 'refuned']
+            )->nullable()->default('pending');
+
+            // payment methods : 
+            $table->enum('payment_methods', ['ABA', 'ACLEDA', 'BAKONG', 'CREDIT CARD', 'CODE']);
+            $table->enum('payment_status', ['unpaid', 'paid', 'failed', 'refuned'])->default('unpaid');
+            $table->string('payment_reference')->nullable(); // transaction id or return id when purchase
+
+            // Shipping Snapshort 
+            $table->string('shipping_name')->nullable();
+            $table->string('shipping_phone')->nullable();
+            $table->text('shipping_address')->nullable();
+            $table->text('shipping_note')->nullable();
+
+            // Timestamp for order state 
+            $table->timestamp('paid_at')->nullable();
+            $table->timestamp('shipping_at')->nullable();
+            $table->timestamp('delivered_at')->nullable();
+            $table->timestamp('cancelled_at')->nullable();
+
             $table->timestamps();
         });
     }

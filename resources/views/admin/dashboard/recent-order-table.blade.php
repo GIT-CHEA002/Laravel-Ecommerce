@@ -1,5 +1,5 @@
 {{-- table and title --}}
-<div class="col-span-2 border rounded-md shadow-md dark:bg-slate-800">
+<div class="col-span-2 border rounded-md shadow-md dark:bg-slate-800 h-fit pb-4">
   {{-- title section --}}
   <div class="flex items-center justify-between default-padding">
     <span class="text-xl font-bold">Recent Orders</span>
@@ -17,6 +17,7 @@
         @endforeach
       </tr>
     </thead>
+    {{-- display the real data of some order --}}
     <tbody class="divide-y">
       @foreach ([1, 2, 3, 4, 5] as $num)
         <tr>
@@ -29,7 +30,7 @@
           </td>
           <td class="px-3 py-2">
             <a href="#"
-              class="font-semibold tracking-wider text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">View</a>
+              class=" text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">View</a>
           </td>
         </tr>
       @endforeach

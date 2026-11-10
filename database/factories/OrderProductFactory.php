@@ -20,10 +20,12 @@ class OrderProductFactory extends Factory
     {
         return [
             //
-            'order_id' => 1,
-            'product_id' => 1,
-            'price' => 1000,
-            'quantity' => fake()->numberBetween(1, 5)
+            'order_id'     => 1,
+            'product_id'   => 1,
+            'product_name' => null,      // snapshot
+            'product_sku'  => 0,         // snapshot
+            'unit_price'   => 0,         // snapshot
+            'quantity'     => fake()->numberBetween(1, 5),
         ];
     }
 }

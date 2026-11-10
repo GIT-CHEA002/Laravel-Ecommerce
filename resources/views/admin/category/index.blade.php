@@ -28,7 +28,7 @@
           <tr>
             <td class="px-3 py-2">
               <div class="w-10 h-10 rounded-md overflow-hidden">
-                <img src="{{ $category?->productImages?->first()?->image_url ?? 'https://picsum.photos/200/300' }}"
+                <img src="{{ $category?->image_url ?? 'https://picsum.photos/200/300' }}"
                   alt="{{ $category->name }}" class="object-cover w-full h-full">
               </div>
             </td>

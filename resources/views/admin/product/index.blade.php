@@ -25,7 +25,7 @@
                     class="py-1 tracking-wide space-y-0 placeholder:capitalize" icon="magnifying-glass" />
             </div>
             <div class="flex justify-end items-center gap-4">
-                <x-form.select name="category" placeholder="All Category" :options="$categories->pluck('name', 'categories_id')" :selected="request('category')" onchange="this.form.submit()" />
+                <x-form.select name="category" placeholder="All Category" :options="$categories->pluck('name', 'name')" :selected="request('category')" onchange="this.form.submit()" />
                 <x-form.select name="is_on_market" placeholder="All Statuses" :options="[1 => 'Active', 0 => 'Inactive']"
                     :selected="request('is_on_market')" onchange="this.form.submit()" />
             </div>

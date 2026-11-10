@@ -27,7 +27,6 @@ class CategoryFactory extends Factory
                 'Camera',
                 'Tablet',
             ]),
-            'slug' => fake()->unique()->slug(),
             'image_url' => fake()->imageUrl()
         ];
     }

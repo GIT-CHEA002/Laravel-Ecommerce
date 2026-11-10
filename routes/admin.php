@@ -85,9 +85,11 @@ Route::middleware(['auth', 'admin'])
       Route::delete('/{order}', [AdminOrderController::class, 'destroy']);
     });
 
-    // Users
-    Route::prefix('user')->name('users.')->group(function () {
+    // Users : display admins
+    Route::prefix('user')->name('user.')->group(function () {
       Route::get('/', [AdminUserController::class, 'index'])->name('index');
+      Route::get('/admin', [AdminUserController::class, 'admin'])->name('admin');
+      Route::get('/client', [AdminUserController::class, 'client'])->name('client');
       Route::get('/create', [AdminUserController::class, 'create'])->name('create');
       Route::post('/', [AdminUserController::class, 'store'])->name('store');
       Route::get('/{user}', [AdminUserController::class, 'show'])->name('show');
@@ -95,7 +97,6 @@ Route::middleware(['auth', 'admin'])
       Route::patch('/{user}', [AdminUserController::class, 'update'])->name('update');
       Route::delete('/{user}', [AdminUserController::class, 'destroy'])->name('destroy');
     });
-
     // Reports
     Route::prefix('reports')->name('reports.')->group(function () {
       Route::get('/', [AdminReportController::class, 'index'])->name('index');
