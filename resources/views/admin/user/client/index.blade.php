@@ -72,7 +72,14 @@
           </tr>
         @endforeach
       </tbody>
+
     </table>
+    <div class="px-3 py-3 text-right border-t">
+      <a href="{{ route('admin.user.index') }}"
+        class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-700 dark:text-indigo-500 origin-right transition-transform duration-300 hover:scale-105">
+        Back
+      </a>
+    </div>
   </div>
   <div class="py-2 ">
     {{ $clients->links() }}

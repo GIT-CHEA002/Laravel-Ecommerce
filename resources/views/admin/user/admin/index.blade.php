@@ -32,7 +32,7 @@
     <table class="w-full text-sm text-left dark:text-white">
       <thead class="text-xs tracking-wide uppercase bg-indigo-100 dark:bg-slate-700">
         <tr class="font-light">
-          @foreach (['ID', 'Image', 'Customer Name', 'Email', 'Registe On', 'Status', 'Action'] as $heading)
+          @foreach (['ID', 'Avatar', 'Customer Name', 'Email', 'Registe On', 'Status', 'Action'] as $heading)
             <th class="px-3 py-3">{{ $heading }}</th>
           @endforeach
         </tr>
@@ -72,6 +72,13 @@
         @endforeach
       </tbody>
     </table>
+    <div class="px-3 py-3 text-right flex justify-end items-center gap-1 border-t">
+      <x-heroicon-o-arrow-left class="w-3 h-3 text-indigo-700 dark:text-indigo-500"/> 
+      <a href="{{ route('admin.user.index') }}"
+        class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-700 dark:text-indigo-500 origin-right transition-transform duration-300 hover:scale-105">
+        Back
+      </a>
+    </div>
   </div>
   <div class="py-2 ">
     {{ $admins->links() }}

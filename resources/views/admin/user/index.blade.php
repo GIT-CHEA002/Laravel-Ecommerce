@@ -6,6 +6,7 @@
       'icon' => 'users',
       'change' => '+14.2% vs last month',
       'trend' => 'up',
+      'target' => route('admin.user.client')
     ],
     [
       'title' => 'Total Admin Users',
@@ -13,6 +14,7 @@
       'icon' => 'shield-check',
       'change' => 'No change vs last month',
       'trend' => 'neutral',
+      'target' => route('admin.user.admin')
     ],
     [
       'title' => 'Newest Registrations',
@@ -20,6 +22,7 @@
       'icon' => 'user-plus',
       'change' => 'Registered this month',
       'trend' => 'up',
+
     ],
   ];
 @endphp
@@ -35,7 +38,13 @@
   </div>
   <div class="grid grid-cols-4 auto-rows-auto gap-4 py-4 ">
     @foreach ($summaryInfo as $info)
-      @include('admin.orders.order-summary-card', ['info' => $info])
+      @if (!empty($info['target']))
+        <a href="{{ $info['target'] }}">
+          @include('admin.orders.order-summary-card', ['info' => $info])
+        </a>
+      @else
+        @include('admin.orders.order-summary-card', ['info' => $info])
+      @endif
     @endforeach
   </div>
   <div class="border rounded-md shadow-md dark:bg-slate-800 h-fit my-3 overflow-hidden">
@@ -80,12 +89,13 @@
         @endforeach
       </tbody>
     </table>
-    <div class="px-3 py-3 text-right border-t">
+    <div class="px-3 py-3 text-right flex justify-end items-center gap-1 border-t">
+
       <a href="{{ route('admin.user.client') }}"
         class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-700 dark:text-indigo-500 origin-right transition-transform duration-300 hover:scale-105">
-        View all client
-        <x-heroicon-o-arrow-right class="w-3 h-3" />
+        View All
       </a>
+      <x-heroicon-o-arrow-right class="w-3 h-3 text-indigo-700 dark:text-indigo-500" />
     </div>
   </div>
 @endsection
