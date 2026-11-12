@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Override;
 
 class User extends Authenticatable
 {
@@ -50,14 +51,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    #[Override]
+    protected static function booted()
+    {
+        return parent::booted();
+    }
+    // getRouteKeyName
     // The relationship of the model (eloquent)
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
-    public function userAddresses(): HasMany
+    public function addresses(): HasMany
     {
         return $this->hasMany(UserAddress::class, 'user_id', 'user_id');
+    }
+    public function defaultAddress()
+    {
+        return $this->hasOne(UserAddress::class, 'user_id', 'user_id')->where('is_default', true);
     }
     public function carts(): HasMany
     {

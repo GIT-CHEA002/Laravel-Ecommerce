@@ -8,10 +8,12 @@
       <x-shared.section-header>Category - Overview</x-shared.section-header>
       <x-shared.intro-text>Manage your store inventory and listings</x-shared.intro-text>
     </div>
-    <x-button.primary-button href="{{ route('admin.category.create') }}">
-      <x-heroicon-o-plus class="w-5 h-5" />
-      <span class="capitalize text-sm tracking-wide">Add Category</span>
-    </x-button.primary-button>
+    @can('create', App\Models\Category::class)
+      <x-button.primary-button href="{{ route('admin.category.create') }}">
+        <x-heroicon-o-plus class="w-5 h-5" />
+        <span class="capitalize text-sm tracking-wide">Add Category</span>
+      </x-button.primary-button>
+    @endcan
   </div>
   {{-- some details categories with pagination --}}
   <div class="border rounded-md shadow-md dark:bg-slate-800 h-fit my-3 overflow-hidden">
@@ -28,8 +30,8 @@
           <tr>
             <td class="px-3 py-2">
               <div class="w-10 h-10 rounded-md overflow-hidden">
-                <img src="{{ $category?->image_url ?? 'https://picsum.photos/200/300' }}"
-                  alt="{{ $category->name }}" class="object-cover w-full h-full">
+                <img src="{{ $category?->image_url ?? 'https://picsum.photos/200/300' }}" alt="{{ $category->name }}"
+                  class="object-cover w-full h-full">
               </div>
             </td>
             <td class="px-3 py-2">{{ $category->name }}</td>

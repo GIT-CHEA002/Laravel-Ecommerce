@@ -1,7 +1,14 @@
+@php
+  $breadcrumpLink = [
+    ['label' => 'Users', 'url' => route('admin.user.index')],
+    ['label' => 'Admin'],
+  ];  
+@endphp
 @extends('layout.admin-layout')
 @section('title', 'Admin - User Admin')
 @section('favicon', asset('images/favicons/register.png'))
 @section('content')
+  <x-shared.breadcrumb :items="$breadcrumpLink" />
   <div class="flex justify-between items-center">
     <div class="block">
       <x-shared.section-header>Admin User</x-shared.section-header>
@@ -65,7 +72,7 @@
               @endif
             </td>
             <td class="px-3 py-2">
-              <a href="{{ route('admin.user.show', $admin) }}"
+              <a href="{{ route('admin.user.admin.show', $admin) }}"
                 class="text-xs font-semibold tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">view</a>
             </td>
           </tr>
@@ -73,7 +80,7 @@
       </tbody>
     </table>
     <div class="px-3 py-3 text-right flex justify-end items-center gap-1 border-t">
-      <x-heroicon-o-arrow-left class="w-3 h-3 text-indigo-700 dark:text-indigo-500"/> 
+      <x-heroicon-o-arrow-left class="w-3 h-3 text-indigo-700 dark:text-indigo-500" />
       <a href="{{ route('admin.user.index') }}"
         class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-700 dark:text-indigo-500 origin-right transition-transform duration-300 hover:scale-105">
         Back

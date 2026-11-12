@@ -19,9 +19,10 @@ class UserAddressSeeder extends Seeder
         // UserAddress::factory(2)->create();
         // assign to exist users 
         User::all()->each(function (User $user) {
-            UserAddress::factory(fake()->numberBetween(2, 4))->create([
-                'user_id' => $user->user_id
-            ]);
+            $addresses = UserAddress::factory()
+                ->count(fake()->numberBetween(2, 4))
+                ->create(['user_id' => $user->user_id]);
+            $addresses->first()->update(['is_default' => true]);
         });
     }
 }

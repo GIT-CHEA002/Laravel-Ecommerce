@@ -1,6 +1,6 @@
-@props(['label' => null, 'for' => null])
+@props(['label' => null, 'for' => null, 'defaultWidth' => 'w-full'])
 
-<div class="w-full">
+<div {{ $attributes->merge(['class' => $defaultWidth]) }}>
   @if ($label)
     <label @if ($for) for="{{ $for }}" @endif class="block py-0.5 text-sm font-medium tracking-wide">
       {{ $label }}

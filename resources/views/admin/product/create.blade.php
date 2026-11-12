@@ -7,13 +7,16 @@
         {{-- form --}}
         <x-form.form class="py-3 space-y-4" action="{{ route('admin.products.store') }}" method="POST">
             <div class="flex justify-between items-center gap-6">
-                <x-form.field name="name" label="Name" placeholder="Coca Cola" class="flex-1 py-2" />
-                <x-form.field name="price" label="Price" placeholder="$20,00..." class="flex-1 py-2" />
+                <x-form.field name="name" label="Name" value="{{ old('name') }}" placeholder="Coca Cola"
+                    class="flex-1 py-2" />
+                <x-form.field name="price" label="Price" value="{{ old('price') }}" placeholder="$20,00..."
+                    class="flex-1 py-2" />
             </div>
-            <x-form.field name="description" label="Description(10-200 words)" placeholder="This product is about..."
-                :isTextArea="true" />
+            <x-form.field name="description" value="{{ old('description') }}" label="Description(10-200 words)"
+                placeholder="This product is about..." :isTextArea="true" />
             <div class="flex justify-between items-center  gap-6">
-                <x-form.field name="stock_quantity" label="Stock" placeholder="20..." class="flex-1" />
+                <x-form.field name="stock_quantity" label="Stock" value="{{ old('stock_quantity') }}" placeholder="20..."
+                    class="flex-1" />
                 <div class="">
                     <label for="" class="opacity-0">Category</label>
                     <x-form.select name="categories_id" :options="$categories->pluck('name', 'categories_id')"
@@ -21,7 +24,8 @@
                 </div>
                 <div class="">
                     <label for="" class="opacity-0">Category</label>
-                    <x-form.checkbox name="is_on_market" label="Avaible(On Market ?)" />
+                    <x-form.checkbox name="is_on_market" value="1" :checked="(bool) old('is_on_market', false)"
+                        label="Avaible(On Market ?)" />
                 </div>
             </div>
             <div class="flex justify-end  items-center gap-3 mt-2">

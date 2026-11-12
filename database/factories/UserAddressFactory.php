@@ -21,9 +21,12 @@ class UserAddressFactory extends Factory
         return [
             //
             'address_line' => fake()->address(),
-            // 'user_id' => User::factory(),
             'city' => fake()->city(),
             'postal_code' => fake()->postcode(),
         ];
+    }
+    public function default()
+    {
+        return $this->state(fn() => ['is_default' => true]);
     }
 }

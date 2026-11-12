@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Validation\Rules\Can;
 
 Route::middleware(['auth', 'admin'])
@@ -43,11 +45,15 @@ Route::middleware(['auth', 'admin'])
     });
     // Category
     Route::prefix('category')->name('category.')->group(function () {
-      Route::get('/', [AdminCategoryController::class, 'index'])->name('index');
+      Route::get('/', [AdminCategoryController::class, 'index'])
+        ->can('viewAny', Category::class)
+        ->name('index');
       // protected route 
       Route::get('/create', [AdminCategoryController::class, 'create'])
+        ->can('create', Category::class)
         ->name('create');
       Route::post('/', [AdminCategoryController::class, 'store'])
+        ->can('create', Category::class)
         ->name('store');
       Route::get('/{category}', [AdminCategoryController::class, 'show'])
         ->name('show');
@@ -87,14 +93,29 @@ Route::middleware(['auth', 'admin'])
 
     // Users : display admins
     Route::prefix('user')->name('user.')->group(function () {
-      Route::get('/', [AdminUserController::class, 'index'])->name('index');
-      Route::get('/admin', [AdminUserController::class, 'admin'])->name('admin');
-      Route::get('/client', [AdminUserController::class, 'client'])->name('client');
-      Route::get('/create', [AdminUserController::class, 'create'])->name('create');
-      Route::post('/', [AdminUserController::class, 'store'])->name('store');
-      Route::get('/{user}', [AdminUserController::class, 'show'])->name('show');
-      Route::get('/{user}/edit', [AdminUserController::class, 'edit'])->name('edit');
-      Route::patch('/{user}', [AdminUserController::class, 'update'])->name('update');
+      Route::get('/', [AdminUserController::class, 'index'])
+        ->name('index');
+      Route::get('/admin', [AdminUserController::class, 'admin'])
+        ->can('viewAny', User::class)
+        ->name('admin');
+      Route::get('/client', [AdminUserController::class, 'client'])
+        ->name('client');
+      Route::get('/create', [AdminUserController::class, 'create'])
+        ->name('create');
+      Route::post('/', [AdminUserController::class, 'store'])
+        ->name('store');
+
+      // showing route : separate by admin and client
+      Route::get('/admin/{user}', [AdminUserController::class, 'show'])
+        // ->can('view', User::class, 'user')
+        ->name('admin.show');
+      Route::get('/client/{user}', [AdminUserController::class, 'show'])
+        ->name('client.show');
+      Route::get('/{user}/edit', [AdminUserController::class, 'edit'])
+        ->name('edit');
+      Route::patch('/{user}', [AdminUserController::class, 'update'])
+        ->can('update', 'user')
+        ->name('update');
       Route::delete('/{user}', [AdminUserController::class, 'destroy'])->name('destroy');
     });
     // Reports

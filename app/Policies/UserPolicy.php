@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return false;
+        return $user->isAdmin() || $user->is($model);
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -36,15 +36,19 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return false;
+        if ($user->is($model))
+            return true;
+        return $user->isAdmin() && $model->isAdmin();
     }
-
     /**
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, User $model): bool
     {
-        return false;
+        if ($user->is($model)) {
+            return false;
+        }
+        return $user->isAdmin() && $model->isAdmin();
     }
 
     /**

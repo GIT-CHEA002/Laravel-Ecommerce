@@ -14,10 +14,22 @@ class Product extends Model
     use HasFactory;
     protected $primaryKey = 'product_id';
     protected $guarded = [];
+    #[Override]
+    protected static function booted()
+    {
+        parent::booted();
+        // generate product number
+        static::created(function (Product $product) {
+            $product->forceFill([
+                'product_number' => 'PRO-' . str_pad($product->product_id, 3, '0', STR_PAD_LEFT),
+            ])->saveQuietly();
+        });
+    }
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'categories_id', 'categories_id');
     }
+
     public function productImages(): HasMany
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'product_id');

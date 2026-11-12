@@ -104,14 +104,14 @@ class CategoryController extends Controller
     {
         $attributes = $request->validate([
             'name'  => ['required', 'string', 'min:5', 'max:255'],
-            'slug'  => ['required', 'string', 'min:3', 'max:100'],
+            'slug'  => ['nullable', 'string', 'min:3', 'max:100'],
             'image' => ['required', 'url'],
         ]);
 
         try {
             $category->updateOrFail([
                 'name'      => $attributes['name'],
-                'slug'      => $attributes['slug'],
+                // 'slug'      => $attributes['slug'], // later update slug 
                 'image_url' => $attributes['image'],
             ]);
 

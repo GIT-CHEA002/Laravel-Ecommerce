@@ -8,17 +8,19 @@
       <x-shared.intro-text>Manage your store inventory and listings</x-shared.intro-text>
     </div>
   </div>
-  <x-form.form id="update-category" class="py-3 space-y-4" action="{{ route('admin.category.store', $category) }}"
+  <x-form.form id="update-category" class="py-3 space-y-4" action="{{ route('admin.category.update', $category) }}"
     method="POST">
     @csrf
     @method('PATCH')
     <div class="flex justify-between items-center  gap-6">
-      <x-form.field name="name" label="Name" placeholder="Fragrance..." :value="$category->name" class="flex-1 py-2" />
-      <x-form.field name="slug" label="Slug" placeholder="EDT/EDP..." :value="$category->slug" class="flex-1 py-2" />
+      <x-form.field name="name" label="Name" placeholder="Fragrance..." value="{{ old('name', $category->name) }}"
+        class="flex-1 py-2" />
+      <x-form.field name="slug" label="Slug" placeholder="EDT/EDP..." value="{{ old('slug', $category->slug) }}"
+        class="flex-1 py-2" />
     </div>
     <div class="flex justify-between items-center  gap-6">
-      <x-form.field name="image" label="Image Url" placeholder="https://placeholder/200/300" :value="$category->image_url"
-        class="flex-1 py-2" />
+      <x-form.field name="image" label="Image Url" placeholder="https://placeholder/200/300"
+        value="{{ old('image', $category->image_url) }}" class="flex-1 py-2" />
     </div>
   </x-form.form>
   <div class="flex justify-end  items-center gap-3 mt-2">
