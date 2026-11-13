@@ -37,16 +37,28 @@ class UserPolicy
     public function update(User $user, User $model): bool
     {
         if ($user->is($model))
-            return true;
+            return false;
+
+        // super-admin can touch super admin 
+        if ($model->isSuperAdmin()) {
+            return $user->isSuperAdmin();
+        }
+        // super-admin can update any admin 
+
         return $user->isAdmin() && $model->isAdmin();
     }
+
     /**
      * Determine whether the user can delete the model.
      */
+
     public function delete(User $user, User $model): bool
     {
         if ($user->is($model)) {
             return false;
+        }
+        if ($model->isSuperAdmin()) {
+            return $user->isSuperAdmin();
         }
         return $user->isAdmin() && $model->isAdmin();
     }
@@ -56,7 +68,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return false;
+        return true;
     }
 
     /**

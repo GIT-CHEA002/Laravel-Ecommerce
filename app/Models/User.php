@@ -27,6 +27,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'role_id',
+        'is_active'
     ];
     protected $primaryKey = 'user_id';
     /**
@@ -86,5 +88,10 @@ class User extends Authenticatable
     public function isClient(): bool
     {
         return $this->role_id === 2;
+    }
+    public function isSuperAdmin(): bool
+    {
+        // the higest priority 
+        return $this->role_id === 0;
     }
 }

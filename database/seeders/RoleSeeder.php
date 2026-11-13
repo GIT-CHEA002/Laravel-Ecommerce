@@ -26,6 +26,12 @@ class RoleSeeder extends Seeder
                 'slug' => 'client',
                 'description' => 'Regular customer account.',
             ],
+            [
+                'role_id' => 0,
+                'name' => 'Super-Admin',
+                'slug' => 'super-admin',
+                'description' => 'Super Admin Do'
+            ]
         ];
 
         foreach ($roles as $role) {

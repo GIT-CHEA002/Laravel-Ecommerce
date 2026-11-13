@@ -16,21 +16,21 @@
     <x-shared.intro-text>Manage Your Category Product by attaching them</x-shared.intro-text>
   </div>
   <div class="grid grid-cols-3 gap-6" x-data="{
-                                                                key: 'attach-{{ $category->id }}',
-                                                                selected: [], {{-- state to store the attached products --}}
+                                                                    key: 'attach-{{ $category->id }}',
+                                                                    selected: [], {{-- state to store the attached products --}}
 
-                                                                init() {
-                                                                  try {
-                                                                    this.selected = JSON.parse(sessionStorage.getItem(this.key) || '[]')
-                                                                  } catch (e) {
-                                                                    this.selected = []
-                                                                  }
+                                                                    init() {
+                                                                      try {
+                                                                        this.selected = JSON.parse(sessionStorage.getItem(this.key) || '[]')
+                                                                      } catch (e) {
+                                                                        this.selected = []
+                                                                      }
 
-                                                                  if (!Array.isArray(this.selected)) this.selected = []
+                                                                      if (!Array.isArray(this.selected)) this.selected = []
 
-                                                                  this.$watch('selected', v => sessionStorage.setItem(this.key, JSON.stringify(v)))
-                                                                }
-                                                              }">
+                                                                      this.$watch('selected', v => sessionStorage.setItem(this.key, JSON.stringify(v)))
+                                                                    }
+                                                                  }">
 
     {{-- ============ Products table ============ --}}
     <div class="col-span-2">
@@ -161,7 +161,7 @@
       </div>
       {{-- Back button --}}
       <div class="pt-4">
-        <x-button.primary-button class="w-full" href="{{ url()->previous() }}">
+        <x-button.primary-button class="w-full" href="{{ route('admin.category.show', $category) }}">
           Back
         </x-button.primary-button>
       </div>

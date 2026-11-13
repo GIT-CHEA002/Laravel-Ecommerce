@@ -22,7 +22,7 @@
       <x-shared.intro-text>Be admin on : {{ $user->created_at->format('l d F Y') }}</x-shared.intro-text>
     </div>
   </div>
-  <x-form.form method="POST" action="{{ route('admin.user.update', $user) }}">
+  <x-form.form method="POST" action="{{ route('admin.user.admin.update', $user) }}">
     @csrf
     @method('PATCH')
     <div class="grid grid-cols-3 gap-6 py-4 mt-3 border-t auto-rows-auto">
@@ -77,7 +77,11 @@
                 value="{{ old('user_addresses.postal_code', $userAddress?->postal_code) }}" placeholder="e.g. 12000"
                 class="flex-1" />
             </div>
-            <x-form.checkbox name="user_addresses[is_default]" value="1" :checked="(bool) old('user_addresses.is_default', $userAddress?->is_default)" label="Set as Default" />
+            <div class=" justify-between flex items-center gap-6">
+              <x-form.checkbox name="user_addresses[is_default]" value="1" :checked="(bool) old('user_addresses.is_default', $userAddress?->is_default)" label="Set as Default Address" />
+              <x-form.checkbox name="is_active" value="1" :checked="(bool) old('is_active', $user->is_active)"
+                label="Is Active ? " />
+            </div>
           </div>
         </div>
       </div>

@@ -111,44 +111,13 @@
                                 {{ $order->payment_status }}
                             </span>
                         </td>
-                        <td class="px-3 py-2">
+                        <td class="px-3 py-2 flex justify-center">
                             <a href="{{ route('admin.orders.show', $order) }}"
-                                class="text-xs tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">view</a>
+                                class="text-xs tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">
+                                <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
+                            </a>
                         </td>
-                        {{-- <td class="px-3 py-2">
-                            <div class="flex justify-start items-center gap-3">
-                                <a href="{{ route('admin.products.show', $product) }}">
-                                    <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
-                                </a>
-                                <a href="{{ route('admin.products.edit', $product) }}">
-                                    <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
-                                </a>
-                                @if ($product->is_on_market == true)
-                                @can('delete', $product)
-                                <div x-data="{isDeleteOpen : false}">
-                                    <button type="button" @click="isDeleteOpen = true" class="cursor-pointer">
-                                        <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
-                                    </button>
-                                    <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate Product"
-                                        message="Are you sure want to deactivate this product"
-                                        action="{{ route('admin.products.destroy', $product) }}" confirmText="Deactivate" />
-                                </div>
-                                @endcan
-                                @elseif ($product->is_on_market == false)
-                                @can('restore', $product)
-                                <div x-data="{isRestoreOpen : false}">
-                                    <button type="button" @click="isRestoreOpen = true" class="cursor-pointer">
-                                        <x-heroicon-s-arrow-uturn-left class="w-4 h-5 text-green-700 dark:text-green-500" />
-                                    </button>
-                                    <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
-                                        confirmStyle="bg-green-700 dark:bg-green-500"
-                                        message="Are you sure want to restore this product" method="PATCH"
-                                        action="{{ route('admin.products.restore', $product) }}" confirmText="Restore" />
-                                </div>
-                                @endcan
-                                @endif
-                            </div>
-                        </td> --}}
+
                     </tr>
                 @endforeach
             </tbody>

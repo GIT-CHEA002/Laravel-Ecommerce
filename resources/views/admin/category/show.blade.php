@@ -186,7 +186,7 @@
         <h1 class="text-sm tracking-wide font-semibold pt-1 text-center">This image describes the category</h1>
       </div>
       <div class="flex justify-between items-center gap-4">
-        <x-button.primary-button href="{{ url()->previous() }}" class="w-full bg-green-700 dark:bg-green-500">
+        <x-button.primary-button href="{{ route('admin.category.index') }}" class="w-full bg-green-700 dark:bg-green-500">
           Back
         </x-button.primary-button>
         <x-button.primary-button href="{{ route('admin.category.product.attach.index', $category)  }}"

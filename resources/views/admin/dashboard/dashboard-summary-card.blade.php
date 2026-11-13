@@ -1,15 +1,17 @@
 @props(['info' => null])
 @if ($info)
-  <div class="bg-white/80 dark:bg-slate-800 border rounded-md shadow-sm p-3">
+  <div class="h-full flex flex-col bg-white/80 dark:bg-slate-800 border rounded-md shadow-sm p-3">
     <div class="flex justify-between">
-      <div>
-        <h1 class="uppercase text-sm font-semibold tracking-wide">{{ $info['title'] }}</h1>
-        <h1 class="py-2 text-xl tracking-wide font-bold">{{ $info['value'] }}</h1>
-      </div>
+      <h1 class="uppercase text-sm font-semibold tracking-wide">{{ $info['title'] }}</h1>
       <x-dynamic-component :component="'heroicon-o-' . $info['icon']" class="w-5 h-5 text-indigo-700 font-bold" />
     </div>
+
+    <div class="flex-1 flex items-center">
+      <h1 class="text-xl tracking-wide font-bold">{{ $info['value'] }}</h1>
+    </div>
+
     <p @class([
-      'mt-1 flex items-center gap-1 text-xs sm:text-sm font-medium tracking-wide',
+      'pt-1 flex items-center gap-1 text-xs sm:text-sm font-medium tracking-wide',
       'text-green-600 dark:text-green-400' => $info['trend'] === 'up',
       'text-red-600 dark:text-red-400' => $info['trend'] === 'down',
     ])>

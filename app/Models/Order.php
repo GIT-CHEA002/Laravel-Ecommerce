@@ -55,4 +55,16 @@ class Order extends Model
         $this->total_amount = $this->calculateTotalAmount();
         $this->saveQuietly();
     }
+    public static function thisMonthRevenue(): float
+    {
+        return (float) static::where('created_at', '>=', now()->startOfMonth())
+            ->sum('total_amount');
+    }
+    public static function lastMonthRevenue(): float
+    {
+        return round((float) static::whereBetween('created_at', [
+            now()->subMonthNoOverflow()->startOfMonth(),
+            now()->subMonthNoOverflow()->endOfMonth(),
+        ])->sum('total_amount'));
+    }
 }

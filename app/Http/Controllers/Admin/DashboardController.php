@@ -14,55 +14,76 @@ class DashboardController extends Controller
   //
   public function index()
   {
+    $thisMonthRevenue = Order::thisMonthRevenue();
+    $lastMonthRevenue = Order::lastMonthRevenue();
+    $totalOrder = Order::count();
+    $totalCustomer = User::where('role_id', 2)->count();
+    $totalProduct = Product::count();
+    $totalCategoryWithProduct = Category::with('product')->count();
+    $totalCategoryWithoutProduct = Category::without('product')->count();
+    $summaryInfo = [
+      [
+        'title' => 'Total Revenue This Month',
+        'value' => '$ ' . number_format($thisMonthRevenue, 2),
+        'icon' => 'banknotes',
+        'change' => '+12.5% from last month',
+        'trend' => 'up',
+      ],
+      [
+        'title' => 'Total Revenue last month',
+        'value' => '$ ' . number_format($lastMonthRevenue, 2),
+        'icon' => 'banknotes',
+        'change' => '+12.5% from last month',
+        'trend' => 'up',
+      ],
+      [
+        'title' => 'Orders',
+        'value' => $totalOrder . ' Order',
+        'icon' => 'shopping-cart',
+        'change' => '+5.2% from last month',
+        'trend' => 'up',
+      ],
+      [
+        'title' => 'Customers',
+        'value' => $totalCustomer . ' customer',
+        'icon' => 'users',
+        'change' => '+18.1% from last month',
+        'trend' => 'up',
+      ],
+      [
+        'title' => 'Products',
+        'value' => $totalProduct . ' product',
+        'icon' => 'archive-box',
+        'change' => 'Steady inventory',
+        'trend' => 'neutral',
+      ],
+      [
+        'title' => 'Category with product',
+        'value' => $totalCategoryWithProduct . ' category',
+        'icon' => 'rectangle-group',
+        'change' => '2 new added',
+        'trend' => 'neutral',
+      ],
+      [
+        'title' => 'Category without product',
+        'value' => $totalCategoryWithoutProduct . ' category',
+        'icon' => 'rectangle-group',
+        'change' => '2 new added',
+        'trend' => 'neutral',
+      ],
+    ];
 
-    //     $summaryInfo = [
-    //   [
-    //     'title' => 'Total Revenue',
-    //     'value' => '$124,563.00',
-    //     'icon' => 'banknotes',
-    //     'change' => '+12.5% from last month',
-    //     'trend' => 'up',
-    //   ],
-    //   [
-    //     'title' => 'Orders',
-    //     'value' => '1,245',
-    //     'icon' => 'shopping-cart',
-    //     'change' => '+5.2% from last month',
-    //     'trend' => 'up',
-    //   ],
-    //   [
-    //     'title' => 'Customers',
-    //     'value' => '8,932',
-    //     'icon' => 'users',
-    //     'change' => '+18.1% from last month',
-    //     'trend' => 'up',
-    //   ],
-    //   [
-    //     'title' => 'Products',
-    //     'value' => '456',
-    //     'icon' => 'archive-box',
-    //     'change' => 'Steady inventory',
-    //     'trend' => 'neutral',
-    //   ],
-    //   [
-    //     'title' => 'Category',
-    //     'value' => '24',
-    //     'icon' => 'rectangle-group',
-    //     'change' => '2 new added',
-    //     'trend' => 'neutral',
-    //   ],
-    // ];
-    // get some order information products
-    // summaryInfoDashboard 
-    $totaRevenue = 124563;
-    $totalOrderCount = Order::count();
-    $totalCustomerCount = User::count('role_id');
-    $totalProductCount = Product::count();
-    $totalCategoryWithProductCount = Category::with('product')->count();
-    $totalCategoryWithoutProductCount = Category::without('product')->count();
-
-
-
-    return view('admin.dashboard.dashboard', ['Data' => 'Hello Dashboard data']);
+    $recentOrder = Order::with('user')->latest()->take(5)->get();
+    $lowStockProduct = Product::where('stock_quantity', '<=', 10)->get();
+    $newRegister = User::where('role_id', 2)->latest()->take(5)->get();
+    return view(
+      'admin.dashboard.dashboard',
+      [
+        'summaryInfo' => $summaryInfo,
+        'recentOrder' => $recentOrder,
+        'lowStockProduct' => $lowStockProduct,
+        'newRegister' => $newRegister
+      ]
+    );
   }
 }

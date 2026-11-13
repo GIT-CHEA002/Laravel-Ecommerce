@@ -14,6 +14,9 @@
       <x-shared.section-header>Admin User</x-shared.section-header>
       <x-shared.intro-text>Manage Admin log in , track fullfillment status, and monitor revenue.</x-shared.intro-text>
     </div>
+    @can('create', App\Models\User::class)
+      <x-button.primary-button href="{{ route('admin.user.create') }}">Create New Admin</x-button.primary-button>
+    @endcan
   </div>
   <x-form.form method="GET" action="{{ route('admin.user.admin') }}" onchange="this.submit()"
     class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3">
@@ -52,8 +55,8 @@
             </td>
             <td class="px-3 py-2">
               <div class="w-10 h-10 rounded-md overflow-hidden">
-                <img src="{{ $admin->avatar ?? 'https://picsum.photos/200/300' }}" alt="{{ $admin->first_name }}"
-                  class="object-cover w-full h-full">
+                <img src="{{ $admin->avatar ?: 'https://placehold.co/200x300?text=No+Image' }}"
+                  alt="{{ $admin->first_name }}" class="object-cover w-full h-full">
               </div>
             </td>
             <td class="px-3 py-2">{{ $admin->first_name  }}-{{ $admin->last_name }}</td>
@@ -71,9 +74,39 @@
                 <x-shared.badge-tag bgColor="bg-red-100" textColor="text-red-600">Inactive</x-shared.badge-tag>
               @endif
             </td>
-            <td class="px-3 py-2">
-              <a href="{{ route('admin.user.admin.show', $admin) }}"
-                class="text-xs font-semibold tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">view</a>
+            <td class="px-3 py-2  ">
+              <div class="flex justify-start items-center gap-3">
+                <a href="{{ route('admin.user.admin.show', $admin) }}">
+                  <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
+                </a>
+                <a href="{{ route('admin.user.edit', $admin) }}">
+                  <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
+                </a>
+                @if ($admin->is_active == true)
+                  @can('delete', $admin)
+                    <div x-data="{isDeleteOpen : false}">
+                      <button type="button" @click="isDeleteOpen = true" class="cursor-pointer">
+                        <x-heroicon-o-trash class="w-4 h-5 text-red-700 dark:text-red-500" />
+                      </button>
+                      <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate Admin"
+                        message="Are you sure want to deactivate this admin user ?"
+                        action="{{ route('admin.user.admin.destroy', $admin) }}" confirmText="Deactivate" />
+                    </div>
+                  @endcan
+                @elseif ($admin->is_active == false)
+                  @can('restore', $admin)
+                    <div x-data="{isRestoreOpen : false}">
+                      <button type="button" @click="isRestoreOpen = true" class="cursor-pointer">
+                        <x-heroicon-s-arrow-uturn-left class="w-4 h-5 text-green-700 dark:text-green-500" />
+                      </button>
+                      <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
+                        confirmStyle="bg-green-700 dark:bg-green-500" message="Are you sure want to restore this product"
+                        method="PATCH" action="{{ route('admin.user.admin.restore', $admin) }}" confirmText="Restore" />
+                    </div>
+                  @endcan
+                @endif
+              </div>
+
             </td>
           </tr>
         @endforeach

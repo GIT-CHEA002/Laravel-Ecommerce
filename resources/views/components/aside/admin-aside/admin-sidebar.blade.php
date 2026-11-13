@@ -29,13 +29,7 @@
       'icon' => 'users',
       'name' => 'Users',
       'active' => request()->is('admin/user*'),
-    ],
-    [
-      'href' => '/admin/gallery',
-      'icon' => 'photo',
-      'name' => 'Gallery',
-      'active' => request()->is('admin/gallery*'),
-    ],
+    ]
   ];
 @endphp
 

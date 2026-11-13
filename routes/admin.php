@@ -107,16 +107,21 @@ Route::middleware(['auth', 'admin'])
 
       // showing route : separate by admin and client
       Route::get('/admin/{user}', [AdminUserController::class, 'show'])
-        // ->can('view', User::class, 'user')
+        ->can('view', 'user')
         ->name('admin.show');
       Route::get('/client/{user}', [AdminUserController::class, 'show'])
         ->name('client.show');
+
       Route::get('/{user}/edit', [AdminUserController::class, 'edit'])
         ->name('edit');
       Route::patch('/{user}', [AdminUserController::class, 'update'])
         ->can('update', 'user')
-        ->name('update');
-      Route::delete('/{user}', [AdminUserController::class, 'destroy'])->name('destroy');
+        ->name('admin.update');
+
+      Route::delete('/{user}', [AdminUserController::class, 'destroy'])
+        ->name('admin.destroy');
+      Route::patch('/{user}/restore', [AdminUserController::class, 'restore'])
+        ->name('admin.restore');
     });
     // Reports
     Route::prefix('reports')->name('reports.')->group(function () {

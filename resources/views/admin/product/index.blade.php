@@ -25,7 +25,8 @@
                     class="py-1 tracking-wide space-y-0 placeholder:capitalize" icon="magnifying-glass" />
             </div>
             <div class="flex justify-end items-center gap-4">
-                <x-form.select name="category" placeholder="All Category" :options="$categories->pluck('name', 'name')" :selected="request('category')" onchange="this.form.submit()" />
+                <x-form.select name="category" placeholder="All Category" :options="$categories->pluck('name', 'name')"
+                    :selected="request('category')" onchange="this.form.submit()" />
                 <x-form.select name="is_on_market" placeholder="All Statuses" :options="[1 => 'Active', 0 => 'Inactive']"
                     :selected="request('is_on_market')" onchange="this.form.submit()" />
             </div>
@@ -45,7 +46,7 @@
                         <tr>
                             <td class="px-3 py-2">
                                 <div class="w-10 h-10 rounded-md overflow-hidden">
-                                    <img src="{{ $product->productImages->first()?->image_url ?? 'https://picsum.photos/200/300' }}"
+                                    <img src="{{ $product->productImages->first()?->image_url ?: 'https://placehold.co/200x300?text=No+Image' }}"
                                         alt="{{ $product->name }}" class="object-cover w-full h-full">
                                 </div>
                             </td>
