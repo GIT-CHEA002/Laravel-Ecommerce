@@ -76,12 +76,16 @@
             </td>
             <td class="px-3 py-2  ">
               <div class="flex justify-start items-center gap-3">
-                <a href="{{ route('admin.user.admin.show', $admin) }}">
-                  <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
-                </a>
-                <a href="{{ route('admin.user.edit', $admin) }}">
-                  <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
-                </a>
+                @can('view', $admin)
+                  <a href="{{ route('admin.user.admin.show', $admin) }}">
+                    <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
+                  </a>
+                @endcan
+                @can('update', $admin)
+                  <a href="{{ route('admin.user.edit', $admin) }}">
+                    <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
+                  </a>
+                @endcan
                 @if ($admin->is_active == true)
                   @can('delete', $admin)
                     <div x-data="{isDeleteOpen : false}">
@@ -99,14 +103,13 @@
                       <button type="button" @click="isRestoreOpen = true" class="cursor-pointer">
                         <x-heroicon-s-arrow-uturn-left class="w-4 h-5 text-green-700 dark:text-green-500" />
                       </button>
-                      <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
-                        confirmStyle="bg-green-700 dark:bg-green-500" message="Are you sure want to restore this product"
+                      <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Admin"
+                        confirmStyle="bg-green-700 dark:bg-green-500" message="Are you sure want to restore this admin user ?"
                         method="PATCH" action="{{ route('admin.user.admin.restore', $admin) }}" confirmText="Restore" />
                     </div>
                   @endcan
                 @endif
               </div>
-
             </td>
           </tr>
         @endforeach

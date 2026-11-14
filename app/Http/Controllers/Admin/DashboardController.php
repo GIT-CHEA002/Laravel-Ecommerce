@@ -12,29 +12,59 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
   //
+  private function compare(float|int $current, float|int $previous, string $label): array
+  {
+    if ($previous == 0) {
+      return $current > 0
+        ? ['change' => "New activity $label", 'trend' => 'up']
+        : ['change' => "No change $label", 'trend' => 'neutral'];
+    }
+
+    $percent = (($current - $previous) / $previous) * 100;
+
+    if (round($percent, 1) == 0) {
+      return ['change' => "0% $label", 'trend' => 'neutral'];
+    }
+
+    return [
+      'change' => sprintf('%+.1f%% %s', $percent, $label),
+      'trend' => $percent > 0 ? 'up' : 'down',
+    ];
+  }
   public function index()
   {
+    // periods 
+    $thisMonthStart = now()->startOfMonth();
+    $lastMonthStart = now()->subMonthNoOverflow()->startOfMonth();
+    $lastMonthEnd = $lastMonthStart->copy()->endOfMonth();
+
+    // old data 
     $thisMonthRevenue = Order::thisMonthRevenue();
     $lastMonthRevenue = Order::lastMonthRevenue();
     $totalOrder = Order::count();
     $totalCustomer = User::where('role_id', 2)->count();
     $totalProduct = Product::count();
-    $totalCategoryWithProduct = Category::with('product')->count();
-    $totalCategoryWithoutProduct = Category::without('product')->count();
+    $totalCategoryWithProduct = Category::has('products')->count();
+    $totalCategoryWithoutProduct = Category::doesntHave('products')->count();
+
+    // periods compare 
+    $monthBeforeLastRevenue = Order::monthBeforeLastRevenue();
+
+    $orderThisMonth = Order::where('created_at', '>=', $thisMonthStart)->count();
+    $orderLastMonth = Order::whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
+
     $summaryInfo = [
       [
         'title' => 'Total Revenue This Month',
         'value' => '$ ' . number_format($thisMonthRevenue, 2),
         'icon' => 'banknotes',
-        'change' => '+12.5% from last month',
-        'trend' => 'up',
+        ...$this->compare($thisMonthRevenue, $lastMonthRevenue, 'vs last month'),
       ],
       [
         'title' => 'Total Revenue last month',
         'value' => '$ ' . number_format($lastMonthRevenue, 2),
         'icon' => 'banknotes',
-        'change' => '+12.5% from last month',
-        'trend' => 'up',
+        ...$this->compare($lastMonthRevenue, $monthBeforeLastRevenue, 'vs month before'),
       ],
       [
         'title' => 'Orders',

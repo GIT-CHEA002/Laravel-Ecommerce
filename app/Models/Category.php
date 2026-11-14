@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Override;
 
 class Category extends Model
 {
@@ -25,9 +26,20 @@ class Category extends Model
     // {
     //     return $this->children()->with('childrenRecursive');
     // }
+    #[Override]
+    protected static function booted()
+    {
+        parent::booted();
+    }
 
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'categories_id', 'categories_id');
     }
+    // public function syncProductCount(): void
+    // {
+    //     $this->forceFill([
+    //         'product_attached' => $this->products()->count(),
+    //     ])->saveQuietly();
+    // }
 }

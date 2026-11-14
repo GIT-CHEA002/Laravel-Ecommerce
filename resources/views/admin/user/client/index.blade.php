@@ -73,9 +73,15 @@
                 <x-shared.badge-tag bgColor="bg-red-100" textColor="text-red-600">Inactive</x-shared.badge-tag>
               @endif
             </td>
+
             <td class="px-3 py-2">
-              <a href="{{ route('admin.user.client.show', $client) }}"
-                class="text-xs font-semibold tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">view</a>
+              @can('view', $client)
+                <a href="{{ route('admin.user.client.show', $client) }}"
+                  class="text-xs font-semibold tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">
+                  <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
+                </a>
+              @endcan
+
             </td>
           </tr>
         @endforeach

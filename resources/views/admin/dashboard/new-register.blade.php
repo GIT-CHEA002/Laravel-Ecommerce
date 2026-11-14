@@ -3,7 +3,7 @@
   {{-- alert title --}}
   <div class="flex justify-between">
     <h1 class="font-semibold tracking-wide capitalize">new sign up</h1>
-    <a href="#"
+    <a href="{{ route('admin.user.client') }}"
       class="text-sm font-bold tracking-wide text-indigo-700 capitalize transition-all duration-300 dark:text-indigo-500 hover:scale-105">
       see all
     </a>

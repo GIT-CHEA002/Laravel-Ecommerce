@@ -24,6 +24,8 @@ class Product extends Model
                 'product_number' => 'PRO-' . str_pad($product->product_id, 3, '0', STR_PAD_LEFT),
             ])->saveQuietly();
         });
+
+        
     }
     public function category(): BelongsTo
     {

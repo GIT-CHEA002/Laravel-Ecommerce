@@ -57,14 +57,21 @@ class Order extends Model
     }
     public static function thisMonthRevenue(): float
     {
-        return (float) static::where('created_at', '>=', now()->startOfMonth())
-            ->sum('total_amount');
+        return round((float) static::where('created_at', '>=', now()->startOfMonth())
+            ->sum('total_amount'), 2);
     }
     public static function lastMonthRevenue(): float
     {
         return round((float) static::whereBetween('created_at', [
             now()->subMonthNoOverflow()->startOfMonth(),
             now()->subMonthNoOverflow()->endOfMonth(),
-        ])->sum('total_amount'));
+        ])->sum('total_amount'), 2);
+    }
+    public static function monthBeforeLastRevenue(): float
+    {
+        return round((float) static::whereBetween('created_at', [
+            now()->subMonthsNoOverflow(2)->startOfMonth(),
+            now()->subMonthsNoOverflow(2)->endOfMonth(),
+        ])->sum('total_amount'), 2);
     }
 }

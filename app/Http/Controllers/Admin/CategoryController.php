@@ -29,11 +29,16 @@ class CategoryController extends Controller
     {
         // the product must belon to this category 
         abort_unless($product->categories_id == $category->categories_id, 404);
-        $product->category()->disassociate();
-        if ($product->save()) {
-            return back()->with('success', 'Product removed from category successfully');
+        try {
+            $product->category()->disassociate();
+            $product->save();
+            return back()
+                ->with('success', 'Product removed from category successfully');
+        } catch (Exception $e) {
+            report($e);
+            return back()
+                ->with('error', 'Failed to remove product from category');
         }
-        return back()->with('error', 'Failed to remove product from category');
     }
     public function attachProductIndex(Category $category)
     {

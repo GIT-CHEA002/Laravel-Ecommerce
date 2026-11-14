@@ -82,8 +82,12 @@
               </x-shared.badge-tag>
             </td>
             <td class="px-3 py-2">
-              <a href="{{ route('admin.user.client.show', $client) }}"
-                class="text-xs font-semibold tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">view</a>
+              <div class="flex justify-start items-center">
+                <a href="{{ route('admin.user.client.show', $client) }}"
+                  class="text-xs font-semibold tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">
+                  <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
+                </a>
+              </div>
             </td>
           </tr>
         @endforeach
