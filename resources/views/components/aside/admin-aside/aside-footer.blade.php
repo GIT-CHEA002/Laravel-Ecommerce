@@ -1,6 +1,9 @@
 <div {{ $attributes->merge(['class' => 'border-t-2 border-indigo-700 dark:border-indigo-500 py-3 space-y-2']) }}>
-  <a href=""
-    class="flex items-center text-sm tracking-wide gap-2 font-medium px-2 md:px-4 lg:px-6 py-1.5 rounded-md text-black dark:text-white hover:bg-indigo-700 dark:hover:bg-indigo-500 hover:text-white/90 hover:scale-[1.01] hover:shadow-sm transition duration-300">
+  <a href="{{ route('admin.profile.index') }}" @class([
+    'flex items-center text-sm tracking-wide gap-2 font-medium px-2 md:px-4 lg:px-6 py-1.5 rounded-md text-black dark:text-white',
+    'hover:bg-indigo-700 dark:hover:bg-indigo-500 hover:text-white/90 hover:scale-[1.01] hover:shadow-sm transition duration-300',
+    'bg-indigo-700 dark:bg-indigo-500 text-white' => request()->is('admin/profile') | request()->is('admin/profile/*') | request()->is('auth/password*'),
+  ])>
     <x-heroicon-o-user-circle class="w-5 h-5" />
     <span>Profile</span>
   </a>
@@ -13,7 +16,7 @@
     </button>
     <template x-teleport="body">
       <x-shared.confirm-dialog show="isLogoutDialog" title="Confirm Logout"
-        message="You need to be sign in again after log out ? " action="{{ route('logout-user') }}"
+        message="You need to be sign in again after log out ? " action="{{ route('auth.logout-user') }}"
         confirmText="Log Out" />
     </template>
   </div>

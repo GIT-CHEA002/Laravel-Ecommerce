@@ -1,35 +1,3 @@
-@php
-    $summaryInfo = [
-        [
-            'title' => 'Total Revenue',
-            'value' => '$48,295.50',
-            'icon' => 'banknotes',
-            'change' => '+14.2% vs last month',
-            'trend' => 'up',
-        ],
-        [
-            'title' => 'Awaiting Shipment',
-            'value' => '18',
-            'icon' => 'truck',
-            'change' => 'Requires immediate action',
-            'trend' => 'neutral',
-        ],
-        [
-            'title' => 'Delivered (30D)',
-            'value' => '116',
-            'icon' => 'check-circle',
-            'change' => '98.2% on-time rate',
-            'trend' => 'up',
-        ],
-        [
-            'title' => 'Cancelled / Refunded',
-            'value' => '8',
-            'icon' => 'x-circle',
-            'change' => '1.6% cancellation rate',
-            'trend' => 'down',
-        ],
-    ];
-@endphp
 @extends('layout.admin-layout')
 @section('title', 'Admin - User Orders')
 @section('page-heading', 'Total Orders')
@@ -37,38 +5,82 @@
     <div class="flex justify-between items-center">
         <div class="block">
             <x-shared.section-header>Orders</x-shared.section-header>
-            <x-shared.intro-text>Manage customer, track fullfillment status, and monitor revenue.</x-shared.intro-text>
+            <x-shared.intro-text>Manage customers, track fulfillment status, and monitor revenue.</x-shared.intro-text>
         </div>
     </div>
-    {{-- summary card --}}
-    <div class="grid grid-cols-4 auto-rows-auto gap-4 py-4 ">
+    {{-- Summary cards --}}
+    <div class="grid grid-cols-4 auto-rows-auto gap-4 py-4">
         @foreach ($summaryInfo as $info)
             @include('admin.orders.order-summary-card', ['info' => $info])
         @endforeach
     </div>
-    {{-- search and filter section --}}
-
-    <x-form.form method="GET" action="{{ route('admin.orders.index') }}" onchange="this.submit()"
+    {{-- Search and filters --}}
+    <x-form.form action="{{ route('admin.orders.index') }}"
         class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3">
-        <div class="w-1/4 ">
-            <x-form.field name="order_number" placeholder="ORD-001..." :value="request('order_number')"
-                class="py-1 tracking-wide space-y-0 placeholder:capitalize" icon="magnifying-glass" />
+        <div class="w-1/4">
+            <x-form.field name="order_number" placeholder="ORD-001..." icon="magnifying-glass"
+                :value="request('order_number')" class="py-1 tracking-wide space-y-0 placeholder:capitalize" />
         </div>
-        {{-- filter section --}}
         <div class="flex justify-end items-center gap-4">
-            <div class="flex items-center gap-2">
-                <x-form.field type="date" name="date_from" :value="request('date_from')" onchange="this.form.submit()" />
-                <span class="text-sm text-slate-500 dark:text-slate-400">to</span>
-                <x-form.field type="date" name="date_to" :value="request('date_to')" onchange="this.form.submit()" />
+            {{-- Period filter with custom date range popup --}}
+            <div class="relative" x-data="{
+                                                                     period: '{{ request('period') }}',
+                                                                     saved: '{{ request('period') }}',
+                                                                     open: false,
+                                                                     pick() {
+                                                                        if (this.period === 'custom') {
+                                                                            this.open = true;
+                                                                        } else {
+                                                                          this.$root.closest('form').submit();
+                                                                        }
+                                                                        },
+                                                                         cancel() {
+                                                                        this.period = this.saved;
+                                                                        this.open = false;
+                                                                        }
+                                                                       }">
+
+                <x-form.select name="period" placeholder="All time" x-model="period" x-on:change="pick()"
+                    :selected="request('period')" :options="[
+            'this_month' => 'This month',
+            'last_month' => 'Last month',
+            'last_7_days' => 'Last 7 days',
+            'custom' => 'Custom',
+        ]" />
+                <div x-show="open" x-cloak x-transition x-on:click.outside="cancel()" x-on:keydown.escape.window="cancel()"
+                    class="absolute right-0 top-full mt-2 z-50 w-72 p-4 space-y-3 bg-white dark:bg-slate-800 rounded-md shadow-xl border border-slate-200 dark:border-slate-700">
+
+                    <h4 class="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                        Custom date range
+                    </h4>
+                    <div class="space-y-2">
+                        <label class="block text-xs text-slate-500 dark:text-slate-400">From</label>
+                        <x-form.field type="date" name="date_from" :value="request('date_from')" />
+                        <label class="block text-xs text-slate-500 dark:text-slate-400">To</label>
+                        <x-form.field type="date" name="date_to" :value="request('date_to')" />
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-1">
+                        <button type="button" x-on:click="cancel()"
+                            class="px-3 py-1 text-sm rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-3 py-1 text-sm rounded-md bg-blue-600 text-white hover:bg-blue-700">
+                            Apply
+                        </button>
+                    </div>
+                </div>
             </div>
-            <x-form.select name="status" placeholder="All status" :selected="request('status')" :options="['shipping' => 'Shipping', 'arrived' => 'Arrived', 'pending' => 'Pending']" onchange="this.form.submit()" />
-            <x-form.select name="is_paid" placeholder="Paid / Unpaid" :options="[1 => 'Paid', 0 => 'Unpaid']"
-                onchange="this.form.submit()" :selected="request('is_paid')" />
+
+            <x-form.select name="status" placeholder="All status" onchange="this.form.submit()"
+                :selected="request('status')" :options="$status" />
+
+            <x-form.select name="payment_status" placeholder="Paid / Unpaid" onchange="this.form.submit()"
+                :selected="request('payment_status')" :options="['paid' => 'Paid', 'unpaid' => 'Unpaid']" />
         </div>
     </x-form.form>
 
-
-    {{-- Display table --}}
+    {{-- Orders table --}}
     <div class="border rounded-md shadow-md dark:bg-slate-800 h-fit my-3 overflow-hidden">
         <table class="w-full text-sm text-left dark:text-white">
             <thead class="text-xs tracking-wide uppercase bg-indigo-100 dark:bg-slate-700">
@@ -78,36 +90,34 @@
                     @endforeach
                 </tr>
             </thead>
+
             <tbody class="divide-y">
                 @foreach ($orders as $order)
+                    @php
+                        $badge = match ($order->status) {
+                            'pending' => ['bg-red-100', 'text-red-600'],
+                            'processing' => ['bg-blue-100', 'text-blue-600'],
+                            'shipping' => ['bg-amber-100', 'text-amber-600'],
+                            'delivered' => ['bg-green-100', 'text-green-600'],
+                            'cancelled' => ['bg-gray-100', 'text-gray-600'],
+                            'refunded' => ['bg-purple-100', 'text-purple-600'],
+                            default => ['bg-gray-100', 'text-gray-500'],
+                        };
+                    @endphp
                     <tr>
+                        <td class="px-3 py-2">{{ $order->order_id }}</td>
                         <td class="px-3 py-2">
-                            {{ $order->order_id }}
+                            {{ $order->user?->first_name }}-{{ $order->user?->last_name }}
                         </td>
-                        <td class="px-3 py-2">{{ $order->user?->first_name  }}-{{ $order->user->last_name }}</td>
                         <td class="px-3 py-2">${{ number_format($order->total_amount, 2) }}</td>
-                        {{-- <td class="px-3 py-2">{{ $order->status}}</td> --}}
                         <td class="px-3 py-2">
-                            @php
-                                $badge = match ($order->status) {
-                                    'pending' => ['bg-red-100', 'text-red-600'],
-                                    'processing' => ['bg-blue-100', 'text-blue-600'],
-                                    'shipping' => ['bg-amber-100', 'text-amber-600'],
-                                    'delivered' => ['bg-green-100', 'text-green-600'],
-                                    'cancelled' => ['bg-gray-100', 'text-gray-600'],
-                                    'refuned' => ['bg-purple-100', 'text-purple-600'],
-                                    default => ['bg-gray-100', 'text-gray-500'],
-                                };
-                            @endphp
                             <x-shared.badge-tag :bgColor="$badge[0]" :textColor="$badge[1]">
                                 {{ ucfirst($order->status ?? 'unknown') }}
                             </x-shared.badge-tag>
                         </td>
+                        <td class="px-3 py-2">{{ $order->shipping_address }}</td>
                         <td class="px-3 py-2">
-                            {{ $order->shipping_address }}
-                        </td>
-                        <td class="px-3 py-2 ">
-                            <span class="text-xs font-medium tracking-wide text-indigo-700 dark:text-indigo-500">
+                            <span class="text-xs font-medium capitalize tracking-wide text-indigo-700 dark:text-indigo-500">
                                 {{ $order->payment_status }}
                             </span>
                         </td>
@@ -117,7 +127,6 @@
                                 <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
                             </a>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>
@@ -126,5 +135,4 @@
     <div class="py-2">
         {{ $orders->links() }}
     </div>
-
 @endsection

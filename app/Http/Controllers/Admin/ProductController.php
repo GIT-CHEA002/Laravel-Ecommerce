@@ -83,12 +83,8 @@ class ProductController extends Controller
             'description'    => ['required', 'string', 'min:10', 'max:2000'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
             'categories_id'  => ['nullable', 'exists:categories,categories_id'],
-            'is_on_market'   => ['sometimes', 'boolean'],
         ]);
-
         $attributes['slug'] = Str::slug($attributes['name']);
-        $attributes['is_on_market'] = $request->boolean('is_on_market');
-
         try {
             $product->updateOrFail($attributes);
 

@@ -13,10 +13,7 @@
         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
         x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
-        @foreach ($categories as $categoryId => $products)
-          @php
-            $category = $products->first()->category;
-          @endphp
+        @foreach ($categories as $category)
           <x-form.checkbox type="checkbox" :label="$category->name" name="category[]" :value="$category->categories_id"
             :checked="in_array($category->categories_id, (array) request('category', []))"
             onchange="this.form.submit()" />
@@ -25,10 +22,12 @@
     </div>
 
     {{-- Price range filter --}}
-    <div x-data="{ priceValue: 400 }" class="border-b border-indigo-700 dark:border-indigo-500 py-4">
+    <div x-data="{ priceValue: {{ (int) request('price_range', 10000) }} }"
+      class="border-b border-indigo-700 dark:border-indigo-500 py-4">
       <h1 class="text-base tracking-wide uppercase">Price range</h1>
       <div class="py-2">
-        <input x-model="priceValue" type="range" name="price_range" id="price_range" min="10" max="10000" step="100"
+        <input x-model="priceValue" @change="$el.form.submit()" type="range" name="price_range" id="price_range"
+          min="10" max="10000" step="100"
           class="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600
                                                                                                                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3
                                                                                                                [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-indigo-600 [&::-webkit-slider-thumb]:ring-4
@@ -38,7 +37,7 @@
                                                                                                                [&::-moz-range-thumb]:transition-all" />
         <div class="flex justify-between items-center tracking-wide">
           <span>$10</span>
-          <span x-text="'$' + priceValue"></span>
+          <span class="font-semibold" x-text="'$' + Number(priceValue).toLocaleString()"></span>
           <span>$10,000+</span>
         </div>
       </div>

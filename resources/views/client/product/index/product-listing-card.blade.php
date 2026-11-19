@@ -17,7 +17,7 @@
       </h2>
       {{-- categories --}}
       <h1 class="font-semibold tracking-wide text-sm">
-        <span>{{ $product->category->name }}</span>,
+        <span>{{ $product->category?->name ?: "Uncategorize"}}</span>,
         <span class="intro-text-color">{{ $product->slug }}</span>
       </h1>
     </div>

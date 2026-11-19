@@ -78,4 +78,13 @@ class UserPolicy
     {
         return false;
     }
+    public function updateProfile(User $user, User $model)
+    {
+        return $user->is($model);
+    }
+    // reset password 
+    public function resetPassword(User $user, User $model)
+    {
+        return $user->is($model);
+    }
 }

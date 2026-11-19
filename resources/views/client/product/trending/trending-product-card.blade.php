@@ -25,7 +25,10 @@
   <div class="flex-1 p-3 flex flex-col justify-between">
     <div class="block">
       {{-- category --}}
-      <span class="intro-text-color font-semibold tracking-wide text-sm">{{ $product->category->name }}</span>
+      @unless ($product->category)
+        <span class="intro-text-color font-semibold tracking-wide text-sm">{{ $product->category?->name }}</span>
+      @endunless
+
       {{-- title --}}
       <h2 class="text-base font-bold text-slate-800 dark:text-white tracking-wide line-clamp-2">
         {{ $product->name }}

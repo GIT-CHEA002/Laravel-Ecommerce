@@ -15,7 +15,7 @@
             <x-heroicon-o-user class="h-5 w-5 text-indigo-700 dark:text-indigo-500" />
           </button>
           <x-shared.confirm-dialog show="isLogoutDialog" title="Confirm Logout"
-            message="You need to be sign in again after log out ? " action="{{ route('logout-user') }}"
+            message="You need to be sign in again after log out ? " action="{{ route('auth.logout-user') }}"
             confirmText="Log Out" />
         @endif
       @endauth

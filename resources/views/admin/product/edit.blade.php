@@ -13,17 +13,18 @@
             <x-form.field name="price" label="Price" placeholder="$20,00..." class="flex-1 py-2" :value="$product->price" />
         </div>
         <x-form.field name="description" label="Description(10-200 words)" placeholder="This product is about..."
-            :isTextArea="true" :value="$product->description" />
+            :isTextArea="true" :value="trim($product->description)" />
         <div class="flex justify-between items-center  gap-6">
             <x-form.field name="stock_quantity" label="Stock" placeholder="20..." class="flex-1"
                 :value="$product->stock_quantity" />
             <div class="">
                 <label for="" class="opacity-0">Category</label>
                 <x-form.select name="categories_id" :options="$categories->pluck('name', 'categories_id')"
-                    label="Category(optional):" selected="{{ $product->category?->name }}" />
+                    label="Category(optional):" selected="{{ $product->category?->categories_id }}" />
             </div>
         </div>
     </x-form.form>
+
     <div class="flex justify-end  items-center gap-3 mt-2">
         <div class="w-1/4  flex justify-end items-center gap-4">
             <x-button.primary-button href="{{ url()->previous() }}">Back</x-button.primary-button>

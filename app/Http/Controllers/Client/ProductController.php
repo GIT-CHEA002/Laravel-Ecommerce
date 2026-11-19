@@ -14,17 +14,17 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $allProduct = Product::with('category')->get();
+        $categories = Category::whereHas('products')->orderBy('name')->get();
+
         $products = Product::with('category')
-            ->when($request->filled('category'), fn($q) =>
-            $q->whereIn('categories_id', $request->category))
-            ->when($request->filled('max_price'), fn($q) =>
-            $q->where('price', '<=', $request->max_price))
-            ->when($request->filled('rating'), fn($q) =>
-            $q->where('rating', '>=', $request->rating))
+            ->when($request->filled('category'), fn($query) =>
+            $query->whereIn('categories_id', $request->category))
+            ->when($request->filled('max_price'), fn($query) =>
+            $query->where('price', '<=', $request->max_price))
+            ->when($request->filled('rating'), fn($query) =>
+            $query->where('rating', '>=', $request->rating))
             ->simplePaginate(9)
             ->withQueryString();
-        $categories = $allProduct->groupBy('categories_id');
         return view('client.product.index.index', [
             'products' => $products,
             'categories' => $categories,

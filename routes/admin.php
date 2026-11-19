@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Validation\Rules\Can;
@@ -89,6 +90,16 @@ Route::middleware(['auth', 'admin'])
       Route::patch('/{order}', [AdminOrderController::class, 'update'])
         ->name('update');
       Route::delete('/{order}', [AdminOrderController::class, 'destroy']);
+    });
+    Route::prefix('profile')->name('profile.')->group(function () {
+      Route::get('/', [AdminProfileController::class, 'index'])
+        ->name('index');
+      Route::get('/{user}/edit', [AdminProfileController::class, 'edit'])
+        ->can('updateProfile', 'user')
+        ->name('edit');
+      Route::patch('/{user}', [AdminProfileController::class, 'updateProfile'])
+        ->can('updateProfile', 'user')
+        ->name('update');
     });
 
     // Users : display admins

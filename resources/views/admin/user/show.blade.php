@@ -5,13 +5,19 @@
       ['label' => 'Admin', 'url' => route('admin.user.admin')],
       ['label' => 'Show'],
     ];
-  $breadcrumpLink = [
-    ['label' => 'Users', 'url' => route('admin.user.index')],
-    ['label' => 'Client', 'url' => route('admin.user.client')],
-    ['label' => 'Show'],
-  ];
-  // check if the address is exist or not
-  $userAddress = $user->defaultAddress;
+  else {
+    $breadcrumpLink = [
+      ['label' => 'Users', 'url' => route('admin.user.index')],
+      ['label' => 'Client', 'url' => route('admin.user.client')],
+      ['label' => 'Show'],
+    ];
+  }
+
+  if ($user->defaultAddress != null) {
+    $userAddress = $user->defaultAddress;
+  } else {
+    $userAddress = $user->addresses()->first();
+  }
 @endphp
 
 @extends('layout.admin-layout')

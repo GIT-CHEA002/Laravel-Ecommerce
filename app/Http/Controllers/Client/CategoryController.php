@@ -23,6 +23,5 @@ class CategoryController extends Controller
     $categories = Category::withCount('products')->get();
 
     return view('client.category.category', ['categories' => $categories, 'products' => $products, 'categoryId' => $categoryId]);
-    // return $catetories;
   }
 }

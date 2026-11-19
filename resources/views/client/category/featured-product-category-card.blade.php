@@ -1,7 +1,8 @@
 <div
   class='bg-indigo-50/90 dark:bg-slate-900/90 border border-indigo-700 rounded-md overflow-hidden h-full flex flex-col'>
   <div class="h-1/2 px-7 pt-7 relative">
-    <img src="{{ $product->category->image_url }}" alt="{{ $product->name ?? 'Electronics category' }}"
+    <img src="{{ $product->category?->image_url ?: 'https://placehold.co/600x400?text=No+Image' }}"
+      alt="{{ $product->name ?? 'Electronics category' }}"
       class="h-full w-full rounded-md object-cover hover:scale-105 transition-transform duration-700 cursor-pointer">
     <div class="absolute top-8 right-8">
       <x-shared.badge-tag bgColor="bg-white" textColor="text-black" rounded="rounded-full">128</x-shared.badge-tag>
@@ -15,13 +16,13 @@
       </h2>
       {{-- categories --}}
       <h1 class="font-semibold tracking-wide text-sm">
-        <span>{{ $product->category->name }}</span>,
+        <span>{{ $product->category?->name ?: 'Uncategorize' }}</span>,
       </h1>
       <p class="text-justify">{{ Str::words($product->description, 15, '...') }}</p>
     </div>
     <div class="py-2">
       <x-links.secondary-link class="text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2"
-        href="{{ route('category.index', ['category' => $product->category->categories_id]) }}">
+        href="{{ route('category.index', ['category' => $product->category?->categories_id]) }}">
         Explore departments</x-links.primary-link>
     </div>
   </div>

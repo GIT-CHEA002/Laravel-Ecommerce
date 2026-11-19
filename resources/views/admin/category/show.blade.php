@@ -123,34 +123,18 @@
                       <a href="{{ route('admin.products.show', $product) }}" title="View">
                         <x-heroicon-o-eye class="w-4 h-4 text-indigo-700 dark:text-indigo-500" />
                       </a>
-                      {{-- <a href="{{ route('admin.products.edit', $product) }}" title="Edit">
-                        <x-heroicon-o-pencil class="w-4 h-4 text-yellow-700 dark:text-yellow-500" />
-                      </a> --}}
-                      {{-- @if ($product->is_on_market)
+                      {{-- detach product --}}
                       @can('update', $product)
-                      <div x-data="{ isDeleteOpen: false }">
-                        <button type="button" @click="isDeleteOpen = true" class="cursor-pointer" title="Detach">
-                          <x-heroicon-o-trash class="w-4 h-4 text-red-700 dark:text-red-500" />
-                        </button>
-                        <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate Product"
-                          message="Are you sure you want to deactivate this product?" method="PATCH"
-                          action="{{ route('admin.category.products.detach', [$category, $product]) }}"
-                          confirmText="Detach" />
-                      </div>
+                        <div x-data="{ isDetachOpen: false }">
+                          <button type="button" @click="isDetachOpen = true" class="cursor-pointer" title="Detach">
+                            <x-heroicon-o-link-slash class="w-4 h-4 text-red-700 dark:text-red-500" />
+                          </button>
+                          <x-shared.confirm-dialog show="isDetachOpen" title="Detach Product"
+                            message="Are you sure you want to detach this product from {{ $category->name }}?" method="PATCH"
+                            confirmText="Detach"
+                            action="{{ route('admin.category.products.detach', [$category, $product]) }}" />
+                        </div>
                       @endcan
-                      @else
-                      @can('restore', $product)
-                      <div x-data="{ isRestoreOpen: false }">
-                        <button type="button" @click="isRestoreOpen = true" class="cursor-pointer" title="Restore">
-                          <x-heroicon-s-arrow-uturn-left class="w-4 h-4 text-green-700 dark:text-green-500" />
-                        </button>
-                        <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
-                          confirmStyle="bg-green-700 dark:bg-green-500"
-                          message="Are you sure you want to restore this product?" method="PATCH"
-                          action="{{ route('admin.products.restore', $product) }}" confirmText="Restore" />
-                      </div>
-                      @endcan
-                      @endif --}}
                     </div>
                   </td>
                 </tr>

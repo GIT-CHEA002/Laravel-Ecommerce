@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,10 @@ Route::middleware(['guest', 'nocache'])->group(function () {
 });
 
 // Auth-only routes
-Route::middleware('auth')->group(function () {
-  Route::delete('/auth/logout', [SessionController::class, 'destroy'])->name('logout-user');
+Route::middleware('auth')->prefix('auth')->name('auth.')->group(function () {
+  Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout-user');
+  Route::get('/password', [PasswordController::class, 'edit'])
+    ->name('password.edit');
+  Route::put('/password', [PasswordController::class, 'update'])
+    ->name('password.update');
 });
