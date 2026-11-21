@@ -127,7 +127,7 @@
             <x-button.primary-button href="{{ url()->previous() }}" class="w-full bg-green-700 dark:bg-green-500">
                 Back
             </x-button.primary-button>
-            <x-button.primary-button href="{{ route('admin.products.edit', $product) }}" class="w-full">
+            <x-button.primary-button href="{{ route('admin.product.edit', $product) }}" class="w-full">
                 Edit product
             </x-button.primary-button>
         </div>

@@ -11,7 +11,7 @@
                 <x-shared.section-header>Products (Total : {{ \App\Models\Product::count() }})</x-shared.section-header>
                 <x-shared.intro-text>Manage your store inventory and listings</x-shared.intro-text>
             </div>
-            <x-button.primary-button href="{{ route('admin.products.create') }}">
+            <x-button.primary-button href="{{ route('admin.product.create') }}">
                 <x-heroicon-o-plus class="w-5 h-5" />
                 <span class="capitalize text-sm tracking-wide">Add product</span>
             </x-button.primary-button>
@@ -19,7 +19,7 @@
         </div>
         {{-- search and filter section --}}
         <x-form.form class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3"
-            onchange="this.submit()" method="GET" action="{{ route('admin.products.index') }}">
+            onchange="this.submit()" method="GET" action="{{ route('admin.product.index') }}">
             <div class="w-1/4">
                 <x-form.field name="search" :value="request('search')" placeholder="search product..."
                     class="py-1 tracking-wide space-y-0 placeholder:capitalize" icon="magnifying-glass" />
@@ -75,10 +75,10 @@
                             </td>
                             <td class="px-3 py-2">
                                 <div class="flex justify-start items-center gap-3">
-                                    <a href="{{ route('admin.products.show', $product) }}">
+                                    <a href="{{ route('admin.product.show', $product) }}">
                                         <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
                                     </a>
-                                    <a href="{{ route('admin.products.edit', $product) }}">
+                                    <a href="{{ route('admin.product.edit', $product) }}">
                                         <x-heroicon-o-pencil class="w-4 h-5 text-yellow-700 dark:text-yellow-500" />
                                     </a>
                                     @if ($product->is_on_market == true)
@@ -89,7 +89,7 @@
                                                 </button>
                                                 <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate Product"
                                                     message="Are you sure want to deactivate this product"
-                                                    action="{{ route('admin.products.destroy', $product) }}" confirmText="Deactivate" />
+                                                    action="{{ route('admin.product.destroy', $product) }}" confirmText="Deactivate" />
                                             </div>
                                         @endcan
                                     @elseif ($product->is_on_market == false)
@@ -101,7 +101,7 @@
                                                 <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
                                                     confirmStyle="bg-green-700 dark:bg-green-500"
                                                     message="Are you sure want to restore this product" method="PATCH"
-                                                    action="{{ route('admin.products.restore', $product) }}" confirmText="Restore" />
+                                                    action="{{ route('admin.product.restore', $product) }}" confirmText="Restore" />
                                             </div>
                                         @endcan
                                     @endif

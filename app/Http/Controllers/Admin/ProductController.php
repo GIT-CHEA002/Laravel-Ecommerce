@@ -58,7 +58,7 @@ class ProductController extends Controller
         try {
             Product::create($attributes);
             return redirect()
-                ->route('admin.products.index')
+                ->route('admin.product.index')
                 ->with('success', 'Product created successfully.');
         } catch (QueryException $e) {
             report($e);
@@ -89,7 +89,7 @@ class ProductController extends Controller
             $product->updateOrFail($attributes);
 
             return redirect()
-                ->route('admin.products.index')
+                ->route('admin.product.index')
                 ->with('success', 'Product updated successfully.');
         } catch (QueryException $e) {
             report($e);
@@ -106,7 +106,7 @@ class ProductController extends Controller
             $product->updateOrFail(['is_on_market' => false]);
 
             return redirect()
-                ->route('admin.products.index')
+                ->route('admin.product.index')
                 ->with('success', 'Product deactivated successfully.');
         } catch (QueryException $e) {
             report($e);
@@ -123,7 +123,7 @@ class ProductController extends Controller
             $product->updateOrFail(['is_on_market' => true]);
 
             return redirect()
-                ->route('admin.products.index')
+                ->route('admin.product.index')
                 ->with('success', 'Product restored successfully.');
         } catch (QueryException $e) {
             report($e);
@@ -140,7 +140,7 @@ class ProductController extends Controller
             $product->delete();
 
             return redirect()
-                ->route('admin.products.index')
+                ->route('admin.product.index')
                 ->with('success', 'Product deleted permanently.');
         } catch (QueryException $e) {
             report($e);

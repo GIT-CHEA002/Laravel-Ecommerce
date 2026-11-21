@@ -7,10 +7,10 @@
       'active' => request()->is('admin/dashboard'),
     ],
     [
-      'href' => '/admin/products',
+      'href' => '/admin/product',
       'icon' => 'archive-box',
-      'name' => 'Products',
-      'active' => request()->is('admin/products*'),
+      'name' => 'Product',
+      'active' => request()->is('admin/product*'),
     ],
     [
       'href' => '/admin/category',
@@ -19,15 +19,15 @@
       'active' => request()->is('admin/category*'),
     ],
     [
-      'href' => '/admin/orders',
+      'href' => '/admin/order',
       'icon' => 'shopping-cart',
-      'name' => 'Orders',
-      'active' => request()->is('admin/orders*'),
+      'name' => 'Order',
+      'active' => request()->is('admin/order*'),
     ],
     [
       'href' => '/admin/user',
       'icon' => 'users',
-      'name' => 'Users',
+      'name' => 'User',
       'active' => request()->is('admin/user*'),
     ]
   ];

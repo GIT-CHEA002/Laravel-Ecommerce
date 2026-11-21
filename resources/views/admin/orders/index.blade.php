@@ -15,7 +15,7 @@
         @endforeach
     </div>
     {{-- Search and filters --}}
-    <x-form.form action="{{ route('admin.orders.index') }}"
+    <x-form.form action="{{ route('admin.order.index') }}"
         class="flex justify-between items-center bg-white dark:bg-slate-800 p-3 rounded-md shadow-md mt-3">
         <div class="w-1/4">
             <x-form.field name="order_number" placeholder="ORD-001..." icon="magnifying-glass"
@@ -24,21 +24,21 @@
         <div class="flex justify-end items-center gap-4">
             {{-- Period filter with custom date range popup --}}
             <div class="relative" x-data="{
-                                                                     period: '{{ request('period') }}',
-                                                                     saved: '{{ request('period') }}',
-                                                                     open: false,
-                                                                     pick() {
-                                                                        if (this.period === 'custom') {
-                                                                            this.open = true;
-                                                                        } else {
-                                                                          this.$root.closest('form').submit();
-                                                                        }
-                                                                        },
-                                                                         cancel() {
-                                                                        this.period = this.saved;
-                                                                        this.open = false;
-                                                                        }
-                                                                       }">
+                                                                         period: '{{ request('period') }}',
+                                                                         saved: '{{ request('period') }}',
+                                                                         open: false,
+                                                                         pick() {
+                                                                            if (this.period === 'custom') {
+                                                                                this.open = true;
+                                                                            } else {
+                                                                              this.$root.closest('form').submit();
+                                                                            }
+                                                                            },
+                                                                             cancel() {
+                                                                            this.period = this.saved;
+                                                                            this.open = false;
+                                                                            }
+                                                                           }">
 
                 <x-form.select name="period" placeholder="All time" x-model="period" x-on:change="pick()"
                     :selected="request('period')" :options="[
@@ -122,7 +122,7 @@
                             </span>
                         </td>
                         <td class="px-3 py-2 flex justify-center">
-                            <a href="{{ route('admin.orders.show', $order) }}"
+                            <a href="{{ route('admin.order.show', $order) }}"
                                 class="text-xs tracking-wide text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">
                                 <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
                             </a>

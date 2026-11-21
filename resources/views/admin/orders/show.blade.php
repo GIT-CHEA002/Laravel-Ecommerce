@@ -1,6 +1,6 @@
 @php
     $breadcrumpLink = [
-        ['label' => 'Orders', 'url' => route('admin.orders.index')],
+        ['label' => 'Orders', 'url' => route('admin.order.index')],
         ['label' => 'Show'],
     ];
 @endphp

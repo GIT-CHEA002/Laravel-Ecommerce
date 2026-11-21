@@ -3,7 +3,7 @@
   {{-- title section --}}
   <div class="flex items-center justify-between default-padding">
     <span class="text-xl font-bold">Recent Orders</span>
-    <a href="{{ route('admin.orders.index') }}"
+    <a href="{{ route('admin.order.index') }}"
       class="text-sm font-bold tracking-wide text-indigo-700 capitalize dark:text-indigo-500">
       view all
     </a>
@@ -44,7 +44,7 @@
             </x-shared.badge-tag>
           </td>
           <td class="px-3 py-2 flex justify-center">
-            <a href="{{ route('admin.orders.show', $order) }}"
+            <a href="{{ route('admin.order.show', $order) }}"
               class=" text-xs font-semibold tracking-wider text-indigo-700 dark:text-indigo-500 hover:underline underline-offset-2">
               <x-heroicon-o-eye class="w-4 h-5 text-indigo-700 dark:text-indigo-500" />
             </a>

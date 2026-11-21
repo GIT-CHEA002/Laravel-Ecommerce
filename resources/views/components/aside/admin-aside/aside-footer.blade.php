@@ -7,7 +7,7 @@
     <x-heroicon-o-user-circle class="w-5 h-5" />
     <span>Profile</span>
   </a>
-  {{-- logout section --}}
+  {{-- auth.logout section --}}
   <div x-data="{isLogoutDialog : false}">
     <button type="button" @click="isLogoutDialog = true"
       class=" w-full flex items-center text-sm tracking-wide gap-2 font-medium px-2 md:px-4 lg:px-6 py-1.5 rounded-md text-red-700 dark:text-red-500 hover:bg-red-700 dark:hover:bg-red-500 hover:text-white/90 dark:hover:text-white/90 hover:scale-[1.01] hover:shadow-sm transition duration-300">
@@ -16,7 +16,7 @@
     </button>
     <template x-teleport="body">
       <x-shared.confirm-dialog show="isLogoutDialog" title="Confirm Logout"
-        message="You need to be sign in again after log out ? " action="{{ route('auth.logout-user') }}"
+        message="You need to be sign in again after log out ? " action="{{ route('auth.logout') }}"
         confirmText="Log Out" />
     </template>
   </div>

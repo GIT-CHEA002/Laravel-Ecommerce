@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'client' => EnsureUserIsClient::class,
             'nocache' => NoCache::class
         ]);
-        $middleware->redirectGuestsTo(fn(Request $request) => route('login-user'));
+        $middleware->redirectGuestsTo(fn(Request $request) => route('auth.login'));
         $middleware->redirectUsersTo(fn(Request $request) =>
         $request->user()->isAdmin() ?
             route('admin.dashboard') : route('client.home'));

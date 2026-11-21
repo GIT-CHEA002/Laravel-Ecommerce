@@ -49,18 +49,18 @@
       {{-- user sections --}}
       @auth
         <button type="button" @click="isLogoutDialog = true" class="relative flex w-fit cursor-pointer items-center justify-center gap-1
-                                               rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700
-                                               transition hover:bg-indigo-100
-                                               dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-500">
+                                                         rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700
+                                                         transition hover:bg-indigo-100
+                                                         dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-500">
           <span class="text-xs tracking-wide">Log out</span>
           <x-heroicon-o-user class="h-5 w-5 text-indigo-700 dark:text-indigo-500" />
         </button>
         <x-shared.confirm-dialog show="isLogoutDialog" title="Confirm Logout"
-          message="You need to be sign in again after log out ? " action="{{ route('logout-user') }}"
+          message="You need to be sign in again after log out ? " action="{{ route('auth.logout') }}"
           confirmText="Log Out" />
       @endauth
       @guest
-        <a href="{{ route('login-user') }}"
+        <a href="{{ route('auth.login') }}"
           class="flex w-fit items-center justify-center gap-1 rounded-md border border-indigo-200 bg-indigo-50 px-2 py-1 text-indigo-700 transition hover:bg-indigo-100 dark:border-slate-700 dark:bg-slate-800 dark:text-indigo-500">
           <span class="text-xs tracking-wide">Login</span>
           <x-heroicon-o-user class="h-5 w-5" />

@@ -3,32 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Password;
 
-class ResetPasswordController extends Controller
+class ForgotPasswordController extends Controller
 {
-  public function create(Request $request, String $token)
+  public function create()
   {
-    $landing = $request->routeIs('auth.admin.password.reset') ? 'admin.profile.reset-password' : 'auth.reset-password';
-    return view(
-      $landing,
-      [
-        'token' => $token,
-        'email' => $request->query('email')
-      ]
-    );
+    return view('auth.forgot-password');
   }
-  public function store(Request $attributes)
+  public function store(Request $request)
   {
-    // validate 
-    // resetUser 
-    $attributes =   $attributes->validate([
-      'token' => ['required', 'string'],
-      'email' => ['required', 'email'],
-      'password' => ['required', 'confirmed', Password::defaults()]
-    ]);
-    dd($attributes);
+    $request->validate(['email' => ['required', 'email']]);
+    $status = Password::sendResetLink($request->only('email'));
+    return $status === Password::RESET_LINK_SENT
+      ? back()->with('success', __($status))
+      : back()->withErrors([
+        'error' => __($status)
+      ]);
   }
 }

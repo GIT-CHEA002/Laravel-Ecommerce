@@ -43,7 +43,7 @@ class SessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         if ($isAdmin) {
-            return redirect()->route('login-user');
+            return redirect()->route('auth.login');
         } else {
             return redirect('/');
         }

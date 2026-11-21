@@ -5,7 +5,7 @@
     <div>
         <x-shared.section-header class=" underline underline-offset-2">Product Adding Form</x-shared.section-header>
         {{-- form --}}
-        <x-form.form class="py-3 space-y-4" action="{{ route('admin.products.store') }}" method="POST">
+        <x-form.form class="py-3 space-y-4" action="{{ route('admin.product.store') }}" method="POST">
             <div class="flex justify-between items-center gap-6">
                 <x-form.field name="name" label="Name" value="{{ old('name') }}" placeholder="Coca Cola"
                     class="flex-1 py-2" />
@@ -30,7 +30,7 @@
             </div>
             <div class="flex justify-end  items-center gap-3 mt-2">
                 <div class="w-1/4  flex justify-end items-center">
-                    <x-button.primary-button href="{{ route('admin.products.index') }}"
+                    <x-button.primary-button href="{{ route('admin.product.index') }}"
                         class="bg-red-700 dark:bg-red-500">Cancel</x-button.primary-button>
                 </div>
                 <div class="w-1/4 ">

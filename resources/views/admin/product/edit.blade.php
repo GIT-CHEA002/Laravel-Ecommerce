@@ -4,7 +4,7 @@
 @section('content')
     <x-shared.section-header class=" underline underline-offset-2">Product Edit Form</x-shared.section-header>
     {{-- form --}}
-    <x-form.form id="update-product" class="py-3 space-y-4" action="{{ route('admin.products.update', $product) }}"
+    <x-form.form id="update-product" class="py-3 space-y-4" action="{{ route('admin.product.update', $product) }}"
         method="POST">
         @csrf
         @method('PATCH')
@@ -37,8 +37,7 @@
                         </x-form.button>
                         <x-shared.confirm-dialog show="isRestoreOpen" title="Restore Product"
                             message="Are you sure want to restore this product" method="PATCH" confirmText="Restore"
-                            confirmStyle="bg-green-700 dark:bg-green-500"
-                            action="{{ route('admin.products.restore', $product) }}" />
+                            confirmStyle="bg-green-700 dark:bg-green-500" action="{{ route('admin.product.restore', $product) }}" />
                     </div>
                 @endcan
             @endif
@@ -51,7 +50,7 @@
                         </x-form.button>
                         <x-shared.confirm-dialog show="isDeleteOpen" title="Deactivate Product"
                             message="Are you sure want to deactivate this product" method="DELETE" confirmText="Deactivate"
-                            confirmStyle="bg-red-700 dark:bg-red-500" action="{{ route('admin.products.destroy', $product) }}" />
+                            confirmStyle="bg-red-700 dark:bg-red-500" action="{{ route('admin.product.destroy', $product) }}" />
                     </div>
                 @endcan
             @endif
@@ -66,7 +65,7 @@
                     <x-shared.confirm-dialog show="isForceDeleteOpen" title="Deactivate Product"
                         message="Are you sure want to permanantly delete this product. This Action can not be undo!"
                         method="DELETE" confirmText="Delete" confirmStyle="bg-red-700 dark:bg-red-500"
-                        action="{{ route('admin.products.forceDelete', $product) }}" />
+                        action="{{ route('admin.product.forceDelete', $product) }}" />
                 </div>
             @endcan
             <x-form.button form="update-product" class="rounded-md capitalize">Update Product</x-form.button>
