@@ -1,2 +1,4 @@
-@props(['label', 'name'])
-<label for="{{ $name }}" class="text-base tracking-wide">{{ $label }}</label>
+@props(['label', 'name', 'defaultText' => 'text-sm md:text-base'])
+<label for="{{ $name }}" {{$attributes->merge(['class' => ' tracking-wide font-semibold ' . $defaultText]) }}>
+  {{ $label }}
+</label>

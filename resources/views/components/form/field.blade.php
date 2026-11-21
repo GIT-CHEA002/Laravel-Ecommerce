@@ -23,7 +23,7 @@
     'items-center' => !$isTextArea,
     'items-start' => $isTextArea,
     'border border-slate-300 dark:border-slate-700 rounded',
-    'focus-within:border-indigo-700 transition-colors duration-300',
+    'focus-within:border-indigo-700 dark:focus-within:border-indigo-500 transition-colors duration-300',
   ])>
     @if ($icon)
       <x-dynamic-component :component="'heroicon-o-' . $icon" class="size-4 shrink-0 text-slate-400" />

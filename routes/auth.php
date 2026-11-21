@@ -5,6 +5,7 @@
   use App\Http\Controllers\Auth\RegisteredUserController;
   use App\Http\Controllers\Auth\ResetPasswordController;
   use App\Http\Controllers\Auth\SessionController;
+  use App\Http\Controllers\Auth\SignInWithGoogleController;
   use Illuminate\Support\Facades\Route;
 
   /*
@@ -53,6 +54,17 @@
             ->name('password.reset');
           Route::post('reset-password', 'store')
             ->name('password.reset.store');
+        });
+
+      // google service 
+      Route::controller(SignInWithGoogleController::class)
+        ->group(function () {
+          // redirect to google page 
+          Route::get('google', 'redirect')
+            ->name('google.redirect');
+          // callback 
+          Route::get('google/callback', 'callback')
+            ->name('google.callback');
         });
     });
 
