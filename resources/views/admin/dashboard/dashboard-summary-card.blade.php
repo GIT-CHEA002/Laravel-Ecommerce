@@ -1,6 +1,7 @@
 @props(['info' => null])
 @if ($info)
-  <div class="h-full flex flex-col bg-white/80 dark:bg-slate-800 border rounded-md shadow-sm p-3">
+  <div
+    class=" hover:scale-105 transition-transform duration-300 cursor-pointer h-full flex flex-col bg-white/80 dark:bg-slate-800 border rounded-md shadow-sm p-3">
     <div class="flex justify-between">
       <h1 class="uppercase text-sm font-semibold tracking-wide">{{ $info['title'] }}</h1>
       <x-dynamic-component :component="'heroicon-o-' . $info['icon']" class="w-5 h-5 text-indigo-700 font-bold" />

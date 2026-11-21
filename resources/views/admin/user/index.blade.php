@@ -40,10 +40,10 @@
     @foreach ($summaryInfo as $info)
       @if (!empty($info['target']))
         <a href="{{ $info['target'] }}">
-          @include('admin.orders.order-summary-card', ['info' => $info])
+          @include('admin.user.user-summary-card', ['info' => $info])
         </a>
       @else
-        @include('admin.orders.order-summary-card', ['info' => $info])
+        @include('admin.user.user-summary-card', ['info' => $info])
       @endif
     @endforeach
   </div>
